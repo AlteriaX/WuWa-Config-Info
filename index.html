@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+    <meta property="og:title" content="WuWa Config Command Info" />
+    <meta property="og:description" content="Explanation for commands used in WuWa-Configs" />
+    <meta property="og:image" content="https://i.imgur.com/FTGBtNI.png" />
+	<meta property="og:url" content="https://alteriax.github.io/WuWa-Config-Info/" />
+	<title>WuWa Config Command Info</title>
+	<link rel="icon" type="image/x-icon" href="images/danjin_happy.ico">
+	<link rel="stylesheet" href="css/main.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+	<script src="script/main.js"></script>
+</head>
+
+<body>
+   <center>
+      <h1>WuWa Config Command Info</h1>
+   </center>
+
+   <div class="top-bar">
+      <div class="left-links">
+         <a href="https://framedsc.com/GeneralGuides/ue4_commands.htm" target="_blank">UE4 Console Commands</a>
+         <a href="https://github.com/AlteriaX/WuWa-Configs" target="_blank">GitHub</a>
+         <a href="https://discord.gg/gczjQvgzWE" target="_blank">Discord Server</a>
+         <a href="https://ko-fi.com/alteria/" target="_blank">Donate</a>
+      </div>
+      <div class="right-info">Last updated: 28 June 2025</div>
+   </div>
+
+   <div class="content">
+      <button onclick="toggleVisibility('info-1')" class="info1-btn text-change" data-text="Improving Texture Details / LoD" data-state="expanded"><span>▼ Improving Texture Details / LoD</span></button>
+      <div id="info-1">
+         <div class="codebox">
+            <p>
+               ; Forcing Anisotropic Filtering x16 for AMD GPUs doesn't work<br>
+               ; Forcing AFx16 through NVIDIA Control Panel works fine on NVIDIA GPUs (Does not work for RTX 50 series)<br><br>
+               ; For RTX 50 Series use this command instead since AFx16 doesn’t work<br>
+               r.MipMapLODBias=-2<br><br>
+               ; For AMD GPUs only<br>
+               ; r.FidelityFX.FSR.RCAS.Sharpness - 0 = sharpest, 0.2 (default), higher = less sharp<br>
+               ; Set r.FidelityFX.FSR.RCAS.Enabled to 0 if you use sharpening through Control Panel<br>
+               r.FidelityFX.FSR.SecondaryUpscale=1<br>
+               r.FidelityFX.FSR.MipBias.Method=2<br>
+               r.FidelityFX.FSR.MipBias.Offset=-2<br>
+               r.FidelityFX.FSR.RCAS.Enabled=1<br>
+               r.FidelityFX.FSR.RCAS.Sharpness=2.0<br>
+            </p>
+         </div>
+         <p>The command <code>r.MaxAnisotropy</code> doesn't work properly even when it is set to 16. Changing anisotropic filtering / mip bias improves texture details at a distance.</p>
+         <figure>
+            <img src="images/af_compare.jpg" class="zoom-img" alt="af_compare" style="width: 65%; margin: auto; display: block;">
+            <figcaption style="text-align: center; margin-top: 10px;">Anisotropic Filtering Image Comparison</figcaption>
+         </figure>
+         <div class="codebox">
+            <p>
+               ; Default - 1.0, higher value = prioritize loading higher resolution textures<br>
+               ; Lower value = less priority loading high resolution textures<br>
+               r.Streaming.Boost=4.0<br>
+            </p>
+         </div>
+         <p>This fixes the low quality banners and billboards at Septimont. With value 4.0, it increases VRAM usage by around 500MB (1080p) / 1GB (1440p)</p>
+         <figure>
+            <img src="images/streaming_boost.jpg" class="zoom-img" alt="streaming_boost" style="width: 65%; margin: auto; display: block;">
+            <figcaption style="text-align: center; margin-top: 10px;">Streaming Boost Image Comparison</figcaption>
+         </figure>
+         <div class="codebox">
+            <p>
+               ; 0: Low (does not work, will cause textures to not load), 1: High, 2: Medium (Yes the numbers are weird)<br>
+               r.MaterialQualityLevel=1<br>
+               r.KuroMaterialQualityLevel=1<br>
+            </p>
+         </div>
+         <p>Kuro material when set to medium (default for minimum requirement GPUs or lower) has bad environment LOD in certain spots. No clue if it's a recent change with patch 2.4 but FPS hit is minimal using high.</p>
+         <figure>
+            <img src="images/material_quality.jpg" class="zoom-img" alt="material_quality" style="width: 65%; margin: auto; display: block;">
+            <figcaption style="text-align: center; margin-top: 10px;">Kuro Material Quality Image Comparison</figcaption>
+         </figure>
+      </div>
+      <p></p>
+      <button onclick="toggleVisibility('info-2')" class="info2-btn text-change" data-text="View Distance" data-state="expanded"><span>▼ View Distance</span></button>
+      <div id="info-2">
+         <div class="codebox">
+            <p>
+               ; Default view distance / foliage LOD distance value is 1<br>
+               ; Default - 145FPS | View distance 2 - 140FPS | View distance 2 + foliage distance 2 - 133FPS<br>
+               r.ViewDistanceScale=2<br>
+               foliage.LODDistanceScale=2<br>
+            </p>
+         </div>
+         <p>Didn't notice much difference when using values above 3 for view distance / 5 for LOD distance scale.</p>
+         <figure>
+            <img src="images/view_distance.jpg" class="zoom-img" alt="view_distance" style="width: 65%; margin: auto; display: block;">
+            <figcaption style="text-align: center; margin-top: 10px;">View Distance Image Comparison</figcaption>
+         </figure>
+         <figure>
+            <img src="images/foliage_distance.jpg" class="zoom-img" alt="foliage_distance" style="width: 65%; margin: auto; display: block;">
+            <figcaption style="text-align: center; margin-top: 10px;">Foliage LOD Distance Image Comparison</figcaption>
+         </figure>
+      </div>
+      <p></p>
+      <button onclick="toggleVisibility('info-3')" class="info3-btn text-change" data-text="Far Object Rendering" data-state="expanded"><span>▼ Far Object Rendering</span></button>
+      <div id="info-3">
+         <div class="codebox">
+            <p>
+               ; Don't remember the exact FPS numbers, too lazy to retest<br>
+               ; Option 1 - 125FPS | Option 2 - 132FPS | Option 3 - 138FPS | Option 4 - 145FPS<br><br>
+               ; Option 1<br>
+               wp.Runtime.OverrideMultipleRuntimeGridLoadingRangeValues=200&400&600&800&1500&5000&500&800&1000&500&800&1000&1400&3000&150&240&500&600&80&280&200&200&1500&5000&100&160&200&1500&5000<br><br>
+               ; Option 2<br>
+               wp.Runtime.OverrideMultipleRuntimeGridLoadingRangeValues=150&400&450&600&1500&5000&500&600&1000&500&650&800&1000&1500&120&150&200&350&80&280&200&200&1500&5000&100&160&200&1000&1500<br><br>
+               ; Option 3<br>
+               wp.Runtime.OverrideMultipleRuntimeGridLoadingRangeValues=100&400&300&400&1000&4000&250&400&500&250&650&800&850&1000&90&120&150&250&80&160&200&200&1000&4000&75&120&200&900&1250<br><br>
+               ; Option 4<br>
+               wp.Runtime.OverrideMultipleRuntimeGridLoadingRangeValues=80&400&200&300&1000&3000&150&250&350&150&400&600&700&750&80&90&100&150&80&160&200&200&500&3000&50&80&200&750&1000<br>
+            </p>
+         </div>
+         <p>By using lower values you can see that there are less trees in the distance. From left to right: 80, 100, 150, 200 (Labels at the bottom of image)</p>
+         <figure>
+            <img src="images/wp_runtime.jpg" class="zoom-img" alt="wp_runtime" style="width: 80%; margin: auto; display: block;">
+            <figcaption style="text-align: center; margin-top: 10px;">Far Object Rendering Image Comparison</figcaption>
+         </figure>
+      </div>
+      <p></p>
+      <button onclick="toggleVisibility('info-4')" class="info4-btn text-change" data-text="Reflections" data-state="expanded"><span>▼ Reflections</span></button>
+      <div id="info-4">
+         <div class="codebox">
+            <p>
+               ; 0: Off, 1: Low, 2: Medium, 3: High, 4: Very High<br>
+               r.SSR.Quality=3<br><br>
+               ; 0.0 to 1.0 - higher value more objects in reflections<br>
+               r.SSR.MaxRoughness=1.0<br><br>
+               ; 0: Use full res scene color, 1: Use half res scene color<br>
+               r.SSR.HalfResSceneColor=0<br>
+            </p>
+         </div>
+         <figure>
+            <img src="images/reflections.jpg" class="zoom-img" alt="reflections" style="width: 65%; margin: auto; display: block;">
+            <figcaption style="text-align: center; margin-top: 10px;">Reflections Image Comparison</figcaption>
+         </figure>
+      </div>
+      <p></p>
+      <button onclick="toggleVisibility('info-5')" class="info5-btn text-change" data-text="Shadows" data-state="expanded"><span>▼ Shadows</span></button>
+      <div id="info-5">
+         <div class="codebox">
+            <p>
+               ; Set shadow view distance<br>
+               r.Shadow.DistanceScale=0.7<br><br>
+               ; Lower values increases the amount of shadow<br>
+               r.Shadow.RadiusThreshold=0.022<br><br>
+               ; Set shadow resolution, higher costs more FPS<br>
+               r.Shadow.MaxCSMResolution=2048<br>
+               r.Shadow.MinResolution=2048<br>
+               r.Shadow.PerObjectShadowMapResolution=2048<br>
+               r.Shadow.PerObjectResolutionMax=2048<br>
+               r.Shadow.PerObjectResolutionMin=2048<br>
+            </p>
+         </div>
+         <p>Default values used for minimum shadow resolution is low which is the reason why it doesn't look great, using 1024 is enough to make it look decent.</p>
+         <figure>
+            <img src="images/shadows.jpg" class="zoom-img" alt="shadows" style="width: 65%; margin: auto; display: block;">
+            <figcaption style="text-align: center; margin-top: 10px;">Shadows Image Comparison</figcaption>
+         </figure>
+      </div>
+      <p></p>
+      <button onclick="toggleVisibility('info-6')" class="info6-btn text-change" data-text="Fog" data-state="expanded"><span>▼ Fog</span></button>
+      <div id="info-6">
+         <div class="codebox">
+            <p>
+               ; 0: Disable fog | 1: Enable fog<br>
+               r.Fog=0<br><br>
+               ; 0: Disable volume cloud | 1: Enable volume cloud<br>
+               ; Only applies in newer regions, get rids of the clouds at ground level<br>
+               r.KuroVolumeCloudEnable=0<br>
+            </p>
+         </div>
+         <p>In-game "Volumetric Fog" setting doesn't completely remove fog, didn't notice much change with it off. Only way to remove fog is to use those commands in Engine.ini.</p>
+         <figure>
+            <img src="images/fog.jpg" class="zoom-img" alt="fog" style="width: 65%; margin: auto; display: block;">
+            <figcaption style="text-align: center; margin-top: 10px;">Fog Image Comparison</figcaption>
+         </figure>
+         <figure>
+            <img src="images/volume_cloud.jpg" class="zoom-img" alt="volume_cloud" style="width: 65%; margin: auto; display: block;">
+            <figcaption style="text-align: center; margin-top: 10px;">Volume Cloud Image Comparison</figcaption>
+         </figure>
+      </div>
+      <p></p>
+      <button onclick="toggleVisibility('info-7')" class="info7-btn text-change" data-text="Tonemapping" data-state="expanded"><span>▼ Tonemapping</span></button>
+      <div id="info-7">
+         <div class="codebox">
+            <p>
+               ; 0 = Off, 1 = Genshin, 2 = Death Stranding, 3 = Kuro (Default)<br>
+               r.KuroTonemapping=3<br>
+            </p>
+         </div>
+         <p>All Comparisons done with default game settings. From left to right: 0 to 3, labels are at the bottom.</p>
+         <figure>
+            <img src="images/kuro_tonemap.jpg" class="zoom-img" alt="kuro_tonemap" style="width: 80%; margin: auto; display: block;">
+            <figcaption style="text-align: center; margin-top: 10px;">Fog Image Comparison</figcaption>
+         </figure>
+      </div>
+      <p></p>
+      <button onclick="toggleVisibility('info-8')" class="info8-btn text-change" data-text="Particles / Effects / Others" data-state="expanded"><span>▼ Particles / Effects / Others</span></button>
+      <div id="info-8">
+         <div class="codebox">
+            <p>
+               ; Enable water ripples when flying close/casting skill<br>
+               r.Kuro.InteractionEffect.UseCppWaterEffect=1<br><br>
+               ; Flicker light actor update rate, lower = more frequent updates<br>
+               r.Kuro.FlickerLightActorTickFactor=2.4<br><br>
+               ; Changes object details, lights and particle effects<br>
+               ; 0 = low, 1 = medium, 2 = high<br>
+               r.DetailMode=2<br><br>
+               ; Adjust foliage density type<br>
+               ; 0 = low, 1 = medium, 2 = high<br>
+               foliage.DensityType=2<br><br>
+               ; Force in game animations to match FPS, higher value = lower FPS animations<br>
+               a.URO.ForceAnimRate=1<br><br>
+               ; Adjust object details, lower value = better quality<br>
+               r.StaticMeshLODDistanceScale=0.7<br><br>
+               ; Enable / disable Screen Space Fog Scattering<br>
+               ; Pass amount recommended values - 8 for 1080p, 9 for 1440p, 10 for 4K<br>
+               r.SSFS=1<br>
+               r.SSFS.PassAmount=10<br><br>
+               ; I have no clue, no official info provided<br>
+               r.BBM.BoundsScale=0.9<br>
+            </p>
+         </div>
+      </div>
+      <p></p>
+      <button onclick="toggleVisibility('info-9')" class="info9-btn text-change" data-text="Ray Tracing" data-state="expanded"><span>▼ Ray Tracing</span></button>
+      <div id="info-9">
+         <p>Not going to write an explanation for this. Epic has provided plenty of info on their site which can be found here -> <a href="https://dev.epicgames.com/documentation/en-us/unreal-engine/lumen-performance-guide-for-unreal-engine" target="_blank">Lumen Performance Guide</a></p>
+      </div>
+      <br><br>
+   </div>
+
+   <button class="collapse-btn" onclick="collapseAll()">Collapse All</button>
+   <button class="expand-btn" onclick="expandAll()">Expand All</button>
+   <button class="back-to-top" onclick="window.scrollTo({ top: 0, behavior: 'instant' });">↑ Back to top</button>
+
+</body>
+
+</html>

@@ -1,0 +1,152 @@
+body {
+   margin: 0;
+   font-family: Segoe UI, sans-serif;
+   background-image: url('../images/wuwa_anni.jpg');
+   background-size: cover;
+   background-position: center;
+   background-repeat: no-repeat;
+   background-attachment: fixed;
+   font-size: 16px;
+   overflow-y: scroll;
+   color: #fff;
+}
+
+body::before {
+   content: "";
+   position: fixed;
+   top: 0;
+   left: 0;
+   width: 100%;
+   height: 100%;
+   background: rgba(0, 0, 0, 0.85);
+   z-index: -1;
+}
+
+a {
+   color: #fff;
+   font-weight: bold;
+}
+
+.top-bar {
+   width: 70%;
+   margin: 20px auto;
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   background-color: #222;
+   border-radius: 10px;
+   overflow: hidden;
+   border-style: solid;
+   border-width: thin;
+   font-size: 18px;
+}
+
+.top-bar a {
+   float: left;
+   text-align: center;
+   padding: 12px 16px;
+   text-decoration: none;
+}
+
+.top-bar a:hover {
+   background-color: #ccc;
+   color: black;
+}
+
+.right-info {
+   font-weight: bold;
+   padding-right: 17px;
+}
+
+.content {
+   width: 60%;
+   margin: auto;
+}
+
+.content span {
+   color: #fff;
+   font-size: 24px;
+   font-weight: bold;
+}
+
+.content button {
+   margin: 0;
+   padding: 0;
+   background-color: rgba(0, 0, 0, 0);
+   border-width: 0px;
+}
+
+#info-1.hide,
+#info-2.hide,
+#info-3.hide,
+#info-4.hide,
+#info-5.hide,
+#info-6.hide,
+#info-7.hide,
+#info-8.hide,
+#info-9.hide {
+   display: none;
+}
+
+.zoom-img {
+   cursor: zoom-in;
+   transition: transform 0s ease;
+}
+
+.zoom-img.zoomed {
+   transform: scale(1.75);
+   cursor: zoom-out;
+}
+
+.codebox {
+   background-color: #333;
+   font-family: Consolas, monospace;
+}
+
+.codebox p {
+   padding: 14px;
+   word-wrap: break-word;
+}
+
+code {
+   font-family: Consolas, monospace;
+   background-color: #333;
+   padding: 2px;
+}
+
+.collapse-btn,
+.expand-btn,
+.back-to-top {
+   color: #fff;
+   position: fixed;
+   right: 20px;
+   padding: 10px 15px;
+   background-color: #333;
+   border-color: #fff;
+   border-style: solid;
+   border-width: thin;
+   border-radius: 5px;
+   cursor: pointer;
+   font-size: 14px;
+   font-weight: bold;
+   width: 7.5rem;
+}
+
+.collapse-btn {
+   bottom: 7rem;
+}
+
+.expand-btn {
+   bottom: 4rem;
+}
+
+.back-to-top {
+   bottom: 1rem;
+}
+
+.collapse-btn:hover,
+.expand-btn:hover,
+.back-to-top:hover {
+   background-color: #ccc;
+   color: black;
+}
