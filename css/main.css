@@ -114,6 +114,13 @@ code {
    padding: 2px;
 }
 
+.librecounter {
+   position: fixed;
+   top: 10px;
+   right: 10px;
+   display: none;
+}
+
 .collapse-btn,
 .expand-btn,
 .back-to-top {
