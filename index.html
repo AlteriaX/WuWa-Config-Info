@@ -26,7 +26,7 @@
          <a href="https://discord.gg/gczjQvgzWE" target="_blank">Discord Server</a>
          <a href="https://ko-fi.com/alteria/" target="_blank">Donate</a>
       </div>
-      <div class="right-info">Last updated: 28 June 2025</div>
+      <div class="right-info">Last updated: 1 July 2025</div>
    </div>
 
    <div class="content">
@@ -231,7 +231,28 @@
       <p></p>
       <button onclick="toggleVisibility('info-9')" class="info9-btn text-change" data-text="Ray Tracing" data-state="expanded"><span>▼ Ray Tracing</span></button>
       <div id="info-9">
-         <p>Not going to write an explanation for this. Epic has provided plenty of info on their site which can be found here -> <a href="https://dev.epicgames.com/documentation/en-us/unreal-engine/lumen-performance-guide-for-unreal-engine" target="_blank">Lumen Performance Guide</a></p>
+         <p>Not going to write an explanation for this. You can find information for ray tracing stuff in AMD / Epic site which can be found in the links below.</p>
+         <ul>
+            <li><a href="https://gpuopen.com/learn/unreal-engine-performance-guide/" target="_blank">AMD - Unreal Engine Performance Guide</a></li>
+            <li><a href="https://dev.epicgames.com/documentation/en-us/unreal-engine/lumen-performance-guide-for-unreal-engine" target="_blank">Epic - Lumen Performance Guide</a></li>
+         </ul>
+      </div>
+      <p></p>
+      <button onclick="toggleVisibility('info-10')" class="info10-btn text-change" data-text="Extra Commands (Not in config)" data-state="expanded"><span>▼ Extra Commands (Not in config)</span></button>
+      <div id="info-10">
+         <div class="codebox">
+            <p>
+               All commands listed are placed in Engine.ini under [/Script/Engine.RendererSettings]<br><br>
+               ; Enable NVIDIA Reflex<br>
+               ; Reflex Mode - 1 = low latency, 2 = low latency with boost<br>
+               t.Streamline.Reflex.HandleMaxTickRate=true<br>
+               t.Streamline.Reflex.Enable=1<br>
+               t.Streamline.Reflex.Mode=1<br><br>
+               ; Force enable DLAA<br>
+               ; Using this command doesn't allow you to switch to Quality/Balanced/Performance mode in settings<br>
+               r.NGX.DLAA.Enable=1<br>
+            </p>
+         </div>
       </div>
       <br><br>
    </div>

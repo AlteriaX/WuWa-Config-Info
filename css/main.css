@@ -84,7 +84,8 @@ a {
 #info-6.hide,
 #info-7.hide,
 #info-8.hide,
-#info-9.hide {
+#info-9.hide,
+#info-10.hide {
    display: none;
 }
 
@@ -136,7 +137,7 @@ code {
    cursor: pointer;
    font-size: 14px;
    font-weight: bold;
-   width: 7.5rem;
+   width: 8rem;
 }
 
 .collapse-btn {
