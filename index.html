@@ -21,13 +21,16 @@
 
    <div class="top-bar">
       <div class="left-links">
-         <a href="https://framedsc.com/GeneralGuides/ue4_commands.htm" target="_blank">UE4 Console Commands</a>
          <a href="https://github.com/AlteriaX/WuWa-Configs" target="_blank">GitHub</a>
          <a href="https://discord.gg/gczjQvgzWE" target="_blank">Discord Server</a>
          <a href="https://ko-fi.com/alteria/" target="_blank">Donate</a>
       </div>
-      <div class="right-info">Last updated: 1 July 2025</div>
+      <div class="right-info">Last update: 5 July 2025</div>
    </div>
+
+   <center>
+      <p class="something"><a href="https://framedsc.com/GeneralGuides/ue4_commands.htm" target="_blank">UE4 Default Console Commands</a> | <a href="https://pastebin.com/KUNNVZeC" target="_blank">WuWa Console Commands</a></p>
+   </center>
 
    <div class="content">
       <button onclick="toggleVisibility('info-1')" class="info1-btn text-change" data-text="Improving Texture Details / LoD" data-state="expanded"><span>▼ Improving Texture Details / LoD</span></button>
@@ -104,16 +107,16 @@
       <div id="info-3">
          <div class="codebox">
             <p>
-               ; Don't remember the exact FPS numbers, too lazy to retest<br>
-               ; Option 1 - 125FPS | Option 2 - 132FPS | Option 3 - 138FPS | Option 4 - 145FPS<br><br>
+               ; FPS for each option, difference may vary depending on GPU<br>
+               ; Option 1 - 110FPS | Option 2 - 117FPS | Option 3 - 130FPS | Option 4 - 134FPS<br><br>
                ; Option 1<br>
                wp.Runtime.OverrideMultipleRuntimeGridLoadingRangeValues=200&400&600&800&1500&5000&500&800&1000&500&800&1000&1400&3000&150&240&500&600&80&280&200&200&1500&5000&100&160&200&1500&5000<br><br>
                ; Option 2<br>
                wp.Runtime.OverrideMultipleRuntimeGridLoadingRangeValues=150&400&450&600&1500&5000&500&600&1000&500&650&800&1000&1500&120&150&200&350&80&280&200&200&1500&5000&100&160&200&1000&1500<br><br>
                ; Option 3<br>
-               wp.Runtime.OverrideMultipleRuntimeGridLoadingRangeValues=100&400&300&400&1000&4000&250&400&500&250&650&800&850&1000&90&120&150&250&80&160&200&200&1000&4000&75&120&200&900&1250<br><br>
+               wp.Runtime.OverrideMultipleRuntimeGridLoadingRangeValues=100&200&300&400&1500&4000&250&400&500&250&650&800&850&1250&90&120&150&250&80&160&200&200&1000&4000&75&120&200&900&1250<br><br>
                ; Option 4<br>
-               wp.Runtime.OverrideMultipleRuntimeGridLoadingRangeValues=80&400&200&300&1000&3000&150&250&350&150&400&600&700&750&80&90&100&150&80&160&200&200&500&3000&50&80&200&750&1000<br>
+               wp.Runtime.OverrideMultipleRuntimeGridLoadingRangeValues=80&200&200&300&1000&3000&150&250&350&150&400&600&700&1000&80&90&100&150&80&160&200&200&500&3000&50&80&200&750&1000<br>
             </p>
          </div>
          <p>By using lower values you can see that there are less trees in the distance. From left to right: 80, 100, 150, 200 (Labels at the bottom of image)</p>
@@ -223,6 +226,12 @@
                ; Pass amount recommended values - 8 for 1080p, 9 for 1440p, 10 for 4K<br>
                r.SSFS=1<br>
                r.SSFS.PassAmount=10<br><br>
+               ; Set distance before grass is culled<br>
+               r.Kuro.Foliage.GrassCullDistanceMax=35000<br><br>
+               ; Set distance before NPC disappears<br>
+               r.Kuro.NpcDisappearDistance=35000<br><br>
+               ; Set height before light turns off / object despawn? in flight mode<br>
+               wp.Runtime.SoraGridBlackListHeight=35000<br><br>
                ; I have no clue, no official info provided<br>
                r.BBM.BoundsScale=0.9<br>
             </p>

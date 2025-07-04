@@ -58,6 +58,13 @@ a {
    padding-right: 17px;
 }
 
+.something {
+   font-size: 20px;
+   font-weight: bold;
+   word-wrap: break-word;
+   width: 60%;
+}
+
 .content {
    width: 60%;
    margin: auto;
