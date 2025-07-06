@@ -265,6 +265,29 @@
             </p>
          </div>
       </div>
+      <p></p>
+      <button onclick="toggleVisibility('info-11')" class="info11-btn text-change" data-text="Resizable Bar" data-state="expanded"><span>▼ Resizable Bar</span></button>
+      <div id="info-11">
+         <div class="codebox">
+            <p>
+               ; Using ReBar increases VRAM usage, so make sure to check<br>
+               ; Choose either option below for "rBAR - Size Limit", FPS boost is similar<br>
+               0x0000000012C00000 (The Riftbreaker) = 300MB<br>
+               0x0000000040000000 (Red Dead Redemption 2) = 1GB<br>
+            </p>
+         </div>
+         <p>Forcing ReBar on for NVIDIA GPUs can help boost FPS a bit, currently using the 300MB option for native 1080p on RTX 3060 6GB Laptop. You can do this via NVIDIA Profile Inspector.<br><br>
+            Link to download NVIDIA Profile Inspector: <a href="https://github.com/Orbmu2k/nvidiaProfileInspector/releases/tag/2.4.0.19" target="_blank">https://github.com/Orbmu2k/nvidiaProfileInspector/releases/tag/2.4.0.19</a>
+         </p>
+         <figure>
+            <img src="images/nvpi.png" class="zoom-img" alt="nvpi" style="width: 70%; margin: auto; display: block;">
+            <figcaption style="text-align: center; margin-top: 10px;">How to apply using NVIDIA Profile Inspector</figcaption>
+         </figure>
+         <figure>
+            <img src="images/rebar.jpg" class="zoom-img" alt="rebar" style="width: 80%; margin: auto; display: block;">
+            <figcaption style="text-align: center; margin-top: 10px;">ReBar FPS Comparison</figcaption>
+         </figure>
+      </div>
       <br><br>
    </div>
 
