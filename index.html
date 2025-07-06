@@ -25,7 +25,7 @@
          <a href="https://discord.gg/gczjQvgzWE" target="_blank">Discord Server</a>
          <a href="https://ko-fi.com/alteria/" target="_blank">Donate</a>
       </div>
-      <div class="right-info">Last update: 6 July 2025</div>
+      <div class="right-info">Last update: 7 July 2025</div>
    </div>
 
    <p class="something"><a href="https://framedsc.com/GeneralGuides/ue4_commands.htm" target="_blank">UE4 Default Console Commands</a> | <a href="https://pastebin.com/KUNNVZeC" target="_blank">WuWa Console Commands</a></p>
@@ -146,10 +146,15 @@
       <div id="info-5">
          <div class="codebox">
             <p>
-               ; Set shadow view distance<br>
-               r.Shadow.DistanceScale=0.7<br><br>
                ; Lower values increases the amount of shadow<br>
-               r.Shadow.RadiusThreshold=0.022<br><br>
+               r.Shadow.RadiusThreshold=0.02<br>
+               r.Shadow.RadiusThresholdCSM0=0.02<br>
+               r.Shadow.RadiusThresholdCSM1=0.02<br>
+               r.Shadow.RadiusThresholdCSM2=0.02<br>
+               r.Shadow.RadiusThresholdCSM3=0.02<br>
+               r.Shadow.RadiusThresholdCSM4=0.04<br><br>
+               ; Required when changing values for radius threshold CSM<br>
+               r.Shadow.RadiusThresholdOverrideEnable=1<br><br>
                ; Set shadow resolution, higher costs more FPS<br>
                r.Shadow.MaxCSMResolution=2048<br>
                r.Shadow.MinResolution=2048<br>
@@ -233,9 +238,7 @@
                ; Set distance before NPC disappears<br>
                r.Kuro.NpcDisappearDistance=35000<br><br>
                ; Set height before light turns off / object despawn? in flight mode<br>
-               wp.Runtime.SoraGridBlackListHeight=35000<br><br>
-               ; I have no clue, no official info provided<br>
-               r.BBM.BoundsScale=0.9<br>
+               wp.Runtime.SoraGridBlackListHeight=35000<br>
             </p>
          </div>
       </div>
