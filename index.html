@@ -25,7 +25,7 @@
          <a href="https://discord.gg/gczjQvgzWE" target="_blank">Discord Server</a>
          <a href="https://ko-fi.com/alteria/" target="_blank">Donate</a>
       </div>
-      <div class="right-info">Last update: 7 July 2025</div>
+      <div class="right-info">Last update: 9 July 2025</div>
    </div>
 
    <p class="something"><a href="https://framedsc.com/GeneralGuides/ue4_commands.htm" target="_blank">UE4 Default Console Commands</a> | <a href="https://pastebin.com/KUNNVZeC" target="_blank">WuWa Console Commands</a></p>
@@ -147,14 +147,7 @@
          <div class="codebox">
             <p>
                ; Lower values increases the amount of shadow<br>
-               r.Shadow.RadiusThreshold=0.02<br>
-               r.Shadow.RadiusThresholdCSM0=0.02<br>
-               r.Shadow.RadiusThresholdCSM1=0.02<br>
-               r.Shadow.RadiusThresholdCSM2=0.02<br>
-               r.Shadow.RadiusThresholdCSM3=0.02<br>
-               r.Shadow.RadiusThresholdCSM4=0.04<br><br>
-               ; Required when changing values for radius threshold CSM<br>
-               r.Shadow.RadiusThresholdOverrideEnable=1<br><br>
+               r.Shadow.RadiusThreshold=0.02<br><br>
                ; Set shadow resolution, higher costs more FPS<br>
                r.Shadow.MaxCSMResolution=2048<br>
                r.Shadow.MinResolution=2048<br>
@@ -211,8 +204,23 @@
          </figure>
       </div>
       <p></p>
-      <button onclick="toggleVisibility('info-8')" class="info8-btn text-change" data-text="Particles / Effects / Others" data-state="expanded"><span>▼ Particles / Effects / Others</span></button>
+      <button onclick="toggleVisibility('info-8')" class="info8-btn text-change" data-text="Auto Exposure / Eye Adaptation" data-state="expanded"><span>▼ Auto Exposure / Eye Adaptation</span></button>
       <div id="info-8">
+         <div class="codebox">
+            <p>
+               ; 0 = Off, 1 = On (Default)<br>
+               r.Kuro.AutoExposure=1<br>
+            </p>
+         </div>
+         <p>Turning off auto exposure can make the game really dark in certain areas, but it prevents other areas from becoming overly bright.</p>
+         <figure>
+            <img src="images/auto_exposure.jpg" class="zoom-img" alt="auto_exposure" style="width: 80%; margin: auto; display: block;">
+            <figcaption style="text-align: center; margin-top: 10px;">Auto Exposure Image Comparison</figcaption>
+         </figure>
+      </div>
+      <p></p>
+      <button onclick="toggleVisibility('info-9')" class="info9-btn text-change" data-text="Particles / Effects / Others" data-state="expanded"><span>▼ Particles / Effects / Others</span></button>
+      <div id="info-9">
          <div class="codebox">
             <p>
                ; Enable water ripples when flying close/casting skill<br>
@@ -229,6 +237,9 @@
                a.URO.ForceAnimRate=1<br><br>
                ; Adjust object details, lower value = better quality<br>
                r.StaticMeshLODDistanceScale=0.7<br><br>
+			   ; Adjust light shaft resolution,<br>
+			   ; Value from 1 to 8, higher value = lower resolution<br>
+			   r.LightShaftDownSampleFactor=1<br><br>
                ; Enable / disable Screen Space Fog Scattering<br>
                ; Pass amount recommended values - 8 for 1080p, 9 for 1440p, 10 for 4K<br>
                r.SSFS=1<br>
@@ -243,8 +254,8 @@
          </div>
       </div>
       <p></p>
-      <button onclick="toggleVisibility('info-9')" class="info9-btn text-change" data-text="Ray Tracing" data-state="expanded"><span>▼ Ray Tracing</span></button>
-      <div id="info-9">
+      <button onclick="toggleVisibility('info-10')" class="info10-btn text-change" data-text="Ray Tracing" data-state="expanded"><span>▼ Ray Tracing</span></button>
+      <div id="info-10">
          <p>Not going to write an explanation for this. You can find information for ray tracing stuff in AMD / Epic site which can be found in the links below.</p>
          <ul>
             <li><a href="https://gpuopen.com/learn/unreal-engine-performance-guide/" target="_blank">AMD - Unreal Engine Performance Guide</a></li>
@@ -252,8 +263,8 @@
          </ul>
       </div>
       <p></p>
-      <button onclick="toggleVisibility('info-10')" class="info10-btn text-change" data-text="Extra Commands (Not in config)" data-state="expanded"><span>▼ Extra Commands (Not in config)</span></button>
-      <div id="info-10">
+      <button onclick="toggleVisibility('info-11')" class="info11-btn text-change" data-text="Extra Commands (Not in config)" data-state="expanded"><span>▼ Extra Commands (Not in config)</span></button>
+      <div id="info-11">
          <div class="codebox">
             <p>
                All commands listed are placed in Engine.ini under [/Script/Engine.RendererSettings]<br><br>
@@ -269,8 +280,8 @@
          </div>
       </div>
       <p></p>
-      <button onclick="toggleVisibility('info-11')" class="info11-btn text-change" data-text="Resizable Bar" data-state="expanded"><span>▼ Resizable Bar</span></button>
-      <div id="info-11">
+      <button onclick="toggleVisibility('info-12')" class="info12-btn text-change" data-text="Resizable Bar" data-state="expanded"><span>▼ Resizable Bar</span></button>
+      <div id="info-12">
          <div class="codebox">
             <p>
                ; Using ReBar increases VRAM usage, so make sure to check<br>
