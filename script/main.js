@@ -6,7 +6,7 @@ function toggleVisibility(id) {
 };
 
 function expandAll() {
-   for (let i = 1; i <= 12; i++) {
+   for (let i = 1; i <= 13; i++) {
       document.getElementById(`info-${i}`).classList.remove("hide");
 
       const $button = $(`.info${i}-btn`);
@@ -19,7 +19,7 @@ function expandAll() {
 }
 
 function collapseAll() {
-   for (let i = 1; i <= 12; i++) {
+   for (let i = 1; i <= 13; i++) {
       document.getElementById(`info-${i}`).classList.add("hide");
 
       const $button = $(`.info${i}-btn`);

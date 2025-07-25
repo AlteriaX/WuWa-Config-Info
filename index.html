@@ -25,7 +25,7 @@
          <a href="https://discord.gg/gczjQvgzWE" target="_blank">Discord Server</a>
          <a href="https://ko-fi.com/alteria/" target="_blank">Donate</a>
       </div>
-      <div class="right-info">Last update: 9 July 2025</div>
+      <div class="right-info">Last update: 26 July 2025</div>
    </div>
 
    <p class="something"><a href="https://framedsc.com/GeneralGuides/ue4_commands.htm" target="_blank">UE4 Default Console Commands</a> | <a href="https://pastebin.com/KUNNVZeC" target="_blank">WuWa Console Commands</a></p>
@@ -58,7 +58,7 @@
             <p>
                ; Default - 1.0, higher value = prioritize loading higher resolution textures<br>
                ; Lower value = less priority loading high resolution textures<br>
-               r.Streaming.Boost=4.0<br>
+               r.Streaming.MinBoost=4.0<br>
             </p>
          </div>
          <p>This fixes the low quality banners and billboards at Septimont. With value 4.0, it increases VRAM usage by around 500MB (1080p) / 1GB (1440p)</p>
@@ -189,8 +189,23 @@
          </figure>
       </div>
       <p></p>
-      <button onclick="toggleVisibility('info-7')" class="info7-btn text-change" data-text="Tonemapping" data-state="expanded"><span>▼ Tonemapping</span></button>
+      <button onclick="toggleVisibility('info-7')" class="info7-btn text-change" data-text="Culling" data-state="expanded"><span>▼ Culling</span></button>
       <div id="info-7">
+         <div class="codebox">
+            <p>
+               ; 0 = Hardware occlusion (Default), 1 = HZB Occlusion<br>
+               r.HZBOcclusion=1<br>
+            </p>
+         </div>
+         <p>Game's default hardware occlusion culling is pretty bad especially in Vault Underground / Minos Sewers. Using HZB Occlusion reduces the amount of white spots and FPS is the same.</p>
+         <figure>
+            <img src="images/hzb.jpg" class="zoom-img" alt="hzb" style="width: 80%; margin: auto; display: block;">
+            <figcaption style="text-align: center; margin-top: 10px;">HZB Occlusion Image Comparison</figcaption>
+         </figure>
+      </div>
+      <p></p>
+      <button onclick="toggleVisibility('info-8')" class="info8-btn text-change" data-text="Tonemapping" data-state="expanded"><span>▼ Tonemapping</span></button>
+      <div id="info-8">
          <div class="codebox">
             <p>
                ; 0 = Off, 1 = Genshin, 2 = Death Stranding, 3 = Kuro (Default)<br>
@@ -204,8 +219,8 @@
          </figure>
       </div>
       <p></p>
-      <button onclick="toggleVisibility('info-8')" class="info8-btn text-change" data-text="Auto Exposure / Eye Adaptation" data-state="expanded"><span>▼ Auto Exposure / Eye Adaptation</span></button>
-      <div id="info-8">
+      <button onclick="toggleVisibility('info-9')" class="info9-btn text-change" data-text="Auto Exposure / Eye Adaptation" data-state="expanded"><span>▼ Auto Exposure / Eye Adaptation</span></button>
+      <div id="info-9">
          <div class="codebox">
             <p>
                ; 0 = Off, 1 = On (Default)<br>
@@ -219,8 +234,8 @@
          </figure>
       </div>
       <p></p>
-      <button onclick="toggleVisibility('info-9')" class="info9-btn text-change" data-text="Particles / Effects / Others" data-state="expanded"><span>▼ Particles / Effects / Others</span></button>
-      <div id="info-9">
+      <button onclick="toggleVisibility('info-10')" class="info10-btn text-change" data-text="Particles / Effects / Others" data-state="expanded"><span>▼ Particles / Effects / Others</span></button>
+      <div id="info-10">
          <div class="codebox">
             <p>
                ; Enable water ripples when flying close/casting skill<br>
@@ -244,6 +259,10 @@
                ; Pass amount recommended values - 8 for 1080p, 9 for 1440p, 10 for 4K<br>
                r.SSFS=1<br>
                r.SSFS.PassAmount=10<br><br>
+			   ; 0 = Off (Default), 1 = On<br>
+			   ; Group Hierarchical Instanced Static Meshes to reduce draw calls<br>
+			   HISMBatcher.Enabled=1<br>
+			   HISMBatcher.MaxPoolSize=512<br><br>
                ; Set distance before grass is culled<br>
                r.Kuro.Foliage.GrassCullDistanceMax=35000<br><br>
                ; Set distance before NPC disappears<br>
@@ -254,8 +273,8 @@
          </div>
       </div>
       <p></p>
-      <button onclick="toggleVisibility('info-10')" class="info10-btn text-change" data-text="Ray Tracing" data-state="expanded"><span>▼ Ray Tracing</span></button>
-      <div id="info-10">
+      <button onclick="toggleVisibility('info-11')" class="info11-btn text-change" data-text="Ray Tracing" data-state="expanded"><span>▼ Ray Tracing</span></button>
+      <div id="info-11">
          <p>Not going to write an explanation for this. You can find information for ray tracing stuff in AMD / Epic site which can be found in the links below.</p>
          <ul>
             <li><a href="https://gpuopen.com/learn/unreal-engine-performance-guide/" target="_blank">AMD - Unreal Engine Performance Guide</a></li>
@@ -263,8 +282,8 @@
          </ul>
       </div>
       <p></p>
-      <button onclick="toggleVisibility('info-11')" class="info11-btn text-change" data-text="Extra Commands (Not in config)" data-state="expanded"><span>▼ Extra Commands (Not in config)</span></button>
-      <div id="info-11">
+      <button onclick="toggleVisibility('info-12')" class="info12-btn text-change" data-text="Extra Commands (Not in config)" data-state="expanded"><span>▼ Extra Commands (Not in config)</span></button>
+      <div id="info-12">
          <div class="codebox">
             <p>
                All commands listed are placed in Engine.ini under [/Script/Engine.RendererSettings]<br><br>
@@ -280,8 +299,8 @@
          </div>
       </div>
       <p></p>
-      <button onclick="toggleVisibility('info-12')" class="info12-btn text-change" data-text="Resizable Bar" data-state="expanded"><span>▼ Resizable Bar</span></button>
-      <div id="info-12">
+      <button onclick="toggleVisibility('info-13')" class="info13-btn text-change" data-text="Resizable Bar" data-state="expanded"><span>▼ Resizable Bar</span></button>
+      <div id="info-13">
          <div class="codebox">
             <p>
                ; Using ReBar increases VRAM usage, so make sure to check<br>
