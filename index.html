@@ -25,7 +25,7 @@
          <a href="https://discord.gg/gczjQvgzWE" target="_blank">Discord Server</a>
          <a href="https://ko-fi.com/alteria/" target="_blank">Donate</a>
       </div>
-      <div class="right-info">Last update: 27 July 2025</div>
+      <div class="right-info">Last update: 4 August 2025</div>
    </div>
 
    <p class="something"><a href="https://framedsc.com/GeneralGuides/ue4_commands.htm" target="_blank">UE4 Default Console Commands</a> | <a href="https://pastebin.com/KUNNVZeC" target="_blank">WuWa Console Commands</a></p>
@@ -193,7 +193,7 @@
       <div id="info-7">
          <div class="codebox">
             <p>
-			   ; Not included in config by default<br>
+               ; Not included in config by default<br>
                ; 0 = Hardware occlusion (Default), 1 = HZB Occlusion<br>
                r.HZBOcclusion=1<br>
             </p>
@@ -240,36 +240,36 @@
          <div class="codebox">
             <p>
                ; Enable water ripples when flying close/casting skill<br>
+			   ; 0 = Off, 1 = On (Default)<br>
                r.Kuro.InteractionEffect.UseCppWaterEffect=1<br><br>
-               ; Flicker light actor update rate, lower = more frequent updates<br>
-               r.Kuro.FlickerLightActorTickFactor=2.4<br><br>
                ; Changes object details, lights and particle effects<br>
                ; 0 = low, 1 = medium, 2 = high<br>
                r.DetailMode=2<br><br>
                ; Adjust foliage density type<br>
                ; 0 = low, 1 = medium, 2 = high<br>
                foliage.DensityType=2<br><br>
-               ; Force in game animations to match FPS, higher value = lower FPS animations<br>
-               a.URO.ForceAnimRate=1<br><br>
-               ; Adjust object details, lower value = better quality<br>
+               ; Animation rate optimization<br>
+               ; 0 = Off, 1 = On (Default)<br>
+               a.URO.Enable=0<br><br>
+               ; Adjust object details, lower value = better far object detail<br>
                r.StaticMeshLODDistanceScale=0.7<br><br>
-			   ; Adjust light shaft resolution<br>
-			   ; Value from 1 to 8, higher value = lower resolution<br>
-			   r.LightShaftDownSampleFactor=1<br><br>
+               ; Adjust light shaft resolution<br>
+               ; Value from 1 to 8, higher value = lower resolution<br>
+               r.LightShaftDownSampleFactor=1<br><br>
                ; Enable / disable Screen Space Fog Scattering<br>
-               ; Pass amount recommended values - 8 for 1080p, 9 for 1440p, 10 for 4K<br>
-               r.SSFS=1<br>
-               r.SSFS.PassAmount=10<br><br>
-			   ; 0 = Off (Default), 1 = On<br>
-			   ; Group Hierarchical Instanced Static Meshes to reduce draw calls<br>
-			   HISMBatcher.Enabled=1<br>
-			   HISMBatcher.MaxPoolSize=512<br><br>
+               r.SSFS=1<br><br>
+               ; Group Hierarchical Instanced Static Meshes to reduce draw calls<br>
+               ; 0 = Off (Default), 1 = On<br>
+               HISMBatcher.Enabled=1<br>
+               HISMBatcher.MaxPoolSize=512<br><br>
+               ; Whether to uses low-memory LRU cache for character effects pool (Default true)<br>
+               Kuro.CppEffectSystem.UseLowMemoryPlayerEffectLruCapacity=false<br><br>
                ; Set distance before grass is culled<br>
-               r.Kuro.Foliage.GrassCullDistanceMax=35000<br><br>
+               r.Kuro.Foliage.GrassCullDistanceMax=25000<br><br>
                ; Set distance before NPC disappears<br>
-               r.Kuro.NpcDisappearDistance=35000<br><br>
+               r.Kuro.NpcDisappearDistance=20000<br><br>
                ; Set height before light turns off / object despawn? in flight mode<br>
-               wp.Runtime.SoraGridBlackListHeight=35000<br>
+               wp.Runtime.SoraGridBlackListHeight=20000<br>
             </p>
          </div>
       </div>
@@ -311,7 +311,7 @@
             </p>
          </div>
          <p>Forcing ReBar on for NVIDIA GPUs can help boost FPS a bit, currently using the 300MB option for native 1080p on RTX 3060 6GB Laptop. You can do this via NVIDIA Profile Inspector.<br><br>
-            Link to download NVIDIA Profile Inspector: <a href="https://github.com/Orbmu2k/nvidiaProfileInspector/releases/tag/2.4.0.19" target="_blank">https://github.com/Orbmu2k/nvidiaProfileInspector/releases/tag/2.4.0.19</a>
+            Link to download NVIDIA Profile Inspector: <a href="https://github.com/Orbmu2k/nvidiaProfileInspector/releases" target="_blank">https://github.com/Orbmu2k/nvidiaProfileInspector/releases</a>
          </p>
          <figure>
             <img src="images/nvpi.png" class="zoom-img" alt="nvpi" style="width: 70%; margin: auto; display: block;">
