@@ -25,7 +25,7 @@
          <a href="https://discord.gg/gczjQvgzWE" target="_blank">Discord Server</a>
          <a href="https://ko-fi.com/alteria/" target="_blank">Donate</a>
       </div>
-      <div class="right-info">Last update: 4 August 2025</div>
+      <div class="right-info">Last update: 9 August 2025</div>
    </div>
 
    <p class="something"><a href="https://framedsc.com/GeneralGuides/ue4_commands.htm" target="_blank">UE4 Default Console Commands</a> | <a href="https://pastebin.com/KUNNVZeC" target="_blank">WuWa Console Commands</a></p>
@@ -240,7 +240,7 @@
          <div class="codebox">
             <p>
                ; Enable water ripples when flying close/casting skill<br>
-			   ; 0 = Off, 1 = On (Default)<br>
+               ; 0 = Off, 1 = On (Default)<br>
                r.Kuro.InteractionEffect.UseCppWaterEffect=1<br><br>
                ; Changes object details, lights and particle effects<br>
                ; 0 = low, 1 = medium, 2 = high<br>
@@ -276,7 +276,24 @@
       <p></p>
       <button onclick="toggleVisibility('info-11')" class="info11-btn text-change" data-text="Ray Tracing" data-state="expanded"><span>▼ Ray Tracing</span></button>
       <div id="info-11">
-         <p>Not going to write an explanation for this. You can find information for ray tracing stuff in AMD / Epic site which can be found in the links below.</p>
+         <div class="codebox">
+            <p>
+               ; Place the commands in Engine.ini under [/Script/Engine.RendererSettings] or [/Script/Engine.RendererRTXSettings]<br><br>
+               ; Lower values reduce ghosting from characters when near a wall/foliage for RT GI but increase flickering artifacts<br>
+               ; Default - 0.05 (Low & Medium) | 0.03 (High)<br>
+               r.Lumen.ScreenProbeGather.Temporal.DistanceThreshold=0.005<br><br>
+               ; Use async compute for reflections, may improve performance for some GPUs<br>
+               ; 0 = Disable (Default), 1 = Enable<br>
+               r.Lumen.Reflections.AsyncCompute=1<br><br>
+               ; 0 = Disable, 1 = Enable (Default)<br>
+               ; Turning this off fixes SSR-like problems (e.g. blocky character/object shadows) but some objects do not get reflected anymore<br>
+               r.Lumen.Reflections.ScreenTraces=0<br><br>
+               ; Value from 0 to 1 | Default - 0.5<br>
+               ; Higher value will increase number of objects being reflected but lowers FPS<br>
+               r.Lumen.Reflections.SmoothBias=1.0<br>
+            </p>
+         </div>
+         <p>For the rest of the commands you can find information in AMD / Epic site which can be found in the links below.</p>
          <ul>
             <li><a href="https://gpuopen.com/learn/unreal-engine-performance-guide/" target="_blank">AMD - Unreal Engine Performance Guide</a></li>
             <li><a href="https://dev.epicgames.com/documentation/en-us/unreal-engine/lumen-performance-guide-for-unreal-engine" target="_blank">Epic - Lumen Performance Guide</a></li>
