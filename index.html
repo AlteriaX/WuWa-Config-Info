@@ -25,7 +25,7 @@
          <a href="https://discord.gg/gczjQvgzWE" target="_blank">Discord Server</a>
          <a href="https://ko-fi.com/alteria/" target="_blank">Donate</a>
       </div>
-      <div class="right-info">Last update: 9 August 2025</div>
+      <div class="right-info">Last update: 17 August 2025</div>
    </div>
 
    <p class="something"><a href="https://framedsc.com/GeneralGuides/ue4_commands.htm" target="_blank">UE4 Default Console Commands</a> | <a href="https://pastebin.com/KUNNVZeC" target="_blank">WuWa Console Commands</a></p>
@@ -65,18 +65,6 @@
          <figure>
             <img src="images/streaming_boost.jpg" class="zoom-img" alt="streaming_boost" style="width: 80%; margin: auto; display: block;">
             <figcaption style="text-align: center; margin-top: 10px;">Streaming Boost Image Comparison</figcaption>
-         </figure>
-         <div class="codebox">
-            <p>
-               ; 0: Low (does not work, will cause textures to not load), 1: High, 2: Medium (Yes the numbers are weird)<br>
-               r.MaterialQualityLevel=1<br>
-               r.KuroMaterialQualityLevel=1<br>
-            </p>
-         </div>
-         <p>Kuro material when set to medium (default for minimum requirement GPUs or lower) has bad environment LOD in certain spots. No clue if it's a recent change with patch 2.4 but FPS hit is minimal using high.</p>
-         <figure>
-            <img src="images/material_quality.jpg" class="zoom-img" alt="material_quality" style="width: 80%; margin: auto; display: block;">
-            <figcaption style="text-align: center; margin-top: 10px;">Kuro Material Quality Image Comparison</figcaption>
          </figure>
       </div>
       <p></p>
@@ -240,6 +228,9 @@
       <div id="info-10">
          <div class="codebox">
             <p>
+               ; 0: Low (does not work, will cause textures to not load), 1: High, 2: Medium (Yes the numbers are weird)<br>
+               r.MaterialQualityLevel=1<br>
+               r.KuroMaterialQualityLevel=1<br><br>
                ; Enable water ripples when flying close/casting skill<br>
                ; 0 = Off, 1 = On (Default)<br>
                r.Kuro.InteractionEffect.UseCppWaterEffect=1<br><br>
