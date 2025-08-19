@@ -25,7 +25,7 @@
          <a href="https://discord.gg/gczjQvgzWE" target="_blank">Discord Server</a>
          <a href="https://ko-fi.com/alteria/" target="_blank">Donate</a>
       </div>
-      <div class="right-info">Last update: 17 August 2025</div>
+      <div class="right-info">Last update: 19 August 2025</div>
    </div>
 
    <p class="something"><a href="https://framedsc.com/GeneralGuides/ue4_commands.htm" target="_blank">UE4 Default Console Commands</a> | <a href="https://pastebin.com/KUNNVZeC" target="_blank">WuWa Console Commands</a></p>
@@ -270,7 +270,7 @@
       <div id="info-11">
          <div class="codebox">
             <p>
-               ; Place the commands in Engine.ini under [/Script/Engine.RendererSettings] or [/Script/Engine.RendererRTXSettings]<br><br>
+               ; Place the commands in Engine.ini under [SystemSettings] or [/Script/Engine.RendererRTXSettings]<br><br>
                ; Lower values reduce ghosting from characters when near a wall/foliage for RT GI but increase flickering artifacts<br>
                ; Default - 0.05 (Low & Medium) | 0.03 (High)<br>
                r.Lumen.ScreenProbeGather.Temporal.DistanceThreshold=0.005<br><br>
@@ -296,7 +296,7 @@
       <div id="info-12">
          <div class="codebox">
             <p>
-               All commands listed are placed in Engine.ini under [/Script/Engine.RendererSettings]<br><br>
+               All commands listed are placed in Engine.ini under [SystemSettings]<br><br>
                ; Enable NVIDIA Reflex<br>
                ; Reflex Mode - 1 = low latency, 2 = low latency with boost<br>
                t.Streamline.Reflex.HandleMaxTickRate=true<br>
@@ -304,7 +304,9 @@
                t.Streamline.Reflex.Mode=1<br><br>
                ; Force enable DLAA<br>
                ; Using this command doesn't allow you to switch to Quality/Balanced/Performance mode in settings<br>
-               r.NGX.DLAA.Enable=1<br>
+               r.NGX.DLAA.Enable=1<br><br>
+			   ; To fix stuttering with menus when using DLSS Frame Gen<br>
+			   r.Streamline.DLSSG.RetainResourcesWhenOff=1<br>
             </p>
          </div>
       </div>
