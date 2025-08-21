@@ -73,11 +73,11 @@
          <div class="codebox">
             <p>
                ; Default view distance / foliage LOD distance value is 1<br><br>
-			   ; Test done near Ragunna<br>
+               ; Test done near Ragunna<br>
                ; Default - 145FPS | View distance 2 - 140FPS | View distance 2 + foliage distance 2 - 133FPS<br><br>
-			   ; Test done in Septimont<br>
-			   ; Default foliage distance - 97 FPS | Foliage distance 2 - 96 FPS<br>
-			   ; Foliage distance 3 - 93 FPS | Foliage distance 4 - 91 FPS | Foliage distance 5 - 85 FPS<br><br>
+               ; Test done in Septimont<br>
+               ; Default foliage distance - 97 FPS | Foliage distance 2 - 96 FPS<br>
+               ; Foliage distance 3 - 93 FPS | Foliage distance 4 - 91 FPS | Foliage distance 5 - 85 FPS<br><br>
                r.ViewDistanceScale=2<br>
                foliage.LODDistanceScale=2<br>
             </p>
@@ -282,7 +282,7 @@
       <div id="info-11">
          <div class="codebox">
             <p>
-               ; Place the commands in Engine.ini under [SystemSettings] or [/Script/Engine.RendererRTXSettings]<br><br>
+               ; Place the commands in Engine.ini under [/Script/Engine.RendererSettings] or [/Script/Engine.RendererRTXSettings]<br><br>
                ; Lower values reduce ghosting from characters when near a wall/foliage for RT GI but increase flickering artifacts<br>
                ; Default - 0.05 (Low & Medium) | 0.03 (High)<br>
                r.Lumen.ScreenProbeGather.Temporal.DistanceThreshold=0.005<br><br>
@@ -308,7 +308,7 @@
       <div id="info-12">
          <div class="codebox">
             <p>
-               All commands listed are placed in Engine.ini under [SystemSettings]<br><br>
+               All commands listed are placed in Engine.ini under [/Script/Engine.RendererSettings]<br><br>
                ; 0 = Disable Lens Flare, 1 = Enable Lens Flare (Default)<br>
                r.EnableLensflareSceneSample=0<br><br>
                ; 0 = Disable Depth of Field, 1 = Low, 2 = High, 3 = Very High, 4 = Extremely High<br>
