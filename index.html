@@ -25,10 +25,10 @@
          <a href="https://discord.gg/gczjQvgzWE" target="_blank">Discord Server</a>
          <a href="https://ko-fi.com/alteria/" target="_blank">Donate</a>
       </div>
-      <div class="right-info">Last update: 19 August 2025</div>
+      <div class="right-info">Last update: 21 August 2025</div>
    </div>
 
-   <p class="something"><a href="https://framedsc.com/GeneralGuides/ue4_commands.htm" target="_blank">UE4 Default Console Commands</a> | <a href="https://pastebin.com/KUNNVZeC" target="_blank">WuWa Console Commands</a></p>
+   <p class="something"><a href="https://framedsc.com/GeneralGuides/ue4_commands.htm" target="_blank">UE4 Default Commands (Some disabled by Kuro)</a> | <a href="https://pastebin.com/KUNNVZeC" target="_blank">WuWa Commands</a></p>
 
    <div class="content">
       <button onclick="toggleVisibility('info-1')" class="info1-btn text-change" data-text="Improving Texture Details / LoD" data-state="expanded"><span>▼ Improving Texture Details / LoD</span></button>
@@ -72,8 +72,12 @@
       <div id="info-2">
          <div class="codebox">
             <p>
-               ; Default view distance / foliage LOD distance value is 1<br>
-               ; Default - 145FPS | View distance 2 - 140FPS | View distance 2 + foliage distance 2 - 133FPS<br>
+               ; Default view distance / foliage LOD distance value is 1<br><br>
+			   ; Test done near Ragunna<br>
+               ; Default - 145FPS | View distance 2 - 140FPS | View distance 2 + foliage distance 2 - 133FPS<br><br>
+			   ; Test done in Septimont<br>
+			   ; Default foliage distance - 97 FPS | Foliage distance 2 - 96 FPS<br>
+			   ; Foliage distance 3 - 93 FPS | Foliage distance 4 - 91 FPS | Foliage distance 5 - 85 FPS<br><br>
                r.ViewDistanceScale=2<br>
                foliage.LODDistanceScale=2<br>
             </p>
@@ -119,7 +123,7 @@
                ; 0: Off, 1: Low, 2: Medium, 3: High, 4: Very High<br>
                r.SSR.Quality=3<br><br>
                ; 0.0 to 1.0 - higher value more objects in reflections<br>
-			   ; Default value - 0.6<br>
+               ; Default value - 0.6<br>
                r.SSR.MaxRoughness=1.0<br><br>
                ; 0: Use full res scene color, 1: Use half res scene color<br>
                r.SSR.HalfResSceneColor=0<br>
@@ -187,7 +191,7 @@
                r.HZBOcclusion=1<br>
             </p>
          </div>
-         <p>Game's default hardware occlusion culling is pretty bad especially in Vault Underground / Minos Sewers. Using HZB Occlusion reduces white spots but drops FPS (for example 10 FPS lower in Ragunna), only a few areas maintain similar FPS.</p>
+         <p>Game's default hardware occlusion culling is pretty bad especially in Vault Underground / Minos Sewers. Using HZB Occlusion reduces white spots when turning camera but drops FPS (for example 10 FPS lower in Ragunna), only a few areas maintain similar FPS.</p>
          <figure>
             <img src="images/hzb.jpg" class="zoom-img" alt="hzb" style="width: 80%; margin: auto; display: block;">
             <figcaption style="text-align: center; margin-top: 10px;">HZB Occlusion Image Comparison</figcaption>
@@ -228,6 +232,14 @@
       <div id="info-10">
          <div class="codebox">
             <p>
+               ; 0 = Off (slightly reduce bloom brightness), 1 = On (Default)<br>
+               r.Kuro.KuroBloomStreak=0<br><br>
+               ; 0 = Off (Disable Chromatic Abberation), 1 = On (Default)<br>
+               r.SceneColorFringeQuality=0<br><br>
+               ; 0 = Disable, 1 = FilmContrast, 2 = Vignette, 4 = Vignette + Film Grain<br>
+               ; Setting it to 0 or 1 disables Film Grain and Vignette<br>
+               ; Don't remember if turning off FilmContrast changes how a game looks<br>
+               r.Tonemapper.Quality=1<br><br>
                ; 0: Low (does not work, will cause textures to not load), 1: High, 2: Medium (Yes the numbers are weird)<br>
                r.MaterialQualityLevel=1<br>
                r.KuroMaterialQualityLevel=1<br><br>
@@ -297,6 +309,10 @@
          <div class="codebox">
             <p>
                All commands listed are placed in Engine.ini under [SystemSettings]<br><br>
+               ; 0 = Disable Lens Flare, 1 = Enable Lens Flare (Default)<br>
+               r.EnableLensflareSceneSample=0<br><br>
+               ; 0 = Disable Depth of Field, 1 = Low, 2 = High, 3 = Very High, 4 = Extremely High<br>
+               r.DepthOfFieldQuality=0<br><br>
                ; Enable NVIDIA Reflex<br>
                ; Reflex Mode - 1 = low latency, 2 = low latency with boost<br>
                t.Streamline.Reflex.HandleMaxTickRate=true<br>
@@ -305,8 +321,8 @@
                ; Force enable DLAA<br>
                ; Using this command doesn't allow you to switch to Quality/Balanced/Performance mode in settings<br>
                r.NGX.DLAA.Enable=1<br><br>
-			   ; To fix stuttering with menus when using DLSS Frame Gen<br>
-			   r.Streamline.DLSSG.RetainResourcesWhenOff=1<br>
+               ; To fix stuttering with menus when using DLSS Frame Gen<br>
+               r.Streamline.DLSSG.RetainResourcesWhenOff=1<br>
             </p>
          </div>
       </div>
