@@ -25,14 +25,14 @@
          <a href="https://discord.gg/gczjQvgzWE" target="_blank">Discord Server</a>
          <a href="https://ko-fi.com/alteria/" target="_blank">Donate</a>
       </div>
-      <div class="right-info">Last update: 21 August 2025</div>
+      <div class="right-info">Last update: 29 August 2025</div>
    </div>
 
    <p class="something"><a href="https://framedsc.com/GeneralGuides/ue4_commands.htm" target="_blank">UE4 Default Commands (Some disabled by Kuro)</a> | <a href="https://pastebin.com/KUNNVZeC" target="_blank">WuWa Commands</a></p>
 
    <div class="content">
-      <button onclick="toggleVisibility('info-1')" class="info1-btn text-change" data-text="Improving Texture Details / LoD" data-state="expanded"><span>▼ Improving Texture Details / LoD</span></button>
-      <div id="info-1">
+      <button onclick="toggleVisibility('texture-details')" class="texture-details-btn text-change" data-text="Improving Texture Details / LoD" data-state="expanded"><span>▼ Improving Texture Details / LoD</span></button>
+      <div id="texture-details">
          <div class="codebox">
             <p>
                ; Forcing Anisotropic Filtering x16 for AMD GPUs doesn't work<br>
@@ -68,8 +68,8 @@
          </figure>
       </div>
       <p></p>
-      <button onclick="toggleVisibility('info-2')" class="info2-btn text-change" data-text="View Distance" data-state="expanded"><span>▼ View Distance</span></button>
-      <div id="info-2">
+      <button onclick="toggleVisibility('view-distance')" class="view-distance-btn text-change" data-text="View Distance" data-state="expanded"><span>▼ View Distance</span></button>
+      <div id="view-distance">
          <div class="codebox">
             <p>
                ; Default view distance / foliage LOD distance value is 1<br><br>
@@ -93,8 +93,8 @@
          </figure>
       </div>
       <p></p>
-      <button onclick="toggleVisibility('info-3')" class="info3-btn text-change" data-text="Far Object Rendering" data-state="expanded"><span>▼ Far Object Rendering</span></button>
-      <div id="info-3">
+      <button onclick="toggleVisibility('far-object')" class="far-object-btn text-change" data-text="Far Object Rendering" data-state="expanded"><span>▼ Far Object Rendering</span></button>
+      <div id="far-object">
          <div class="codebox">
             <p>
                ; FPS for each option, difference may vary depending on GPU<br>
@@ -116,8 +116,8 @@
          </figure>
       </div>
       <p></p>
-      <button onclick="toggleVisibility('info-4')" class="info4-btn text-change" data-text="Reflections" data-state="expanded"><span>▼ Reflections</span></button>
-      <div id="info-4">
+      <button onclick="toggleVisibility('reflections')" class="reflections-btn text-change" data-text="Reflections" data-state="expanded"><span>▼ Reflections</span></button>
+      <div id="reflections">
          <div class="codebox">
             <p>
                ; 0: Off, 1: Low, 2: Medium, 3: High, 4: Very High<br>
@@ -135,8 +135,8 @@
          </figure>
       </div>
       <p></p>
-      <button onclick="toggleVisibility('info-5')" class="info5-btn text-change" data-text="Shadows" data-state="expanded"><span>▼ Shadows</span></button>
-      <div id="info-5">
+      <button onclick="toggleVisibility('shadows')" class="shadows-btn text-change" data-text="Shadows" data-state="expanded"><span>▼ Shadows</span></button>
+      <div id="shadows">
          <div class="codebox">
             <p>
                ; Lower values increases the amount of shadow<br>
@@ -160,8 +160,8 @@
          </figure>
       </div>
       <p></p>
-      <button onclick="toggleVisibility('info-6')" class="info6-btn text-change" data-text="Fog" data-state="expanded"><span>▼ Fog</span></button>
-      <div id="info-6">
+      <button onclick="toggleVisibility('fog')" class="fog-btn text-change" data-text="Fog" data-state="expanded"><span>▼ Fog</span></button>
+      <div id="fog">
          <div class="codebox">
             <p>
                ; 0: Disable fog | 1: Enable fog<br>
@@ -182,8 +182,8 @@
          </figure>
       </div>
       <p></p>
-      <button onclick="toggleVisibility('info-7')" class="info7-btn text-change" data-text="Culling" data-state="expanded"><span>▼ Culling</span></button>
-      <div id="info-7">
+      <button onclick="toggleVisibility('culling')" class="culling-btn text-change" data-text="Culling" data-state="expanded"><span>▼ Culling</span></button>
+      <div id="culling">
          <div class="codebox">
             <p>
                ; Not included in config by default<br>
@@ -198,8 +198,8 @@
          </figure>
       </div>
       <p></p>
-      <button onclick="toggleVisibility('info-8')" class="info8-btn text-change" data-text="Tonemapping" data-state="expanded"><span>▼ Tonemapping</span></button>
-      <div id="info-8">
+      <button onclick="toggleVisibility('tonemap')" class="tonemap-btn text-change" data-text="Tonemapping" data-state="expanded"><span>▼ Tonemapping</span></button>
+      <div id="tonemap">
          <div class="codebox">
             <p>
                ; 0 = Off, 1 = Genshin, 2 = Death Stranding, 3 = Kuro (Default)<br>
@@ -213,23 +213,8 @@
          </figure>
       </div>
       <p></p>
-      <button onclick="toggleVisibility('info-9')" class="info9-btn text-change" data-text="Auto Exposure / Eye Adaptation" data-state="expanded"><span>▼ Auto Exposure / Eye Adaptation</span></button>
-      <div id="info-9">
-         <div class="codebox">
-            <p>
-               ; 0 = Off, 1 = On (Default)<br>
-               r.Kuro.AutoExposure=1<br>
-            </p>
-         </div>
-         <p>Turning off auto exposure can make the game really dark in certain areas, but it prevents other areas from becoming overly bright.</p>
-         <figure>
-            <img src="images/auto_exposure.jpg" class="zoom-img" alt="auto_exposure" style="width: 80%; margin: auto; display: block;">
-            <figcaption style="text-align: center; margin-top: 10px;">Auto Exposure Image Comparison</figcaption>
-         </figure>
-      </div>
-      <p></p>
-      <button onclick="toggleVisibility('info-10')" class="info10-btn text-change" data-text="Particles / Effects / Others" data-state="expanded"><span>▼ Particles / Effects / Others</span></button>
-      <div id="info-10">
+      <button onclick="toggleVisibility('others')" class="others-btn text-change" data-text="Particles / Effects / Others" data-state="expanded"><span>▼ Particles / Effects / Others</span></button>
+      <div id="others">
          <div class="codebox">
             <p>
                ; 0 = Off (slightly reduce bloom brightness), 1 = On (Default)<br>
@@ -278,8 +263,8 @@
          </div>
       </div>
       <p></p>
-      <button onclick="toggleVisibility('info-11')" class="info11-btn text-change" data-text="Ray Tracing" data-state="expanded"><span>▼ Ray Tracing</span></button>
-      <div id="info-11">
+      <button onclick="toggleVisibility('raytracing')" class="raytracing-btn text-change" data-text="Ray Tracing" data-state="expanded"><span>▼ Ray Tracing</span></button>
+      <div id="raytracing">
          <div class="codebox">
             <p>
                ; Place the commands in Engine.ini under [/Script/Engine.RendererSettings] or [/Script/Engine.RendererRTXSettings]<br><br>
@@ -304,8 +289,8 @@
          </ul>
       </div>
       <p></p>
-      <button onclick="toggleVisibility('info-12')" class="info12-btn text-change" data-text="Extra Commands (Not in config)" data-state="expanded"><span>▼ Extra Commands (Not in config)</span></button>
-      <div id="info-12">
+      <button onclick="toggleVisibility('extra')" class="extra-btn text-change" data-text="Extra Commands (Not in config)" data-state="expanded"><span>▼ Extra Commands (Not in config)</span></button>
+      <div id="extra">
          <div class="codebox">
             <p>
                All commands listed are placed in Engine.ini under [/Script/Engine.RendererSettings]<br><br>
@@ -327,8 +312,8 @@
          </div>
       </div>
       <p></p>
-      <button onclick="toggleVisibility('info-13')" class="info13-btn text-change" data-text="Resizable Bar" data-state="expanded"><span>▼ Resizable Bar</span></button>
-      <div id="info-13">
+      <button onclick="toggleVisibility('rebar')" class="rebar-btn text-change" data-text="Resizable Bar" data-state="expanded"><span>▼ Resizable Bar</span></button>
+      <div id="rebar">
          <div class="codebox">
             <p>
                ; Using ReBar increases VRAM usage, so make sure to check<br>

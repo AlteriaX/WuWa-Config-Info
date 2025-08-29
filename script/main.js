@@ -1,35 +1,37 @@
 console.log('Why are you checking the console?! ヾ(•ω•`)o');
 
+const ids = ["texture-details", "view-distance", "far-object", "reflections", "shadows", "fog", "culling", "tonemap", "others", "raytracing", "extra", "rebar"];
+
 function toggleVisibility(id) {
    document.getElementById(id)
       .classList.toggle("hide");
 };
 
 function expandAll() {
-   for (let i = 1; i <= 13; i++) {
-      document.getElementById(`info-${i}`).classList.remove("hide");
+   ids.forEach(id => {
+      document.getElementById(id).classList.remove("hide");
 
-      const $button = $(`.info${i}-btn`);
-      const $span = $button.find('span');
-      const text = $button.data('text');
+      const $button = $(`.${id}-btn`);
+      const $span = $button.find("span");
+      const text = $button.data("text");
 
       $span.html('▼ ' + text);
       $button.data('state', 'expanded');
-   }
-}
+   });
+};
 
 function collapseAll() {
-   for (let i = 1; i <= 13; i++) {
-      document.getElementById(`info-${i}`).classList.add("hide");
+   ids.forEach(id => {
+      document.getElementById(id).classList.add("hide");
 
-      const $button = $(`.info${i}-btn`);
+      const $button = $(`.${id}-btn`);
       const $span = $button.find('span');
       const text = $button.data('text');
 
       $span.html('► ' + text);
       $button.data('state', 'collapsed');
-   }
-}
+   });
+};
 
 $(document)
    .ready(function() {

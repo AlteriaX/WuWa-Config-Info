@@ -86,19 +86,18 @@ a {
    border-width: 0px;
 }
 
-#info-1.hide,
-#info-2.hide,
-#info-3.hide,
-#info-4.hide,
-#info-5.hide,
-#info-6.hide,
-#info-7.hide,
-#info-8.hide,
-#info-9.hide,
-#info-10.hide,
-#info-11.hide,
-#info-12.hide,
-#info-13.hide {
+#texture-details.hide,
+#view-distance.hide,
+#far-object.hide,
+#reflections.hide,
+#shadows.hide,
+#fog.hide,
+#culling.hide,
+#tonemap.hide,
+#others.hide,
+#raytracing.hide,
+#extra.hide,
+#rebar.hide {
    display: none;
 }
 
