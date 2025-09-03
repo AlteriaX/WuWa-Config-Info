@@ -25,7 +25,7 @@
          <a href="https://discord.gg/gczjQvgzWE" target="_blank">Discord Server</a>
          <a href="https://ko-fi.com/alteria/" target="_blank">Donate</a>
       </div>
-      <div class="right-info">Last update: 29 August 2025</div>
+      <div class="right-info">Last update: 3 September 2025</div>
    </div>
 
    <p class="something"><a href="https://framedsc.com/GeneralGuides/ue4_commands.htm" target="_blank">UE4 Default Commands (Some disabled by Kuro)</a> | <a href="https://pastebin.com/KUNNVZeC" target="_blank">WuWa Commands</a></p>
@@ -98,15 +98,15 @@
          <div class="codebox">
             <p>
                ; FPS for each option, difference may vary depending on GPU<br>
-               ; Option 1 - 110FPS | Option 2 - 117FPS | Option 3 - 130FPS | Option 4 - 134FPS<br><br>
+               ; Option 1 - 110FPS | Option 2 - 117FPS | Option 3 - 130FPS | Option 4 - 134FPS (Outdated, need to retest)<br><br>
                ; Option 1<br>
                wp.Runtime.OverrideMultipleRuntimeGridLoadingRangeValues=200&400&600&800&1500&5000&500&800&1000&500&800&1000&1400&3000&150&240&500&600&80&280&200&200&1500&5000&100&160&200&1500&5000<br><br>
                ; Option 2<br>
-               wp.Runtime.OverrideMultipleRuntimeGridLoadingRangeValues=150&400&450&600&1500&5000&500&600&1000&500&650&800&1000&1500&120&150&200&350&80&280&200&200&1500&5000&100&160&200&1000&1500<br><br>
+               wp.Runtime.OverrideMultipleRuntimeGridLoadingRangeValues=150&400&450&600&1500&5000&300&400&600&300&600&700&1400&2000&150&240&500&600&80&160&200&200&1500&5000&100&160&200&1000&3500<br><br>
                ; Option 3<br>
-               wp.Runtime.OverrideMultipleRuntimeGridLoadingRangeValues=100&200&300&400&1500&4000&250&400&500&250&650&800&850&1250&90&120&150&250&80&160&200&200&1000&4000&75&120&200&900&1250<br><br>
+               wp.Runtime.OverrideMultipleRuntimeGridLoadingRangeValues=100&200&200&400&1500&3000&150&250&350&150&400&600&700&1250&80&90&100&150&60&120&150&150&750&3500&65&100&200&800&1100<br><br>
                ; Option 4<br>
-               wp.Runtime.OverrideMultipleRuntimeGridLoadingRangeValues=80&200&200&300&1000&3000&150&250&350&150&400&600&700&1000&80&90&100&150&80&160&200&200&500&3000&50&80&200&750&1000<br>
+               wp.Runtime.OverrideMultipleRuntimeGridLoadingRangeValues=80&100&200&300&750&3000&150&250&350&150&400&600&700&750&80&90&100&150&60&120&150&150&750&3500&65&100&200&800&1100<br>
             </p>
          </div>
          <p>By using lower values you can see that there are less trees in the distance. From left to right: 80, 100, 150, 200 (Labels at the bottom of image)</p>
@@ -237,6 +237,8 @@
                ; Adjust foliage density type<br>
                ; 0 = low, 1 = medium, 2 = high<br>
                foliage.DensityType=2<br><br>
+               ; Set distance before grass is culled<br>
+               r.Kuro.Foliage.GrassCullDistanceMax=20000<br><br>
                ; Animation rate optimization<br>
                ; 0 = Off, 1 = On (Default)<br>
                a.URO.Enable=0<br><br>
@@ -246,17 +248,14 @@
                ; Value from 1 to 8, higher value = lower resolution<br>
                r.LightShaftDownSampleFactor=1<br><br>
                ; Enable / disable Screen Space Fog Scattering<br>
+               ; 0 = Off, 1 = On (Default)<br>
                r.SSFS=1<br><br>
                ; Group Hierarchical Instanced Static Meshes to reduce draw calls<br>
                ; 0 = Off (Default), 1 = On<br>
                HISMBatcher.Enabled=1<br>
                HISMBatcher.MaxPoolSize=512<br><br>
-               ; Whether to uses low-memory LRU cache for character effects pool (Default true)<br>
+               ; Whether to use low-memory LRU cache for character effects pool (Default true)<br>
                Kuro.CppEffectSystem.UseLowMemoryPlayerEffectLruCapacity=false<br><br>
-               ; Set distance before grass is culled<br>
-               r.Kuro.Foliage.GrassCullDistanceMax=25000<br><br>
-               ; Set distance before NPC disappears<br>
-               r.Kuro.NpcDisappearDistance=20000<br><br>
                ; Set height before light turns off / object despawn? in flight mode<br>
                wp.Runtime.SoraGridBlackListHeight=20000<br>
             </p>
@@ -270,7 +269,7 @@
                ; Place the commands in Engine.ini under [/Script/Engine.RendererSettings] or [/Script/Engine.RendererRTXSettings]<br><br>
                ; Lower values reduce ghosting from characters when near a wall/foliage for RT GI but increase flickering artifacts<br>
                ; Default - 0.05 (Low & Medium) | 0.03 (High)<br>
-               r.Lumen.ScreenProbeGather.Temporal.DistanceThreshold=0.005<br><br>
+               r.Lumen.ScreenProbeGather.Temporal.DistanceThreshold=0.03<br><br>
                ; Use async compute for reflections, may improve performance for some GPUs<br>
                ; 0 = Disable (Default), 1 = Enable<br>
                r.Lumen.Reflections.AsyncCompute=1<br><br>
@@ -298,6 +297,8 @@
                r.EnableLensflareSceneSample=0<br><br>
                ; 0 = Disable Depth of Field, 1 = Low, 2 = High, 3 = Very High, 4 = Extremely High<br>
                r.DepthOfFieldQuality=0<br><br>
+               ; Set distance before NPC disappears (Default 6000)<br>
+               r.Kuro.NpcDisappearDistance=20000<br><br>
                ; Enable NVIDIA Reflex<br>
                ; Reflex Mode - 1 = low latency, 2 = low latency with boost<br>
                t.Streamline.Reflex.HandleMaxTickRate=true<br>
