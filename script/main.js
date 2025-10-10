@@ -1,6 +1,6 @@
 console.log('Why are you checking the console?! ヾ(•ω•`)o');
 
-const ids = ["texture-details", "view-distance", "reflections", "shadows", "fog", "culling", "tonemap", "others", "raytracing", "extra", "rebar"];
+const ids = ["texture-details", "view-distance", "reflections", "shadows", "fog", "culling", "tonemap", "auto-exposure", "others", "raytracing", "extra", "rebar"];
 
 function toggleVisibility(id) {
    document.getElementById(id)

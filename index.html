@@ -25,7 +25,7 @@
          <a href="https://discord.gg/gczjQvgzWE" target="_blank">Discord Server</a>
          <a href="https://ko-fi.com/alteria/" target="_blank">Donate</a>
       </div>
-      <div class="right-info">Last update: 18 September 2025</div>
+      <div class="right-info">Last update: 10 October 2025</div>
    </div>
 
    <p class="something"><a href="https://framedsc.com/GeneralGuides/ue4_commands.htm" target="_blank">UE4 Default Commands (Some disabled by Kuro)</a> | <a href="https://pastebin.com/KUNNVZeC" target="_blank">WuWa Commands</a></p>
@@ -37,16 +37,13 @@
             <p>
                ; Forcing Anisotropic Filtering x16 for AMD GPUs doesn't work<br>
                ; Forcing AFx16 through NVIDIA Control Panel works fine on NVIDIA GPUs (Does not work for RTX 50 series)<br><br>
-               ; For RTX 50 Series use this command instead since AFx16 doesn’t work<br>
+               ; For RTX 50 Series use this command instead since AFx16 doesn’t work properly<br>
                r.MipMapLODBias=-2<br><br>
-               ; For AMD GPUs only<br>
-               ; r.FidelityFX.FSR.RCAS.Sharpness - 0 = sharpest, 0.2 (default), higher = less sharp<br>
-               ; Set r.FidelityFX.FSR.RCAS.Enabled to 0 if you use sharpening through Control Panel<br>
+               ; For AMD GPUs only - Works with FSR On/Off<br>
                r.FidelityFX.FSR.SecondaryUpscale=1<br>
                r.FidelityFX.FSR.MipBias.Method=2<br>
                r.FidelityFX.FSR.MipBias.Offset=-2<br>
-               r.FidelityFX.FSR.RCAS.Enabled=1<br>
-               r.FidelityFX.FSR.RCAS.Sharpness=2.0<br>
+               r.FidelityFX.FSR.RCAS.Enabled=0<br>
             </p>
          </div>
          <p>The command <code>r.MaxAnisotropy</code> doesn't work properly even when it is set to 16. Changing anisotropic filtering / mip bias improves texture details at a distance.</p>
@@ -93,7 +90,7 @@
          </figure>
       </div>
       <p></p>
-	  <!--
+      <!--
       <button onclick="toggleVisibility('far-object')" class="far-object-btn text-change" data-text="Far Object Rendering" data-state="expanded"><span>▼ Far Object Rendering</span></button>
       <div id="far-object">
          <div class="codebox">
@@ -215,6 +212,19 @@
          </figure>
       </div>
       <p></p>
+      <button onclick="toggleVisibility('auto-exposure')" class="auto-exposure-btn text-change" data-text="Auto Exposure" data-state="expanded"><span>▼ Auto Exposure</span></button>
+      <div id="auto-exposure">
+         <p>Here's some image comparisons when changing in-game Auto Exposure setting to On / Off.</p>
+         <figure>
+            <img src="images/auto_exposure.jpg" class="zoom-img" alt="auto_exposure" style="width: 80%; margin: auto; display: block;">
+            <figcaption style="text-align: center; margin-top: 10px;">Auto Exposure Image Comparison 1</figcaption>
+         </figure>
+         <figure>
+            <img src="images/auto_exposure2.jpg" class="zoom-img" alt="auto_exposure2" style="width: 80%; margin: auto; display: block;">
+            <figcaption style="text-align: center; margin-top: 10px;">Auto Exposure Image Comparison 2</figcaption>
+         </figure>
+      </div>
+      <p></p>
       <button onclick="toggleVisibility('others')" class="others-btn text-change" data-text="Particles / Effects / Others" data-state="expanded"><span>▼ Particles / Effects / Others</span></button>
       <div id="others">
          <div class="codebox">
@@ -230,17 +240,12 @@
                ; 0: Low (does not work, will cause textures to not load), 1: High, 2: Medium (Yes the numbers are weird)<br>
                r.MaterialQualityLevel=1<br>
                r.KuroMaterialQualityLevel=1<br><br>
-               ; Enable water ripples when flying close/casting skill<br>
-               ; 0 = Off, 1 = On (Default)<br>
-               r.Kuro.InteractionEffect.UseCppWaterEffect=1<br><br>
                ; Changes object details, lights and particle effects<br>
                ; 0 = low, 1 = medium, 2 = high<br>
                r.DetailMode=2<br><br>
                ; Adjust foliage density type<br>
                ; 0 = low, 1 = medium, 2 = high<br>
                foliage.DensityType=2<br><br>
-               ; Set distance before grass is culled<br>
-               r.Kuro.Foliage.GrassCullDistanceMax=20000<br><br>
                ; Animation rate optimization<br>
                ; 0 = Off, 1 = On (Default)<br>
                a.URO.Enable=0<br><br>
@@ -252,6 +257,12 @@
                ; Enable / disable Screen Space Fog Scattering<br>
                ; 0 = Off, 1 = On (Default)<br>
                r.SSFS=1<br><br>
+               ; Enable / disable Kuro CS Cloth<br>
+               ; 0 = Off, 1 = On (Default)<br>
+               r.KuroCSCloth.Enable=1<br><br>
+               ; Enable water ripples when flying close/casting skill<br>
+               ; 0 = Off, 1 = On (Default)<br>
+               r.Kuro.InteractionEffect.UseCppWaterEffect=1<br><br>
                ; Whether to use low-memory LRU cache for character effects pool (Default true)<br>
                Kuro.CppEffectSystem.UseLowMemoryPlayerEffectLruCapacity=false<br><br>
                ; Set height before light turns off / object despawn? in flight mode<br>
@@ -295,11 +306,13 @@
                r.EnableLensflareSceneSample=0<br><br>
                ; 0 = Disable Depth of Field, 1 = Low, 2 = High, 3 = Very High, 4 = Extremely High<br>
                r.DepthOfFieldQuality=0<br><br>
+               ; Set distance before grass is culled<br>
+               r.Kuro.Foliage.GrassCullDistanceMax=20000<br><br>
                ; Set distance before NPC disappears (Default 6000)<br>
                r.Kuro.NpcDisappearDistance=20000<br><br>
                ; Enable NVIDIA Reflex<br>
                ; Reflex Mode - 1 = low latency, 2 = low latency with boost<br>
-			   ; Does not work for RTX 40/50 series due to Frame Generation<br>
+               ; Does not work for RTX 40/50 series due to Frame Generation<br>
                t.Streamline.Reflex.HandleMaxTickRate=true<br>
                t.Streamline.Reflex.Enable=1<br>
                t.Streamline.Reflex.Mode=1<br><br>
