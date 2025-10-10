@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta property="og:title" content="WuWa Old Color Settings" />
+	<meta property="og:description" content="Generate values for old color settings" />
+	<meta property="og:image" content="https://i.imgur.com/FTGBtNI.png" />
+	<meta property="og:url" content="https://alteriax.github.io/WuWa-Config-Info/color-settings.html" />
+	<title>WuWa Old Color Settings</title>
+	<link rel="icon" type="image/x-icon" href="images/danjin_happy.ico">
+	<link rel="stylesheet" href="css/main.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+	<script src="script/main.js"></script>
+</head>
+
+<body>
+   <center>
+      <h1>WuWa Old Color Settings</h1>
+   </center>
+
+   <div class="top-bar">
+      <div class="left-links">
+         <a href="https://github.com/AlteriaX/WuWa-Configs" target="_blank">GitHub</a>
+         <a href="https://discord.gg/gczjQvgzWE" target="_blank">Discord Server</a>
+         <a href="index.html">Config Info</a>
+         <a href="https://ko-fi.com/alteria/" target="_blank">Donate</a>
+      </div>
+      <div class="right-info">Last update: 11 October 2025</div>
+   </div>
+
+   <div class="color-settings-content">
+      <center>
+         <div class="slider-label">
+            <p>Brightness</p>
+            <p id="brightnessValue">50</p>
+         </div>
+         <input type="range" class="slider" id="brightness" min="0" max="100" value="50">
+         <br><br>
+         <div class="slider-label">
+            <p>Saturation</p>
+            <p id="saturationValue">50</p>
+         </div>
+         <input type="range" class="slider" id="saturation" min="0" max="100" value="50">
+         <br><br>
+         <div class="slider-label">
+            <p>Contrast</p>
+            <p id="contrastValue">50</p>
+         </div>
+         <input type="range" class="slider" id="contrast" min="0" max="100" value="50">
+         <br><br><br>
+         <button id="reset">Reset</button>
+         <button id="generate">Generate</button>
+         <h2>Values:</h2>
+         <div class="output-box">
+            <p id="value-output">Brightness: 0 &nbsp;&nbsp;| &nbsp;&nbsp;Saturation: 50 &nbsp;&nbsp;| &nbsp;&nbsp;Contrast: 50</p>
+         </div>
+         <h2>SQL Command:</h2>
+         <div class="output-box">
+            <p id="sql-output">INSERT OR REPLACE INTO LocalStorage (key, value) VALUES ('Brightness', '0'), ('SaturationNew', '50'), ('ContrastNew', '50');</p>
+         </div>
+         <br><br>
+         <hr class="solid"><br>
+         <h2>How to apply color settings:</h2>
+         <div class="apply-settings">
+            <p>- Download DB Browser for SQLite <a href="https://sqlitebrowser.org/dl/" target="_blank">https://sqlitebrowser.org/dl/</a><br><br>
+               - Go to <code>...Wuthering Waves\Wuthering Waves Game\Client\Saved\LocalStorage</code> and open <code>LocalStorage.db</code> using DB Browser for SQLite<br><br>
+               - Copy and paste the code below then execute, write changes and then close database
+            </p>
+            <img src="images/sql-color-settings.png" class="zoom-img" alt="sql-color-settings" style="width: 100%; margin: auto; display: block;">
+         </div>
+         <br><br>
+      </center>
+   </div>
+
+   <a class="librecounter" href="https://librecounter.org/referer/show"><img src="https://librecounter.org/counter.svg" referrerpolicy="unsafe-url" alt="Logo for librecounter" /></a>
+
+</body>
+
+</html>
