@@ -130,7 +130,11 @@ a {
 code {
    font-family: Consolas, monospace;
    background-color: #333;
-   padding: 2px;
+   padding: 0px 3px 0px 3px;
+}
+
+li:nth-child(n+2) {
+   padding-top: 5px;
 }
 
 .slider {
