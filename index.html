@@ -26,7 +26,7 @@
          <a href="color-settings">Old Color Settings</a>
          <a href="https://ko-fi.com/alteria/" target="_blank">Donate</a>
       </div>
-      <div class="right-info">Last update: 18 October 2025</div>
+      <div class="right-info">Last update: 21 November 2025</div>
    </div>
 
    <p class="something"><a href="https://framedsc.com/GeneralGuides/ue4_commands.htm" target="_blank">UE4 Default Commands (Some disabled by Kuro)</a> | <a href="https://pastebin.com/KUNNVZeC" target="_blank">WuWa Commands</a></p>
@@ -272,7 +272,9 @@
                ; Set distance before grass is culled<br>
                r.Kuro.Foliage.GrassCullDistanceMax=20000<br><br>
                ; Set height before light turns off / object despawn? in flight mode<br>
-               wp.Runtime.SoraGridBlackListHeight=20000<br>
+               wp.Runtime.SoraGridBlackListHeight=20000<br><br>
+			   ; Higher value = more objects rendered at a distance<br>
+			   wp.Runtime.LoadingRangeScale=1.0<br>
             </p>
          </div>
       </div>
