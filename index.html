@@ -26,7 +26,7 @@
          <a href="color-settings">Old Color Settings</a>
          <a href="https://ko-fi.com/alteria/" target="_blank">Donate</a>
       </div>
-      <div class="right-info">Last update: 21 November 2025</div>
+      <div class="right-info">Last update: 22 November 2025</div>
    </div>
 
    <p class="something"><a href="https://framedsc.com/GeneralGuides/ue4_commands.htm" target="_blank">UE4 Default Commands (Some disabled by Kuro)</a> | <a href="https://pastebin.com/KUNNVZeC" target="_blank">WuWa Commands</a></p>
@@ -41,7 +41,7 @@
                ; For RTX 50 Series use this command instead since AFx16 doesn’t work properly<br>
                r.MipMapLODBias=-2<br><br>
                ; For AMD GPUs only - Works with FSR On/Off<br>
-			   ; Patch 2.7 issue - Can cause black screen / crash, not sure if it breaks due to FSR3 or other stuff <br>
+               ; Patch 2.7 issue - Can cause black screen / crash, not sure if it breaks due to FSR3 or other stuff<br>
                r.FidelityFX.FSR.SecondaryUpscale=1<br>
                r.FidelityFX.FSR.MipBias.Method=2<br>
                r.FidelityFX.FSR.MipBias.Offset=-2<br>
@@ -123,7 +123,7 @@
             <p>
                ; 0: Off, 1: Low, 2: Medium, 3: High, 4: Very High<br>
                r.SSR.Quality=3<br><br>
-               ; 0.0 to 1.0 - higher value more objects in reflections<br>
+               ; 0.0 to 1.0 - Sets roughness level where SSR starts to fade out<br>
                ; Default value - 0.6<br>
                r.SSR.MaxRoughness=1.0<br><br>
                ; 0: Use full res scene color, 1: Use half res scene color<br>
@@ -161,6 +161,23 @@
          </figure>
       </div>
       <p></p>
+      <button onclick="toggleVisibility('ambient-occlusion')" class="ambient-occlusion-btn text-change" data-text="Ambient Occlusion" data-state="expanded"><span>▼ Ambient Occlusion</span></button>
+      <div id="ambient-occlusion">
+         <div class="codebox">
+            <p>
+               ; 0: DFAO Off, 1: DFAO On<br>
+               r.DistanceFieldAO=1<br><br>
+               ; 0: Off, 1: Medium, 2: High, 3: Very High<br>
+               r.DistanceFieldAOQuality=3<br>
+            </p>
+         </div>
+         <p>Enabled by default for High?/Ultra Quality preset, you can enable it manually through Engine.ini.<br><br>Full image comparison: <a href="https://imgsli.com/NDI5ODk3" target="_blank">DFAO Comparison 1</a> | <a href="https://imgsli.com/NDI5OTAw" target="_blank">DFAO Comparison 2</a></p>
+         <figure>
+            <img src="images/dfao_compare.jpg" class="zoom-img" alt="dfao" style="width: 80%; margin: auto; display: block;">
+            <figcaption style="text-align: center; margin-top: 10px;">DFAO Image Comparison</figcaption>
+         </figure>
+      </div>
+      <p></p>
       <button onclick="toggleVisibility('fog')" class="fog-btn text-change" data-text="Fog" data-state="expanded"><span>▼ Fog</span></button>
       <div id="fog">
          <div class="codebox">
@@ -183,6 +200,7 @@
          </figure>
       </div>
       <p></p>
+      <!--
       <button onclick="toggleVisibility('culling')" class="culling-btn text-change" data-text="Culling" data-state="expanded"><span>▼ Culling</span></button>
       <div id="culling">
          <div class="codebox">
@@ -199,6 +217,7 @@
          </figure>
       </div>
       <p></p>
+	  -->
       <button onclick="toggleVisibility('tonemap')" class="tonemap-btn text-change" data-text="Tonemapping" data-state="expanded"><span>▼ Tonemapping</span></button>
       <div id="tonemap">
          <div class="codebox">
@@ -265,16 +284,14 @@
                ; Enable water ripples when flying close/casting skill<br>
                ; 0 = Off, 1 = On (Default)<br>
                r.Kuro.InteractionEffect.UseCppWaterEffect=1<br><br>
-			   ; When enabled, blueprint tick is controlled by time budget manager (Default true)<br>
-			   Kuro.Blueprint.EnableGameBudget=false<br><br>
                ; Whether to use low-memory LRU cache for character effects pool (Default true)<br>
                Kuro.CppEffectSystem.UseLowMemoryPlayerEffectLruCapacity=false<br><br>
                ; Set distance before grass is culled<br>
                r.Kuro.Foliage.GrassCullDistanceMax=20000<br><br>
                ; Set height before light turns off / object despawn? in flight mode<br>
                wp.Runtime.SoraGridBlackListHeight=20000<br><br>
-			   ; Higher value = more objects rendered at a distance<br>
-			   wp.Runtime.LoadingRangeScale=1.0<br>
+               ; Higher value = more objects rendered at a distance<br>
+               wp.Runtime.LoadingRangeScale=1.0<br>
             </p>
          </div>
       </div>
@@ -294,7 +311,7 @@
                ; Turning this off fixes SSR-like problems (e.g. blocky character/object shadows) but some objects do not get reflected anymore<br>
                r.Lumen.Reflections.ScreenTraces=0<br><br>
                ; Value from 0 to 1 | Default - 0.5<br>
-               ; Higher value will increase number of objects being reflected but lowers FPS<br>
+               ; Global material roughness bias for Lumen Reflections, 1 is fully mirror<br>
                r.Lumen.Reflections.SmoothBias=1.0<br>
             </p>
          </div>
