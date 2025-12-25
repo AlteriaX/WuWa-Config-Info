@@ -26,7 +26,7 @@
          <a href="color-settings">Old Color Settings</a>
          <a href="https://ko-fi.com/alteria/" target="_blank">Donate</a>
       </div>
-      <div class="right-info">Last update: 22 November 2025</div>
+      <div class="right-info">Last update: 25 December 2025</div>
    </div>
 
    <p class="something"><a href="https://framedsc.com/GeneralGuides/ue4_commands.htm" target="_blank">UE4 Default Commands (Some disabled by Kuro)</a> | <a href="https://pastebin.com/KUNNVZeC" target="_blank">WuWa Commands</a></p>
@@ -41,7 +41,7 @@
                ; For RTX 50 Series use this command instead since AFx16 doesn’t work properly<br>
                r.MipMapLODBias=-2<br><br>
                ; For AMD GPUs only - Works with FSR On/Off<br>
-               ; Patch 2.7 issue - Can cause black screen / crash, not sure if it breaks due to FSR3 or other stuff<br>
+               ; Patch 2.7 onwards - May cause black screen / crash, not needed if using FSR3<br>
                r.FidelityFX.FSR.SecondaryUpscale=1<br>
                r.FidelityFX.FSR.MipBias.Method=2<br>
                r.FidelityFX.FSR.MipBias.Offset=-2<br>
@@ -250,8 +250,6 @@
       <div id="others">
          <div class="codebox">
             <p>
-               ; 0 = Off (slightly reduce bloom brightness), 1 = On (Default)<br>
-               r.Kuro.KuroBloomStreak=0<br><br>
                ; 0 = Off (Disable Chromatic Abberation), 1 = On (Default)<br>
                r.SceneColorFringeQuality=0<br><br>
                ; 0 = Disable, 1 = FilmContrast, 2 = Vignette, 4 = Vignette + Film Grain<br>
@@ -278,20 +276,20 @@
                ; Enable / disable Screen Space Fog Scattering<br>
                ; 0 = Off, 1 = On (Default)<br>
                r.SSFS=1<br><br>
-               ; Enable / disable Kuro CS Cloth<br>
-               ; 0 = Off, 1 = On (Default)<br>
-               r.KuroCSCloth.Enable=1<br><br>
                ; Enable water ripples when flying close/casting skill<br>
                ; 0 = Off, 1 = On (Default)<br>
                r.Kuro.InteractionEffect.UseCppWaterEffect=1<br><br>
-               ; Whether to use low-memory LRU cache for character effects pool (Default true)<br>
-               Kuro.CppEffectSystem.UseLowMemoryPlayerEffectLruCapacity=false<br><br>
                ; Set distance before grass is culled<br>
-               r.Kuro.Foliage.GrassCullDistanceMax=20000<br><br>
+               r.Kuro.Foliage.GrassCullDistanceMax=20000<br>
+			   r.Kuro.Foliage.Grass3_0CullDistanceMax=20000<br><br>
                ; Set height before light turns off / object despawn? in flight mode<br>
                wp.Runtime.SoraGridBlackListHeight=20000<br><br>
                ; Higher value = more objects rendered at a distance<br>
                wp.Runtime.LoadingRangeScale=1.0<br>
+			   wp.Runtime.PlannedLoadingRangeScale=1.0<br><br>
+			   ; 0 = Off (Default), 1 = On<br>
+			   ; Enable parallel process draw commands<br>
+			   UBInstancing.ParallelProcess=1<br>
             </p>
          </div>
       </div>
@@ -327,6 +325,8 @@
          <div class="codebox">
             <p>
                All commands listed are placed in Engine.ini under [/Script/Engine.RendererSettings]<br><br>
+               ; 0 = Off (slightly reduce bloom brightness), 1 = On (Default)<br>
+               r.Kuro.KuroBloomStreak=0<br><br>
                ; 0 = Disable Lens Flare, 1 = Enable Lens Flare (Default)<br>
                r.EnableLensflareSceneSample=0<br><br>
                ; 0 = Disable Depth of Field, 1 = Low, 2 = High, 3 = Very High, 4 = Extremely High<br>
