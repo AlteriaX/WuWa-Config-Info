@@ -26,7 +26,7 @@
          <a href="color-settings">Old Color Settings</a>
          <a href="https://ko-fi.com/alteria/" target="_blank">Donate</a>
       </div>
-      <div class="right-info">Last update: 25 December 2025</div>
+      <div class="right-info">Last update: 27 December 2025</div>
    </div>
 
    <p class="something"><a href="https://framedsc.com/GeneralGuides/ue4_commands.htm" target="_blank">UE4 Default Commands (Some disabled by Kuro)</a> | <a href="https://pastebin.com/KUNNVZeC" target="_blank">WuWa Commands</a></p>
@@ -55,6 +55,7 @@
          </figure>
          <div class="codebox">
             <p>
+			   ; Lahai Roi uses more VRAM than previous maps, value lowered in config (2.0 is enough to fix low quality banners)<br>
                ; Default - 1.0, higher value = prioritize loading higher resolution textures<br>
                ; Lower value = less priority loading high resolution textures<br>
                r.Streaming.MinBoost=4.0<br>
@@ -171,7 +172,7 @@
                r.DistanceFieldAOQuality=3<br>
             </p>
          </div>
-         <p>Enabled by default for High?/Ultra Quality preset, you can enable it manually through Engine.ini.<br><br>Full image comparison: <a href="https://imgsli.com/NDI5ODk3" target="_blank">DFAO Comparison 1</a> | <a href="https://imgsli.com/NDI5OTAw" target="_blank">DFAO Comparison 2</a></p>
+         <p>Enabled by default for High Quality and Ultra Quality preset, you can enable it manually through Engine.ini if you want.<br><br>Full image comparison: <a href="https://imgsli.com/NDI5ODk3" target="_blank">DFAO Comparison 1</a> | <a href="https://imgsli.com/NDI5OTAw" target="_blank">DFAO Comparison 2</a></p>
          <figure>
             <img src="images/dfao_compare.jpg" class="zoom-img" alt="dfao" style="width: 80%; margin: auto; display: block;">
             <figcaption style="text-align: center; margin-top: 10px;">DFAO Image Comparison</figcaption>
@@ -189,7 +190,7 @@
                r.KuroVolumeCloudEnable=0<br>
             </p>
          </div>
-         <p>In-game "Volumetric Fog" setting doesn't completely remove fog, didn't notice much change with it off. Only way to remove fog is to use those commands in Engine.ini.</p>
+         <p>In-game “Volumetric Fog” setting doesn’t completely remove fog. To remove the remaining fog, put the commands in Engine.ini.</p>
          <figure>
             <img src="images/fog.jpg" class="zoom-img" alt="fog" style="width: 80%; margin: auto; display: block;">
             <figcaption style="text-align: center; margin-top: 10px;">Fog Image Comparison</figcaption>
@@ -200,7 +201,6 @@
          </figure>
       </div>
       <p></p>
-      <!--
       <button onclick="toggleVisibility('culling')" class="culling-btn text-change" data-text="Culling" data-state="expanded"><span>▼ Culling</span></button>
       <div id="culling">
          <div class="codebox">
@@ -217,7 +217,6 @@
          </figure>
       </div>
       <p></p>
-	  -->
       <button onclick="toggleVisibility('tonemap')" class="tonemap-btn text-change" data-text="Tonemapping" data-state="expanded"><span>▼ Tonemapping</span></button>
       <div id="tonemap">
          <div class="codebox">
@@ -276,6 +275,9 @@
                ; Enable / disable Screen Space Fog Scattering<br>
                ; 0 = Off, 1 = On (Default)<br>
                r.SSFS=1<br><br>
+			   ; 0 = Disable (Default), 1 = Enable<br>
+			   ; Limit texture pool size to available GPU VRAM<br>
+			   r.Streaming.LimitPoolSizeToVRAM=1<br><br>
                ; Enable water ripples when flying close/casting skill<br>
                ; 0 = Off, 1 = On (Default)<br>
                r.Kuro.InteractionEffect.UseCppWaterEffect=1<br><br>
