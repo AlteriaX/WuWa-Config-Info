@@ -264,9 +264,9 @@
                ; Adjust foliage density type<br>
                ; 0 = low, 1 = medium, 2 = high<br>
                foliage.DensityType=2<br><br>
-               ; Animation rate optimization<br>
-               ; 0 = Off, 1 = On (Default)<br>
-               a.URO.Enable=0<br><br>
+               ; Controls how often the animation updates<br>
+			   ; 0 = Use default speed, 1 = Animation updates every frame, fixes low FPS animation for certain NPCs<br>
+               a.URO.ForceAnimRate=1<br><br>
                ; Adjust object details, lower value = better far object detail<br>
                r.StaticMeshLODDistanceScale=0.7<br><br>
                ; Adjust light shaft resolution<br>
@@ -276,8 +276,10 @@
                ; 0 = Off, 1 = On (Default)<br>
                r.SSFS=1<br><br>
 			   ; 0 = Disable (Default), 1 = Enable<br>
-			   ; Limit texture pool size to available GPU VRAM<br>
+			   ; Limit texture pool size to available GPU memory<br>
 			   r.Streaming.LimitPoolSizeToVRAM=1<br><br>
+			   ; Whether to use low-memory LRU cache for character effects pool (Default true)<br>
+			   Kuro.CppEffectSystem.UseLowMemoryPlayerEffectLruCapacity=false<br><br>
                ; Enable water ripples when flying close/casting skill<br>
                ; 0 = Off, 1 = On (Default)<br>
                r.Kuro.InteractionEffect.UseCppWaterEffect=1<br><br>
