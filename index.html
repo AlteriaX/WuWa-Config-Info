@@ -26,7 +26,7 @@
          <a href="color-settings">Old Color Settings</a>
          <a href="https://ko-fi.com/alteria/" target="_blank">Donate</a>
       </div>
-      <div class="right-info">Last update: 27 December 2025</div>
+      <div class="right-info">Last update: 28 December 2025</div>
    </div>
 
    <p class="something"><a href="https://framedsc.com/GeneralGuides/ue4_commands.htm" target="_blank">UE4 Default Commands (Some disabled by Kuro)</a> | <a href="https://pastebin.com/KUNNVZeC" target="_blank">WuWa Commands</a></p>
@@ -275,9 +275,6 @@
                ; Enable / disable Screen Space Fog Scattering<br>
                ; 0 = Off, 1 = On (Default)<br>
                r.SSFS=1<br><br>
-			   ; 0 = Disable (Default), 1 = Enable<br>
-			   ; Limit texture pool size to available GPU memory<br>
-			   r.Streaming.LimitPoolSizeToVRAM=1<br><br>
 			   ; Whether to use low-memory LRU cache for character effects pool (Default true)<br>
 			   Kuro.CppEffectSystem.UseLowMemoryPlayerEffectLruCapacity=false<br><br>
                ; Enable water ripples when flying close/casting skill<br>
@@ -286,14 +283,11 @@
                ; Set distance before grass is culled<br>
                r.Kuro.Foliage.GrassCullDistanceMax=20000<br>
 			   r.Kuro.Foliage.Grass3_0CullDistanceMax=20000<br><br>
-               ; Set height before light turns off / object despawn? in flight mode<br>
+               ; Set height before light turns off / object despawn in flight mode<br>
                wp.Runtime.SoraGridBlackListHeight=20000<br><br>
                ; Higher value = more objects rendered at a distance<br>
-               wp.Runtime.LoadingRangeScale=1.0<br>
+			   ; Does not seem to make a difference above 1.0 after recent hotfix for Patch 3.0<br>
 			   wp.Runtime.PlannedLoadingRangeScale=1.0<br><br>
-			   ; 0 = Off (Default), 1 = On<br>
-			   ; Enable parallel process draw commands<br>
-			   UBInstancing.ParallelProcess=1<br>
             </p>
          </div>
       </div>
