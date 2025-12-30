@@ -26,7 +26,7 @@
          <a href="color-settings">Old Color Settings</a>
          <a href="https://ko-fi.com/alteria/" target="_blank">Donate</a>
       </div>
-      <div class="right-info">Last update: 28 December 2025</div>
+      <div class="right-info">Last update: 30 December 2025</div>
    </div>
 
    <p class="something"><a href="https://framedsc.com/GeneralGuides/ue4_commands.htm" target="_blank">UE4 Default Commands (Some disabled by Kuro)</a> | <a href="https://pastebin.com/KUNNVZeC" target="_blank">WuWa Commands</a></p>
@@ -38,24 +38,23 @@
             <p>
                ; Forcing Anisotropic Filtering x16 for AMD GPUs doesn't work<br>
                ; Forcing AFx16 through NVIDIA Control Panel works fine on NVIDIA GPUs (Does not work for RTX 50 series)<br><br>
-               ; For RTX 50 Series use this command instead since AFx16 doesn’t work properly<br>
+               ; For RTX 50 Series / AMD GPUs with FSR3 use this command instead<br>
                r.MipMapLODBias=-2<br><br>
-               ; For AMD GPUs only - Works with FSR On/Off<br>
-               ; Patch 2.7 onwards - May cause black screen / crash, not needed if using FSR3<br>
+               ; For AMD GPUs with FSR1 - Works with FSR On/Off<br>
                r.FidelityFX.FSR.SecondaryUpscale=1<br>
                r.FidelityFX.FSR.MipBias.Method=2<br>
                r.FidelityFX.FSR.MipBias.Offset=-2<br>
                r.FidelityFX.FSR.RCAS.Enabled=0<br>
             </p>
          </div>
-         <p>The command <code>r.MaxAnisotropy</code> doesn't work properly even when it is set to 16. Changing anisotropic filtering / mip bias improves texture details at a distance.</p>
+         <p>The command <code>r.MaxAnisotropy</code> doesn't work properly even when it is set to 16. Changing anisotropic filtering / mip bias improves texture details.</p>
          <figure>
             <img src="images/af_compare.jpg" class="zoom-img" alt="af_compare" style="width: 80%; margin: auto; display: block;">
             <figcaption style="text-align: center; margin-top: 10px;">Anisotropic Filtering Image Comparison</figcaption>
          </figure>
          <div class="codebox">
             <p>
-			   ; Lahai Roi uses more VRAM than previous maps, value lowered in config (2.0 is enough to fix low quality banners)<br>
+			   ; Lahai Roi uses more VRAM than previous maps, lower the value if you run into issues<br>
                ; Default - 1.0, higher value = prioritize loading higher resolution textures<br>
                ; Lower value = less priority loading high resolution textures<br>
                r.Streaming.MinBoost=4.0<br>
@@ -134,6 +133,17 @@
          <figure>
             <img src="images/reflections.jpg" class="zoom-img" alt="reflections" style="width: 80%; margin: auto; display: block;">
             <figcaption style="text-align: center; margin-top: 10px;">Reflections Max Roughness Image Comparison</figcaption>
+         </figure>
+         <div class="codebox">
+            <p>
+               ; 1: Low precision (default), 3: High precision normals, 5: High precision<br>
+               r.GBufferFormat=3<br>
+            </p>
+         </div>
+		 <p>Using <b>high precision normals</b> improves SSR reflection quality, <b>high precision</b> is better than default but slightly worse than <b>high precision normals</b>. Another example comparison can be seen on <a href="https://dev.epicgames.com/documentation/en-us/unreal-engine/reflection-environment?application_version=4.27#highprecisiongbuffernormalencoding" target="_blank">UE4.27 Reflection Environment Documentation</a>
+         <figure>
+            <img src="images/gbuffer.jpg" class="zoom-img" alt="gbuffer" style="width: 80%; margin: auto; display: block;">
+            <figcaption style="text-align: center; margin-top: 10px;">GBuffer Format Image Comparison</figcaption>
          </figure>
       </div>
       <p></p>
@@ -286,7 +296,7 @@
                ; Set height before light turns off / object despawn in flight mode<br>
                wp.Runtime.SoraGridBlackListHeight=20000<br><br>
                ; Higher value = more objects rendered at a distance<br>
-			   ; Does not seem to make a difference above 1.0 after recent hotfix for Patch 3.0<br>
+			   ; Does not seem to make much difference above 1.0 after recent hotfix for Patch 3.0<br>
 			   wp.Runtime.PlannedLoadingRangeScale=1.0<br>
             </p>
          </div>
@@ -332,7 +342,7 @@
                ; Set distance before NPC disappears (Default 6000)<br>
                r.Kuro.NpcDisappearDistance=20000<br><br>
 			   ; When enabled, blueprint tick is managed by time budget (Default true)<br>
-			   ; Turning this off fixes low FPS banner animation in Septimont but objects don't move on interaction in Honami<br>
+			   ; Turning this off fixes low FPS animation for certain things in Lahai Roi but objects don't move on interaction in Honami<br>
 			   Kuro.Blueprint.EnableGameBudget=false<br><br>
                ; Reflex Mode - 1 = low latency, 2 = low latency with boost<br>
                ; Does not work for RTX 40/50 series due to Frame Generation<br>
