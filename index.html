@@ -345,12 +345,12 @@
 			   ; Turning this off fixes low FPS animation for certain things in Lahai Roi but objects don't move on interaction in Honami<br>
 			   Kuro.Blueprint.EnableGameBudget=false<br><br>
                ; Reflex Mode - 1 = low latency, 2 = low latency with boost<br>
-               ; Does not work for RTX 40/50 series due to Frame Generation<br>
+               ; Does not work for RTX 40/50 series due to Frame Generation but if you need Reflex only you can delete nvngx_dlssg.dll to disable FG when turned on (Don't open the game with launcher, it will probably verify files and redownload)<br>
                t.Streamline.Reflex.HandleMaxTickRate=true<br>
                t.Streamline.Reflex.Enable=1<br>
                t.Streamline.Reflex.Mode=1<br><br>
                ; Force enable DLAA<br>
-               ; Using this command doesn't allow you to switch to Quality/Balanced/Performance mode in settings<br>
+               ; Switching to Quality/Balanced/Performance mode in settings doesn't work when using this<br>
                r.NGX.DLAA.Enable=1<br><br>
                ; To fix stuttering with menus when using DLSS Frame Gen (Increases VRAM usage)<br>
                r.Streamline.DLSSG.RetainResourcesWhenOff=1<br>
