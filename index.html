@@ -26,7 +26,7 @@
          <a href="color-settings">Old Color Settings</a>
          <a href="https://ko-fi.com/alteria/" target="_blank">Donate</a>
       </div>
-      <div class="right-info">Last update: 30 December 2025</div>
+      <div class="right-info">Last update: 9 January 2025</div>
    </div>
 
    <p class="something"><a href="https://framedsc.com/GeneralGuides/ue4_commands.htm" target="_blank">UE4 Default Commands (Some disabled by Kuro)</a> | <a href="https://pastebin.com/KUNNVZeC" target="_blank">WuWa Commands</a></p>
@@ -40,7 +40,7 @@
                ; Forcing AFx16 through NVIDIA Control Panel works fine on NVIDIA GPUs (Does not work for RTX 50 series)<br><br>
                ; For RTX 50 Series / AMD GPUs with FSR3 use this command instead<br>
                r.MipMapLODBias=-2<br><br>
-               ; For AMD GPUs with FSR1 - Works with FSR On/Off<br>
+               ; For AMD GPUs with FSR1 - Works with FSR On/Off (May cause black screen on login section)<br>
                r.FidelityFX.FSR.SecondaryUpscale=1<br>
                r.FidelityFX.FSR.MipBias.Method=2<br>
                r.FidelityFX.FSR.MipBias.Offset=-2<br>
@@ -296,7 +296,8 @@
                ; Set height before light turns off / object despawn in flight mode<br>
                wp.Runtime.SoraGridBlackListHeight=20000<br><br>
                ; Higher value = more objects rendered at a distance<br>
-			   ; Does not seem to make much difference above 1.0 after recent hotfix for Patch 3.0<br>
+			   ; Values above 1.0 only work if you have 16GB or more VRAM<br>
+			   wp.Runtime.LoadingRangeScale=1.0<br>
 			   wp.Runtime.PlannedLoadingRangeScale=1.0<br>
             </p>
          </div>
@@ -333,8 +334,11 @@
          <div class="codebox">
             <p>
                All commands listed are placed in Engine.ini under [/Script/Engine.RendererSettings]<br><br>
-               ; 0 = Off (slightly reduce bloom brightness), 1 = On (Default)<br>
+               ; 0 = Off (slightly lower bloom brightness without streak), 1 = On (Default)<br>
                r.Kuro.KuroBloomStreak=0<br><br>
+			   ; 0 = Off, 1 = On (Default for Balanced preset and above)<br>
+			   ; New bloom used in Lahai-Roi<br>
+			   r.Kuro.KuroEnableFFTBloom=0<br><br>
                ; 0 = Disable Lens Flare, 1 = Enable Lens Flare (Default)<br>
                r.EnableLensflareSceneSample=0<br><br>
                ; 0 = Disable Depth of Field, 1 = Low, 2 = High, 3 = Very High, 4 = Extremely High<br>
@@ -342,7 +346,7 @@
                ; Set distance before NPC disappears (Default 6000)<br>
                r.Kuro.NpcDisappearDistance=20000<br><br>
 			   ; When enabled, blueprint tick is managed by time budget (Default true)<br>
-			   ; Turning this off fixes low FPS animation for certain things in Lahai-Roi but objects don't move on interaction in Honami / Lahai-Roi<br>
+			   ; Turning this off fixes low FPS animation for certain things in Lahai-Roi but disables interactive objects in Honami (e.g., umbrella) and Lahai-Roi (e.g., ball)<br>
 			   Kuro.Blueprint.EnableGameBudget=false<br><br>
                ; Reflex Mode - 1 = low latency, 2 = low latency with boost<br>
                ; Does not work for RTX 40/50 series due to Frame Generation but if you need Reflex only you can delete nvngx_dlssg.dll to disable FG when turned on (Don't open the game with launcher, it will probably verify files and redownload)<br>
