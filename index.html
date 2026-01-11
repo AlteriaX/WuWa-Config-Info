@@ -26,7 +26,7 @@
          <a href="color-settings">Old Color Settings</a>
          <a href="https://ko-fi.com/alteria/" target="_blank">Donate</a>
       </div>
-      <div class="right-info">Last update: 9 January 2025</div>
+      <div class="right-info">Last update: 12 January 2025</div>
    </div>
 
    <p class="something"><a href="https://framedsc.com/GeneralGuides/ue4_commands.htm" target="_blank">UE4 Default Commands (Some disabled by Kuro)</a> | <a href="https://pastebin.com/KUNNVZeC" target="_blank">WuWa Commands</a></p>
@@ -161,7 +161,7 @@
                r.Shadow.PerObjectResolutionMin=2048<br>
             </p>
          </div>
-         <p>Default values used for minimum shadow resolution is low which is the reason why it doesn't look great, using 1024 is enough to make it look decent.</p>
+         <p>Default values used for per object shadow resolution is low which is the reason why it doesn't look great, setting per object resolution to 512 or 1024 is enough to make character shadows look better than default.</p>
          <figure>
             <img src="images/shadows.jpg" class="zoom-img" alt="shadows" style="width: 80%; margin: auto; display: block;">
             <figcaption style="text-align: center; margin-top: 10px;">Shadow Resolution Image Comparison</figcaption>
@@ -285,8 +285,6 @@
                ; Enable / disable Screen Space Fog Scattering<br>
                ; 0 = Off, 1 = On (Default)<br>
                r.SSFS=1<br><br>
-			   ; Whether to use low-memory LRU cache for character effects pool (Default true)<br>
-			   Kuro.CppEffectSystem.UseLowMemoryPlayerEffectLruCapacity=false<br><br>
                ; Enable water ripples when flying close/casting skill<br>
                ; 0 = Off, 1 = On (Default)<br>
                r.Kuro.InteractionEffect.UseCppWaterEffect=1<br><br>
