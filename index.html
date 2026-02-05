@@ -26,7 +26,7 @@
          <a href="color-settings">Old Color Settings</a>
          <a href="https://ko-fi.com/alteria/" target="_blank">Donate</a>
       </div>
-      <div class="right-info">Last update: 18 January 2025</div>
+      <div class="right-info">Last update: 5 February 2025</div>
    </div>
 
    <p class="something"><a href="https://framedsc.com/GeneralGuides/ue4_commands.htm" target="_blank">UE4 Default Commands (Some disabled by Kuro)</a> | <a href="https://pastebin.com/KUNNVZeC" target="_blank">WuWa Commands</a></p>
@@ -39,6 +39,7 @@
                ; Forcing Anisotropic Filtering x16 for AMD GPUs doesn't work<br>
                ; Forcing AFx16 through NVIDIA Control Panel works fine on NVIDIA GPUs (Does not work for RTX 50 series)<br><br>
                ; For RTX 50 Series / AMD GPUs with FSR3 use this command instead<br>
+			   ; Still works just need to place in DeviceProfiles.ini instead<br>
                r.MipMapLODBias=-2<br><br>
                ; For AMD GPUs with FSR1 - Works with FSR On/Off (May cause black screen on login section)<br>
                r.FidelityFX.FSR.SecondaryUpscale=1<br>
@@ -263,10 +264,6 @@
             <p>
                ; 0 = Off (Disable Chromatic Abberation), 1 = On (Default)<br>
                r.SceneColorFringeQuality=0<br><br>
-               ; 0 = Disable, 1 = FilmContrast, 2 = Vignette, 4 = Vignette + Film Grain<br>
-               ; Setting it to 0 or 1 disables Film Grain and Vignette<br>
-               ; Don't remember if turning off FilmContrast changes how a game looks<br>
-               r.Tonemapper.Quality=1<br><br>
                ; 0: Low (does not work, will cause textures to not load), 1: High, 2: Medium (Yes the numbers are weird)<br>
                r.MaterialQualityLevel=1<br>
                r.KuroMaterialQualityLevel=1<br><br>
@@ -339,6 +336,10 @@
 			   ; 0 = Off, 1 = On (Default for Balanced preset and above)<br>
 			   ; New bloom used in Lahai-Roi<br>
 			   r.Kuro.KuroEnableFFTBloom=0<br><br>
+               ; 0 = Disable, 1 = FilmContrast, 2 = Vignette, 4 = Vignette + Film Grain<br>
+               ; Setting it to 0 or 1 disables Film Grain and Vignette (can make certain scenes brighter)<br>
+               ; Don't remember if turning off FilmContrast changes how a game looks<br>
+               r.Tonemapper.Quality=1<br><br>
                ; 0 = Disable Lens Flare, 1 = Enable Lens Flare (Default)<br>
                r.EnableLensflareSceneSample=0<br><br>
                ; 0 = Disable Depth of Field, 1 = Low, 2 = High, 3 = Very High, 4 = Extremely High<br>
