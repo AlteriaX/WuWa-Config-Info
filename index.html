@@ -26,7 +26,7 @@
          <a href="color-settings">Old Color Settings</a>
          <a href="https://ko-fi.com/alteria/" target="_blank">Donate</a>
       </div>
-      <div class="right-info">Last update: 7 February 2025</div>
+      <div class="right-info">Last update: 11 February 2025</div>
    </div>
 
    <p class="something"><a href="https://framedsc.com/GeneralGuides/ue4_commands.htm" target="_blank">UE4 Default Commands (Some disabled by Kuro)</a> | <a href="https://pastebin.com/KUNNVZeC" target="_blank">WuWa Commands</a></p>
@@ -297,8 +297,8 @@
                ; Set height before light turns off / object despawn in flight mode<br>
                wp.Runtime.SoraGridBlackListHeight=20000<br><br>
                ; Higher value = more objects rendered at a distance<br>
-			   ; Values above 1.0 only work if you have 16GB or more VRAM<br>
-			   wp.Runtime.LoadingRangeScale=1.0<br>
+			   ; Huge FPS drop when using high values<br>
+			   wp.Runtime.PlannedLoadingRangeScaleExtra=1.0<br>
 			   wp.Runtime.PlannedLoadingRangeScale=1.0<br>
             </p>
          </div>
