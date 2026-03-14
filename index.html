@@ -26,7 +26,7 @@
          <a href="color-settings">Old Color Settings</a>
          <a href="https://ko-fi.com/alteria/" target="_blank">Donate</a>
       </div>
-      <div class="right-info">Last update: 11 February 2025</div>
+      <div class="right-info">Last update: 14 March 2026</div>
    </div>
 
    <p class="something"><a href="https://framedsc.com/GeneralGuides/ue4_commands.htm" target="_blank">UE4 Default Commands (Some disabled by Kuro)</a> | <a href="https://pastebin.com/KUNNVZeC" target="_blank">WuWa Commands</a></p>
@@ -58,10 +58,13 @@
 			   ; Lahai Roi uses more VRAM than previous maps, lower the value if you run into issues<br>
                ; Default - 1.0, higher value = prioritize loading higher resolution textures<br>
                ; Lower value = less priority loading high resolution textures<br>
-               r.Streaming.MinBoost=4.0<br>
+               r.Streaming.MinBoost=3.0<br><br>
+			   ; Enable or disable Kuro Streaming Priority<br>
+			   ; 0: Off, 1: Retention Only, 2: Load Only, 3: Both Retention and Load (Default)<br>
+			   r.Streaming.UsingKuroStreamingPriority=0<br>
             </p>
          </div>
-         <p>This fixes the low quality banners and billboards at Septimont. With value 4.0, it increases VRAM usage by around 500MB (1080p) / 1GB (1440p)</p>
+         <p>Streaming boost fixes the low quality banners and billboards at Septimont. Turning off Kuro streaming priority fixes the issue where Aemeath Resonance Liberation Exostrider armor fails to load.</p>
          <figure>
             <img src="images/streaming_boost.jpg" class="zoom-img" alt="streaming_boost" style="width: 80%; margin: auto; display: block;">
             <figcaption style="text-align: center; margin-top: 10px;">Streaming Boost Image Comparison</figcaption>
@@ -160,8 +163,8 @@
                r.Shadow.MaxCSMResolution=2048<br>
                r.Shadow.MinResolution=2048<br>
                r.Shadow.PerObjectShadowMapResolution=2048<br>
-               r.Shadow.PerObjectResolutionMax=2048<br>
-               r.Shadow.PerObjectResolutionMin=2048<br>
+               r.Shadow.PerObjectResolutionMax=1024<br>
+               r.Shadow.PerObjectResolutionMin=1024<br>
             </p>
          </div>
          <p>Default values used for per object shadow resolution is low which is the reason why it doesn't look great, setting per object resolution to 512 or 1024 is enough to make character shadows look better than default.</p>
@@ -185,7 +188,7 @@
                High - DFAO On (Very High Quality)<br>
             </p>
          </div>
-         <p><s>Enabled by default for High Quality and Ultra Quality preset, you can enable it manually through Engine.ini if you want.</s> Added into in-game settings in version 3.1.<br><br>Full image comparison: <a href="https://imgsli.com/NDI5ODk3" target="_blank">DFAO Comparison 1</a> | <a href="https://imgsli.com/NDI5OTAw" target="_blank">DFAO Comparison 2</a></p>
+         <p><s>Enabled by default for High Quality and Ultra Quality preset, you can enable it through Engine.ini if you want.</s> Added into in-game settings in version 3.1.<br><br>Full image comparison: <a href="https://imgsli.com/NDI5ODk3" target="_blank">DFAO Comparison 1</a> | <a href="https://imgsli.com/NDI5OTAw" target="_blank">DFAO Comparison 2</a></p>
          <figure>
             <img src="images/dfao_compare.jpg" class="zoom-img" alt="dfao" style="width: 80%; margin: auto; display: block;">
             <figcaption style="text-align: center; margin-top: 10px;">DFAO Image Comparison</figcaption>
@@ -197,6 +200,7 @@
          <div class="codebox">
             <p>
                ; 0: Disable fog | 1: Enable fog<br>
+			   ; Fog off can make certain areas bright<br>
                r.Fog=0<br><br>
                ; 0: Disable volume cloud | 1: Enable volume cloud<br>
                ; Only applies in newer regions, get rids of the clouds at ground level<br>
@@ -282,6 +286,9 @@
                a.URO.ForceAnimRate=1<br><br>
                ; Adjust object details, lower value = better far object detail<br>
                r.StaticMeshLODDistanceScale=0.7<br><br>
+			   ; Enable / disable material Variable Rate Shading<br>
+			   ; Default true<br>
+			   r.VRS.EnableMaterial=false<br><br>
                ; Adjust light shaft resolution<br>
                ; Value from 1 to 8, higher value = lower resolution<br>
                r.LightShaftDownSampleFactor=1<br><br>
