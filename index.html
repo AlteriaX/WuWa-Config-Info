@@ -26,7 +26,7 @@
          <a href="color-settings">Old Color Settings</a>
          <a href="https://ko-fi.com/alteria/" target="_blank">Donate</a>
       </div>
-      <div class="right-info">Last update: 14 March 2026</div>
+      <div class="right-info">Last update: 15 March 2026</div>
    </div>
 
    <p class="something"><a href="https://framedsc.com/GeneralGuides/ue4_commands.htm" target="_blank">UE4 Default Commands (Some disabled by Kuro)</a> | <a href="https://pastebin.com/KUNNVZeC" target="_blank">WuWa Commands</a></p>
@@ -58,13 +58,15 @@
 			   ; Lahai Roi uses more VRAM than previous maps, lower the value if you run into issues<br>
                ; Default - 1.0, higher value = prioritize loading higher resolution textures<br>
                ; Lower value = less priority loading high resolution textures<br>
-               r.Streaming.MinBoost=3.0<br><br>
+               r.Streaming.MinBoost=1.5<br><br>
+               ; Sets texture pool size, size in MB<br>
+               r.Streaming.PoolSize=1024<br><br>
 			   ; Enable or disable Kuro Streaming Priority<br>
 			   ; 0: Off, 1: Retention Only, 2: Load Only, 3: Both Retention and Load (Default)<br>
 			   r.Streaming.UsingKuroStreamingPriority=0<br>
             </p>
          </div>
-         <p>Streaming boost fixes the low quality banners and billboards at Septimont. Turning off Kuro streaming priority fixes the issue where Aemeath Resonance Liberation Exostrider armor fails to load.</p>
+         <p>Streaming boost with value 1.5 is enough to fix the low quality banners and billboards at Septimont. Turning off Kuro streaming priority fixes the issue where Aemeath Resonance Liberation Exostrider armor fails to load.</p>
          <figure>
             <img src="images/streaming_boost.jpg" class="zoom-img" alt="streaming_boost" style="width: 80%; margin: auto; display: block;">
             <figcaption style="text-align: center; margin-top: 10px;">Streaming Boost Image Comparison</figcaption>
@@ -172,10 +174,12 @@
             <img src="images/shadows.jpg" class="zoom-img" alt="shadows" style="width: 80%; margin: auto; display: block;">
             <figcaption style="text-align: center; margin-top: 10px;">Shadow Resolution Image Comparison</figcaption>
          </figure>
+		 <!--
          <figure>
             <img src="images/shadow_radius.jpg" class="zoom-img" alt="shadow_radius" style="width: 80%; margin: auto; display: block;">
             <figcaption style="text-align: center; margin-top: 10px;">Shadow Radius Image Comparison</figcaption>
          </figure>
+		 -->
       </div>
       <p></p>
       <button onclick="toggleVisibility('ambient-occlusion')" class="ambient-occlusion-btn text-change" data-text="Ambient Occlusion" data-state="expanded"><span>▼ Ambient Occlusion</span></button>
