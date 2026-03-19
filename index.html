@@ -26,7 +26,7 @@
          <a href="color-settings">Old Color Settings</a>
          <a href="https://ko-fi.com/alteria/" target="_blank">Donate</a>
       </div>
-      <div class="right-info">Last update: 15 March 2026</div>
+      <div class="right-info">Last update: 19 March 2026</div>
    </div>
 
    <p class="something"><a href="https://framedsc.com/GeneralGuides/ue4_commands.htm" target="_blank">UE4 Default Commands (Some disabled by Kuro)</a> | <a href="https://pastebin.com/KUNNVZeC" target="_blank">WuWa Commands</a></p>
@@ -37,22 +37,23 @@
          <div class="codebox">
             <p>
                ; Forcing Anisotropic Filtering x16 for AMD GPUs doesn't work<br>
-               ; Forcing AFx16 through NVIDIA Control Panel works fine on NVIDIA GPUs (Does not work for RTX 50 series)<br><br>
-               ; For RTX 50 Series / AMD GPUs with FSR3 use this command instead<br>
-			   ; Still works just need to place in DeviceProfiles.ini instead<br>
-               r.MipMapLODBias=-2<br><br>
-               ; For AMD GPUs with FSR1 - Works with FSR On/Off (May cause black screen on login section)<br>
+               ; Forcing AFx16 through NVIDIA Control Panel works fine on NVIDIA GPUs (Does not work for RTX 50 series)<br>
+			   ; r.MipMapLODBias can't be used anymore after patch 3.2 update<br><br>
+               ; For AMD GPUs - Works with FSR On/Off (Black screen on login section, after login it's fine)<br>
                r.FidelityFX.FSR.SecondaryUpscale=1<br>
                r.FidelityFX.FSR.MipBias.Method=2<br>
                r.FidelityFX.FSR.MipBias.Offset=-2<br>
-               r.FidelityFX.FSR.RCAS.Enabled=0<br>
+               r.FidelityFX.FSR.RCAS.Enabled=0<br><br>
+			   ; 0: Off, 1: Retention Only, 2: Load Only, 3: Both Retention and Load (Default)<br>
+			   r.Streaming.UsingKuroStreamingPriority=0<br>
             </p>
          </div>
-         <p>The command <code>r.MaxAnisotropy</code> doesn't work properly even when it is set to 16. Changing anisotropic filtering / mip bias improves texture details.</p>
+         <p>The command <code>r.MaxAnisotropy</code> doesn't work even when set to 16. Changing anisotropic filtering / mip bias improves texture details. Turning off Kuro streaming priority fixes the issue where Aemeath Resonance Liberation Exostrider armor fails to load.</p>
          <figure>
             <img src="images/af_compare.jpg" class="zoom-img" alt="af_compare" style="width: 80%; margin: auto; display: block;">
             <figcaption style="text-align: center; margin-top: 10px;">Anisotropic Filtering Image Comparison</figcaption>
          </figure>
+		 <!--
          <div class="codebox">
             <p>
 			   ; Lahai Roi uses more VRAM than previous maps, lower the value if you run into issues<br>
@@ -71,27 +72,27 @@
             <img src="images/streaming_boost.jpg" class="zoom-img" alt="streaming_boost" style="width: 80%; margin: auto; display: block;">
             <figcaption style="text-align: center; margin-top: 10px;">Streaming Boost Image Comparison</figcaption>
          </figure>
+		 -->
       </div>
       <p></p>
       <button onclick="toggleVisibility('view-distance')" class="view-distance-btn text-change" data-text="View Distance" data-state="expanded"><span>▼ View Distance</span></button>
       <div id="view-distance">
          <div class="codebox">
             <p>
-               ; Default view distance / foliage LOD distance value is 1<br><br>
-               ; Test done near Ragunna<br>
-               ; Default - 145FPS | View distance 2 - 140FPS | View distance 2 + foliage distance 2 - 133FPS<br><br>
+               ; Default foliage LOD distance value is 1<br>
                ; Test done in Septimont<br>
                ; Default foliage distance - 97 FPS | Foliage distance 2 - 96 FPS<br>
                ; Foliage distance 3 - 93 FPS | Foliage distance 4 - 91 FPS | Foliage distance 5 - 85 FPS<br><br>
-               r.ViewDistanceScale=2<br>
                foliage.LODDistanceScale=2<br>
             </p>
          </div>
-         <p>Didn't notice much difference when using values above 3 for view distance / 5 for LOD distance scale.</p>
+         <p>Didn't notice much difference when using values above 5 for LOD distance scale.</p>
+		 <!--
          <figure>
             <img src="images/view_distance.jpg" class="zoom-img" alt="view_distance" style="width: 80%; margin: auto; display: block;">
             <figcaption style="text-align: center; margin-top: 10px;">View Distance Image Comparison</figcaption>
          </figure>
+		 -->
          <figure>
             <img src="images/foliage_distance.jpg" class="zoom-img" alt="foliage_distance" style="width: 80%; margin: auto; display: block;">
             <figcaption style="text-align: center; margin-top: 10px;">Foliage LOD Distance Image Comparison</figcaption>
@@ -162,7 +163,6 @@
                ; Lower values increases the amount of shadow<br>
                r.Shadow.RadiusThreshold=0.02<br><br>
                ; Set shadow resolution, higher costs more FPS<br>
-               r.Shadow.MaxCSMResolution=2048<br>
                r.Shadow.MinResolution=2048<br>
                r.Shadow.PerObjectShadowMapResolution=2048<br>
                r.Shadow.PerObjectResolutionMax=1024<br>
@@ -276,15 +276,6 @@
                ; Setting it to 0 or 1 disables Film Grain and Vignette (can make certain scenes brighter)<br>
                ; Don't remember if turning off FilmContrast changes how a game looks<br>
                r.Tonemapper.Quality=1<br><br>
-               ; 0: Low (does not work, will cause textures to not load), 1: High, 2: Medium (Yes the numbers are weird)<br>
-               r.MaterialQualityLevel=1<br>
-               r.KuroMaterialQualityLevel=1<br><br>
-               ; Changes object details, lights and particle effects<br>
-               ; 0 = low, 1 = medium, 2 = high<br>
-               r.DetailMode=2<br><br>
-               ; Adjust foliage density type<br>
-               ; 0 = low, 1 = medium, 2 = high<br>
-               foliage.DensityType=2<br><br>
                ; Controls how often the animation updates<br>
 			   ; 0 = Use default speed, 1 = Animation updates every frame, fixes low FPS animation for certain NPCs<br>
                a.URO.ForceAnimRate=1<br><br>
@@ -309,7 +300,6 @@
                wp.Runtime.SoraGridBlackListHeight=20000<br><br>
                ; Higher value = more objects rendered at a distance<br>
 			   ; Huge FPS drop when using high values<br>
-			   wp.Runtime.PlannedLoadingRangeScaleExtra=1.0<br>
 			   wp.Runtime.PlannedLoadingRangeScale=1.0<br>
             </p>
          </div>
@@ -350,7 +340,8 @@
                r.Kuro.KuroBloomStreak=0<br><br>
 			   ; 0 = Off, 1 = On (Default for Balanced preset and above)<br>
 			   ; New bloom used in Lahai-Roi<br>
-			   r.Kuro.KuroEnableFFTBloom=0<br><br>
+			   r.Kuro.KuroEnableFFTBloom=0<br>
+			   r.Kuro.KuroEnableToonFFTBloom=0<br><br>
                ; 0 = Disable Lens Flare, 1 = Enable Lens Flare (Default)<br>
                r.EnableLensflareSceneSample=0<br><br>
                ; 0 = Disable Depth of Field, 1 = Low, 2 = High, 3 = Very High, 4 = Extremely High<br>
@@ -368,9 +359,7 @@
                t.Streamline.Reflex.Mode=1<br><br>
                ; Force enable DLAA<br>
                ; Switching to Quality/Balanced/Performance mode in settings doesn't work when using this<br>
-               r.NGX.DLAA.Enable=1<br><br>
-               ; To fix stuttering with menus when using DLSS Frame Gen (Increases VRAM usage)<br>
-               r.Streamline.DLSSG.RetainResourcesWhenOff=1<br>
+               r.NGX.DLAA.Enable=1<br>
             </p>
          </div>
       </div>
