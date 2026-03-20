@@ -26,7 +26,7 @@
          <a href="color-settings">Old Color Settings</a>
          <a href="https://ko-fi.com/alteria/" target="_blank">Donate</a>
       </div>
-      <div class="right-info">Last update: 19 March 2026</div>
+      <div class="right-info">Last update: 20 March 2026</div>
    </div>
 
    <p class="something"><a href="https://framedsc.com/GeneralGuides/ue4_commands.htm" target="_blank">UE4 Default Commands (Some disabled by Kuro)</a> | <a href="https://pastebin.com/KUNNVZeC" target="_blank">WuWa Commands</a></p>
@@ -37,8 +37,10 @@
          <div class="codebox">
             <p>
                ; Forcing Anisotropic Filtering x16 for AMD GPUs doesn't work<br>
-               ; Forcing AFx16 through NVIDIA Control Panel works fine on NVIDIA GPUs (Does not work for RTX 50 series)<br>
-			   ; r.MipMapLODBias can't be used anymore after patch 3.2 update<br><br>
+               ; Forcing AFx16 through NVIDIA Control Panel works fine on NVIDIA GPUs (Does not work for RTX 50 series)<br><br>
+			   ; r.MipMapLODBias can't be used anymore after patch 3.2 update<br>
+			   ; For RTX 50 series you can force negative LOD Bias using NVIDIA Profile Inspector instead <a href="https://i.imgur.com/08hBKNa.png" target="_blank">https://i.imgur.com/08hBKNa.png</a><br>
+			   ; Link to download NVIDIA Profile Inspector - <a href="https://github.com/Orbmu2k/nvidiaProfileInspector/releases" target="_blank">https://github.com/Orbmu2k/nvidiaProfileInspector/releases</a><br><br>
 			   ; 0: Off, 1: Retention Only, 2: Load Only, 3: Both Retention and Load (Default)<br>
 			   r.Streaming.UsingKuroStreamingPriority=0<br>
             </p>
