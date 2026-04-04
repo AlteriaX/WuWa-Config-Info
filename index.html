@@ -26,7 +26,7 @@
          <a href="color-settings">Old Color Settings</a>
          <a href="https://ko-fi.com/alteria/" target="_blank">Donate</a>
       </div>
-      <div class="right-info">Last update: 20 March 2026</div>
+      <div class="right-info">Last update: 5 April 2026</div>
    </div>
 
    <p class="something"><a href="https://framedsc.com/GeneralGuides/ue4_commands.htm" target="_blank">UE4 Default Commands (Some disabled by Kuro)</a> | <a href="https://pastebin.com/KUNNVZeC" target="_blank">WuWa Commands</a></p>
@@ -38,38 +38,44 @@
             <p>
                ; Forcing Anisotropic Filtering x16 for AMD GPUs doesn't work<br>
                ; Forcing AFx16 through NVIDIA Control Panel works fine on NVIDIA GPUs (Does not work for RTX 50 series)<br><br>
-			   ; r.MipMapLODBias can't be used anymore after patch 3.2 update<br>
-			   ; For RTX 50 series you can force negative LOD Bias using NVIDIA Profile Inspector instead <a href="https://i.imgur.com/08hBKNa.png" target="_blank">https://i.imgur.com/08hBKNa.png</a><br>
-			   ; Link to download NVIDIA Profile Inspector - <a href="https://github.com/Orbmu2k/nvidiaProfileInspector/releases" target="_blank">https://github.com/Orbmu2k/nvidiaProfileInspector/releases</a><br><br>
-			   ; 0: Off, 1: Retention Only, 2: Load Only, 3: Both Retention and Load (Default)<br>
-			   r.Streaming.UsingKuroStreamingPriority=0<br>
+               ; For RTX 50 Series / AMD GPUs with FSR3 place this command in Engine.ini instead<br>
+               r.MipMapLODBias=-2<br>
             </p>
          </div>
-         <p>The command <code>r.MaxAnisotropy</code> doesn't work even when set to 16. Changing anisotropic filtering / mip bias improves texture details. Turning off Kuro streaming priority fixes the issue where Aemeath Resonance Liberation Exostrider armor fails to load.</p>
+         <p>The command <code>r.MaxAnisotropy</code> doesn't work even when set to 16. Changing anisotropic filtering / mip bias improves texture details.</p>
          <figure>
             <img src="images/af_compare.jpg" class="zoom-img" alt="af_compare" style="width: 80%; margin: auto; display: block;">
             <figcaption style="text-align: center; margin-top: 10px;">Anisotropic Filtering Image Comparison</figcaption>
          </figure>
-		 <!--
          <div class="codebox">
             <p>
-			   ; Lahai Roi uses more VRAM than previous maps, lower the value if you run into issues<br>
                ; Default - 1.0, higher value = prioritize loading higher resolution textures<br>
                ; Lower value = less priority loading high resolution textures<br>
-               r.Streaming.MinBoost=1.5<br><br>
+               r.Streaming.MinBoost=2.0<br><br>
                ; Sets texture pool size, size in MB<br>
-               r.Streaming.PoolSize=1024<br><br>
+			   ; When set to 0, the pool size will be unlimited (uses a lot of VRAM)<br>
+               r.Streaming.PoolSize=1536<br><br>
 			   ; Enable or disable Kuro Streaming Priority<br>
 			   ; 0: Off, 1: Retention Only, 2: Load Only, 3: Both Retention and Load (Default)<br>
-			   r.Streaming.UsingKuroStreamingPriority=0<br>
+			   ; Turning this off can cause Smartprint Cube Reboot textures to load slowly but fixes the issue where Aemeath Resonance Liberation Exostrider armor fails to load<br>
+			   r.Streaming.UsingKuroStreamingPriority=0<br><br>
+			   ; Limits how many mipmaps are kept in memory<br>
+			   ; Default value - 8 for mesh, 15 for texture<br>
+			   r.streaming.MeshMaxKeepMips=15<br>
+			   r.streaming.TextureMaxKeepMips=15<br><br>
+               ; Adjust object details, lower value = better far object detail<br>
+			   ; Using values lower than 0.5 can cause ground texture to flicker<br>
+               r.StaticMeshLODDistanceScale=0.7<br><br>
+               ; Higher value = more objects rendered and better textures at a distance<br>
+			   ; Limit seems to be 1.0, didn't notice any change using a higher value<br>
+			   wp.Runtime.PlannedLoadingRangeScale=1.0<br>
             </p>
          </div>
-         <p>Streaming boost with value 1.5 is enough to fix the low quality banners and billboards at Septimont. Turning off Kuro streaming priority fixes the issue where Aemeath Resonance Liberation Exostrider armor fails to load.</p>
+         <p>If textures are still blurry you can increase streaming boost and pool size but if it's too high you'll get FPS drops due to hitting the VRAM limit (Lahai Roi uses more VRAM compared to older areas)</p>
          <figure>
             <img src="images/streaming_boost.jpg" class="zoom-img" alt="streaming_boost" style="width: 80%; margin: auto; display: block;">
             <figcaption style="text-align: center; margin-top: 10px;">Streaming Boost Image Comparison</figcaption>
          </figure>
-		 -->
       </div>
       <p></p>
       <button onclick="toggleVisibility('view-distance')" class="view-distance-btn text-change" data-text="View Distance" data-state="expanded"><span>▼ View Distance</span></button>
@@ -79,11 +85,14 @@
                ; Default foliage LOD distance value is 1<br>
                ; Test done in Septimont<br>
                ; Default foliage distance - 97 FPS | Foliage distance 2 - 96 FPS<br>
-               ; Foliage distance 3 - 93 FPS | Foliage distance 4 - 91 FPS | Foliage distance 5 - 85 FPS<br><br>
-               foliage.LODDistanceScale=2<br>
+               ; Foliage distance 3 - 93 FPS | Foliage distance 4 - 91 FPS | Foliage distance 5 - 85 FPS<br>
+               foliage.LODDistanceScale=2<br><br>
+               ; Set distance before grass is culled<br>
+               r.Kuro.Foliage.GrassCullDistanceMax=20000<br>
+			   r.Kuro.Foliage.Grass3_0CullDistanceMax=20000<br>
             </p>
          </div>
-         <p>Didn't notice much difference when using values above 5 for LOD distance scale.</p>
+         <p>Didn't notice much difference when using values above 5 for foliage LOD distance scale.</p>
 		 <!--
          <figure>
             <img src="images/view_distance.jpg" class="zoom-img" alt="view_distance" style="width: 80%; margin: auto; display: block;">
@@ -126,6 +135,7 @@
          <div class="codebox">
             <p>
                ; 0: Off, 1: Low, 2: Medium, 3: High, 4: Very High<br>
+			   ; Not included in config anymore as changing the quality doesn't seem to do anything<br>
                r.SSR.Quality=3<br><br>
                ; 0.0 to 1.0 - Sets roughness level where SSR starts to fade out<br>
                ; Default value - 0.6<br>
@@ -158,10 +168,9 @@
          <div class="codebox">
             <p>
                ; Lower values increases the amount of shadow<br>
-               r.Shadow.RadiusThreshold=0.02<br><br>
+               r.Shadow.RadiusThreshold=0.01<br><br>
                ; Set shadow resolution, higher costs more FPS<br>
-               r.Shadow.MinResolution=2048<br>
-               r.Shadow.PerObjectShadowMapResolution=2048<br>
+			   r.Shadow.MaxCSMResolution=2048<br>
                r.Shadow.PerObjectResolutionMax=1024<br>
                r.Shadow.PerObjectResolutionMin=1024<br>
             </p>
@@ -186,7 +195,12 @@
                ; Version 3.1 added Low/Medium/High for Capsule AO in game settings<br>
                Low - Capsule AO, DFAO Off<br>
                Medium - DFAO On (High Quality)<br>
-               High - DFAO On (Very High Quality)<br>
+               High - DFAO On (Very High Quality)<br><br>
+			   ; 1 = Full res DFAO, 2 = Half res DFAO (Default)<br>
+			   r.AODownsampleFactor=2<br><br>
+			   ; Default value is -1 (which sets it to 0.9)<br>
+			   ; Higher value increases AO effect<br>
+			   r.AmbientOcclusion.Intensity=0.9<br>
             </p>
          </div>
          <p><s>Enabled by default for High Quality and Ultra Quality preset, you can enable it through Engine.ini if you want.</s> Added into in-game settings in version 3.1.<br><br>Full image comparison: <a href="https://imgsli.com/NDI5ODk3" target="_blank">DFAO Comparison 1</a> | <a href="https://imgsli.com/NDI5OTAw" target="_blank">DFAO Comparison 2</a></p>
@@ -200,19 +214,21 @@
       <div id="fog">
          <div class="codebox">
             <p>
-               ; 0: Disable fog | 1: Enable fog<br>
-			   ; Fog off can make certain areas bright<br>
-               r.Fog=0<br><br>
                ; 0: Disable volume cloud | 1: Enable volume cloud<br>
                ; Only applies in newer regions, get rids of the clouds at ground level<br>
-               r.KuroVolumeCloudEnable=0<br>
+               r.KuroVolumeCloudEnable=0<br><br>
+               ; Enable / disable Screen Space Fog Scattering<br>
+               ; 0 = Off, 1 = On (Default)<br>
+               r.SSFS=1<br><br>
             </p>
          </div>
+		 <!--
          <p>In-game “Volumetric Fog” setting doesn’t completely remove fog. To remove the remaining fog, put the commands in Engine.ini.</p>
          <figure>
             <img src="images/fog.jpg" class="zoom-img" alt="fog" style="width: 80%; margin: auto; display: block;">
             <figcaption style="text-align: center; margin-top: 10px;">Fog Image Comparison</figcaption>
          </figure>
+		 -->
          <figure>
             <img src="images/volume_cloud.jpg" class="zoom-img" alt="volume_cloud" style="width: 80%; margin: auto; display: block;">
             <figcaption style="text-align: center; margin-top: 10px;">Volume Cloud Image Comparison</figcaption>
@@ -223,9 +239,17 @@
       <div id="culling">
          <div class="codebox">
             <p>
-               ; Not included in config by default<br>
+               ; Not included in config<br>
                ; 0 = Hardware occlusion (Default), 1 = HZB Occlusion<br>
-               r.HZBOcclusion=1<br>
+               r.HZBOcclusion=1<br><br>
+               ; Enable / disable Parallel Frustum Cull<br>
+               ; 0 = Off (Default), 1 = On<br>
+			   r.ParallelFrustumCull=1<br><br>
+               ; Enable / disable Parallel Occlusion Cull<br>
+               ; 0 = Off (Default), 1 = On<br>
+			   r.ParallelOcclusionCull=1<br><br>
+			   ; Higher value = more objects culled<br>
+			   r.ScreenSizeCullRatioFactor=3<br>
             </p>
          </div>
          <p>Game's default hardware occlusion culling is pretty bad especially in Vault Underground / Minos Sewers. Using HZB Occlusion reduces white spots when turning camera but drops FPS (for example 10 FPS lower in Ragunna), only a few areas maintain similar FPS.</p>
@@ -263,41 +287,59 @@
          </figure>
       </div>
       <p></p>
-      <button onclick="toggleVisibility('others')" class="others-btn text-change" data-text="Particles / Effects / Others" data-state="expanded"><span>▼ Particles / Effects / Others</span></button>
-      <div id="others">
+      <button onclick="toggleVisibility('postpro')" class="postpro-btn text-change" data-text="Post-Processing" data-state="expanded"><span>▼ Post-Processing</span></button>
+      <div id="postpro">
          <div class="codebox">
             <p>
+			   ; 0 = Off, 1 = On (Default for Balanced preset and above)<br>
+			   ; New bloom used in Lahai-Roi<br>
+			   r.Kuro.KuroEnableFFTBloom=0<br>
+			   r.Kuro.KuroEnableToonFFTBloom=0<br><br>
+               ; 0 = Off (slightly lower bloom brightness without streak), 1 = On (Default)<br>
+               r.Kuro.KuroBloomStreak=0<br><br>
+               ; 0 = Disable Lens Flare, 1 = Enable Lens Flare (Default)<br>
+               r.EnableLensflareSceneSample=0<br><br>
+               ; 0 = Disable Depth of Field, 1 = Low, 2 = High (Default), 3 = Very High, 4 = Extremely High<br>
+               r.DepthOfFieldQuality=0<br><br>
                ; 0 = Off (Disable Chromatic Abberation), 1 = On (Default)<br>
                r.SceneColorFringeQuality=0<br><br>
                ; 0 = Disable, 1 = FilmContrast, 2 = Vignette, 4 = Vignette + Film Grain<br>
-               ; Setting it to 0 or 1 disables Film Grain and Vignette (can make certain scenes brighter)<br>
-               ; Don't remember if turning off FilmContrast changes how a game looks<br>
-               r.Tonemapper.Quality=1<br><br>
+               ; Setting it to 1 disables Film Grain and Vignette (can make certain scenes brighter)<br>
+               r.Tonemapper.Quality=1<br>
+            </p>
+         </div>
+      </div>
+      <p></p>
+      <button onclick="toggleVisibility('others')" class="others-btn text-change" data-text="Effects / Others" data-state="expanded"><span>▼ Effects / Others</span></button>
+      <div id="others">
+         <div class="codebox">
+            <p>
                ; Controls how often the animation updates<br>
 			   ; 0 = Use default speed, 1 = Animation updates every frame, fixes low FPS animation for certain NPCs<br>
                a.URO.ForceAnimRate=1<br><br>
-               ; Adjust object details, lower value = better far object detail<br>
-               r.StaticMeshLODDistanceScale=0.7<br><br>
-			   ; Enable / disable material Variable Rate Shading<br>
+			   ; Affects UI quality even at native res<br>
+			   ; 3 is best quality, some GPUs have it set to a lower value by default<br>
+			   ; Using value above 3 causes parts of UI to glitch<br>
+			   r.Upscale.Quality=3<br><br>
+			   ; Enable / disable material or mesh Variable Rate Shading<br>
 			   ; Default true<br>
-			   r.VRS.EnableMaterial=false<br><br>
+			   r.VRS.EnableMaterial=false<br>
+			   r.VRS.EnableMesh=false<br><br>
                ; Adjust light shaft resolution<br>
-               ; Value from 1 to 8, higher value = lower resolution<br>
+               ; Value from 1 to 8 (default 2), higher value = lower resolution<br>
                r.LightShaftDownSampleFactor=1<br><br>
-               ; Enable / disable Screen Space Fog Scattering<br>
-               ; 0 = Off, 1 = On (Default)<br>
-               r.SSFS=1<br><br>
+			   ; Adjust volumetric light quality<br>
+			   ; Higher value = lower quality, default value 4 for both<br>
+			   r.KuroVolumetricLight.ColorMaskDownSampleFactor=1<br>
+			   r.KuroVolumetricLight.DownSampleFactor=1<br><br>
                ; Enable water ripples when flying close/casting skill<br>
                ; 0 = Off, 1 = On (Default)<br>
                r.Kuro.InteractionEffect.UseCppWaterEffect=1<br><br>
-               ; Set distance before grass is culled<br>
-               r.Kuro.Foliage.GrassCullDistanceMax=20000<br>
-			   r.Kuro.Foliage.Grass3_0CullDistanceMax=20000<br><br>
+			   ; Optimize draw calls for foliage density LOD scale<br>
+			   ; 0 = Off (Default), 1 = On<br>
+			   foliage.DensityScaleLOD.DrawCallOptimize=1<br><br>
                ; Set height before light turns off / object despawn in flight mode<br>
-               wp.Runtime.SoraGridBlackListHeight=20000<br><br>
-               ; Higher value = more objects rendered at a distance<br>
-			   ; Huge FPS drop when using high values<br>
-			   wp.Runtime.PlannedLoadingRangeScale=1.0<br>
+               wp.Runtime.SoraGridBlackListHeight=20000<br>
             </p>
          </div>
       </div>
@@ -332,17 +374,7 @@
       <div id="extra">
          <div class="codebox">
             <p>
-               All commands listed are placed in Engine.ini under [/Script/Engine.RendererSettings]<br><br>
-               ; 0 = Off (slightly lower bloom brightness without streak), 1 = On (Default)<br>
-               r.Kuro.KuroBloomStreak=0<br><br>
-			   ; 0 = Off, 1 = On (Default for Balanced preset and above)<br>
-			   ; New bloom used in Lahai-Roi<br>
-			   r.Kuro.KuroEnableFFTBloom=0<br>
-			   r.Kuro.KuroEnableToonFFTBloom=0<br><br>
-               ; 0 = Disable Lens Flare, 1 = Enable Lens Flare (Default)<br>
-               r.EnableLensflareSceneSample=0<br><br>
-               ; 0 = Disable Depth of Field, 1 = Low, 2 = High, 3 = Very High, 4 = Extremely High<br>
-               r.DepthOfFieldQuality=0<br><br>
+               All commands listed are placed in Engine.ini under [SystemSettings]<br><br>
                ; Set distance before NPC disappears (Default 6000)<br>
 			   ; Doesn't work for all NPCs, some have a set distance<br>
                r.Kuro.NpcDisappearDistance=20000<br><br>
