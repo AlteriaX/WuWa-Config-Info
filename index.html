@@ -26,7 +26,7 @@
          <a href="color-settings">Old Color Settings</a>
          <a href="https://ko-fi.com/alteria/" target="_blank">Donate</a>
       </div>
-      <div class="right-info">Last update: 5 April 2026</div>
+      <div class="right-info">Last update: 7 April 2026</div>
    </div>
 
    <p class="something"><a href="https://framedsc.com/GeneralGuides/ue4_commands.htm" target="_blank">UE4 Default Commands (Some disabled by Kuro)</a> | <a href="https://pastebin.com/KUNNVZeC" target="_blank">WuWa Commands</a></p>
@@ -82,23 +82,19 @@
       <div id="view-distance">
          <div class="codebox">
             <p>
-               ; Default foliage LOD distance value is 1<br>
-               ; Test done in Septimont<br>
-               ; Default foliage distance - 97 FPS | Foliage distance 2 - 96 FPS<br>
-               ; Foliage distance 3 - 93 FPS | Foliage distance 4 - 91 FPS | Foliage distance 5 - 85 FPS<br>
-               foliage.LODDistanceScale=2<br><br>
+               ; Default value is 1 for both commands<br>
+			   r.ViewDistanceScale=2.0<br>
+               foliage.LODDistanceScale=2.0<br><br>
                ; Set distance before grass is culled<br>
-               r.Kuro.Foliage.GrassCullDistanceMax=20000<br>
+               r.Kuro.Foliage.GrassCullDistanceMax=17500<br>
 			   r.Kuro.Foliage.Grass3_0CullDistanceMax=20000<br>
             </p>
          </div>
          <p>Didn't notice much difference when using values above 5 for foliage LOD distance scale.</p>
-		 <!--
          <figure>
             <img src="images/view_distance.jpg" class="zoom-img" alt="view_distance" style="width: 80%; margin: auto; display: block;">
             <figcaption style="text-align: center; margin-top: 10px;">View Distance Image Comparison</figcaption>
          </figure>
-		 -->
          <figure>
             <img src="images/foliage_distance.jpg" class="zoom-img" alt="foliage_distance" style="width: 80%; margin: auto; display: block;">
             <figcaption style="text-align: center; margin-top: 10px;">Foliage LOD Distance Image Comparison</figcaption>
@@ -329,7 +325,7 @@
                ; Value from 1 to 8 (default 2), higher value = lower resolution<br>
                r.LightShaftDownSampleFactor=1<br><br>
 			   ; Adjust volumetric light quality<br>
-			   ; Higher value = lower quality, default value 4 for both<br>
+			   ; Higher value = lower quality, default value is 4 for both<br>
 			   r.KuroVolumetricLight.ColorMaskDownSampleFactor=1<br>
 			   r.KuroVolumetricLight.DownSampleFactor=1<br><br>
                ; Enable water ripples when flying close/casting skill<br>
@@ -397,13 +393,14 @@
       <div id="rebar">
          <div class="codebox">
             <p>
-               ; Using ReBar increases VRAM usage, so make sure to check<br>
+               ; Using ReBar increases VRAM usage<br>
                ; Choose either option below for "rBAR - Size Limit", FPS boost is similar<br>
+			   0x000000000C800000 (Returnal, Diablo 4) = 200MB<br>
                0x0000000012C00000 (The Riftbreaker) = 300MB<br>
                0x0000000040000000 (Red Dead Redemption 2) = 1GB<br>
             </p>
          </div>
-         <p>Forcing ReBar on for NVIDIA GPUs can help boost FPS a bit, currently using the 300MB option for native 1080p on RTX 3060 6GB Laptop. You can do this via NVIDIA Profile Inspector.<br><br>
+         <p>Forcing ReBar on for NVIDIA GPUs can help boost FPS a bit, currently using the 200MB option for native 1080p on RTX 3060 6GB Laptop. You can do this via NVIDIA Profile Inspector.<br><br>
             Link to download NVIDIA Profile Inspector: <a href="https://github.com/Orbmu2k/nvidiaProfileInspector/releases" target="_blank">https://github.com/Orbmu2k/nvidiaProfileInspector/releases</a>
          </p>
          <figure>
