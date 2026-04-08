@@ -26,10 +26,10 @@
          <a href="color-settings">Old Color Settings</a>
          <a href="https://ko-fi.com/alteria/" target="_blank">Donate</a>
       </div>
-      <div class="right-info">Last update: 7 April 2026</div>
+      <div class="right-info">Last update: 8 April 2026</div>
    </div>
 
-   <p class="something"><a href="https://framedsc.com/GeneralGuides/ue4_commands.htm" target="_blank">UE4 Default Commands (Some disabled by Kuro)</a> | <a href="https://pastebin.com/KUNNVZeC" target="_blank">WuWa Commands</a></p>
+   <p class="something"><a href="https://framedsc.com/GeneralGuides/ue4_commands.htm" target="_blank">UE4 Default Commands (Some not available in WuWa)</a> | <a href="https://pastebin.com/KUNNVZeC" target="_blank">WuWa Commands</a></p>
 
    <div class="content">
       <button onclick="toggleVisibility('texture-details')" class="texture-details-btn text-change" data-text="Improving Texture Details / LoD" data-state="expanded"><span>▼ Improving Texture Details / LoD</span></button>
@@ -37,15 +37,19 @@
          <div class="codebox">
             <p>
                ; Forcing Anisotropic Filtering x16 for AMD GPUs doesn't work<br>
-               ; Forcing AFx16 through NVIDIA Control Panel works fine on NVIDIA GPUs (Does not work for RTX 50 series)<br><br>
+               ; Forcing AFx16 through NVIDIA Control Panel works on NVIDIA GPUs (Does not work for RTX 50 series, will cause textures to have red / pink tint)<br><br>
                ; For RTX 50 Series / AMD GPUs with FSR3 place this command in Engine.ini instead<br>
                r.MipMapLODBias=-2<br>
             </p>
          </div>
          <p>The command <code>r.MaxAnisotropy</code> doesn't work even when set to 16. Changing anisotropic filtering / mip bias improves texture details.</p>
          <figure>
-            <img src="images/af_compare.jpg" class="zoom-img" alt="af_compare" style="width: 80%; margin: auto; display: block;">
-            <figcaption style="text-align: center; margin-top: 10px;">Anisotropic Filtering Image Comparison</figcaption>
+            <img src="images/af_compare.jpg" class="zoom-img" alt="af_compare" style="width: 85%; margin: auto; display: block;">
+            <figcaption style="text-align: center; margin-top: 10px;">Anisotropic Filtering Image Comparison 1</figcaption>
+         </figure>
+         <figure>
+            <img src="images/af_compare2.jpg" class="zoom-img" alt="af_compare" style="width: 85%; margin: auto; display: block;">
+            <figcaption style="text-align: center; margin-top: 10px;">Anisotropic Filtering Image Comparison 2</figcaption>
          </figure>
          <div class="codebox">
             <p>
@@ -73,7 +77,7 @@
          </div>
          <p>If textures are still blurry you can increase streaming boost and pool size but if it's too high you'll get FPS drops due to hitting the VRAM limit (Lahai Roi uses more VRAM compared to older areas)</p>
          <figure>
-            <img src="images/streaming_boost.jpg" class="zoom-img" alt="streaming_boost" style="width: 80%; margin: auto; display: block;">
+            <img src="images/streaming_boost.jpg" class="zoom-img" alt="streaming_boost" style="width: 85%; margin: auto; display: block;">
             <figcaption style="text-align: center; margin-top: 10px;">Streaming Boost Image Comparison</figcaption>
          </figure>
       </div>
@@ -92,11 +96,11 @@
          </div>
          <p>Didn't notice much difference when using values above 5 for foliage LOD distance scale.</p>
          <figure>
-            <img src="images/view_distance.jpg" class="zoom-img" alt="view_distance" style="width: 80%; margin: auto; display: block;">
+            <img src="images/view_distance.jpg" class="zoom-img" alt="view_distance" style="width: 85%; margin: auto; display: block;">
             <figcaption style="text-align: center; margin-top: 10px;">View Distance Image Comparison</figcaption>
          </figure>
          <figure>
-            <img src="images/foliage_distance.jpg" class="zoom-img" alt="foliage_distance" style="width: 80%; margin: auto; display: block;">
+            <img src="images/foliage_distance.jpg" class="zoom-img" alt="foliage_distance" style="width: 85%; margin: auto; display: block;">
             <figcaption style="text-align: center; margin-top: 10px;">Foliage LOD Distance Image Comparison</figcaption>
          </figure>
       </div>
@@ -120,7 +124,7 @@
          </div>
          <p>By using lower values you can see that there are less trees in the distance. From left to right: 80, 100, 150, 200 (Labels at the bottom of image)</p>
          <figure>
-            <img src="images/wp_runtime.jpg" class="zoom-img" alt="wp_runtime" style="width: 80%; margin: auto; display: block;">
+            <img src="images/wp_runtime.jpg" class="zoom-img" alt="wp_runtime" style="width: 85%; margin: auto; display: block;">
             <figcaption style="text-align: center; margin-top: 10px;">Far Object Rendering Image Comparison</figcaption>
          </figure>
       </div>
@@ -141,7 +145,7 @@
             </p>
          </div>
          <figure>
-            <img src="images/reflections.jpg" class="zoom-img" alt="reflections" style="width: 80%; margin: auto; display: block;">
+            <img src="images/reflections.jpg" class="zoom-img" alt="reflections" style="width: 85%; margin: auto; display: block;">
             <figcaption style="text-align: center; margin-top: 10px;">Reflections Max Roughness Image Comparison</figcaption>
          </figure>
 		 <!--
@@ -153,7 +157,7 @@
          </div>
 		 <p>Using <b>high precision normals</b> improves SSR reflection quality, <b>high precision</b> is better than default but slightly worse than <b>high precision normals</b>. Another example comparison can be seen on <a href="https://dev.epicgames.com/documentation/en-us/unreal-engine/reflection-environment?application_version=4.27#highprecisiongbuffernormalencoding" target="_blank">UE4.27 Reflection Environment Documentation</a>
          <figure>
-            <img src="images/gbuffer.jpg" class="zoom-img" alt="gbuffer" style="width: 80%; margin: auto; display: block;">
+            <img src="images/gbuffer.jpg" class="zoom-img" alt="gbuffer" style="width: 85%; margin: auto; display: block;">
             <figcaption style="text-align: center; margin-top: 10px;">GBuffer Format Image Comparison</figcaption>
          </figure>
 		 -->
@@ -173,12 +177,12 @@
          </div>
          <p>Default values used for per object shadow resolution is low which is the reason why it doesn't look great, setting per object resolution to 512 or 1024 is enough to make character shadows look better than default.</p>
          <figure>
-            <img src="images/shadows.jpg" class="zoom-img" alt="shadows" style="width: 80%; margin: auto; display: block;">
+            <img src="images/shadows.jpg" class="zoom-img" alt="shadows" style="width: 85%; margin: auto; display: block;">
             <figcaption style="text-align: center; margin-top: 10px;">Shadow Resolution Image Comparison</figcaption>
          </figure>
 		 <!--
          <figure>
-            <img src="images/shadow_radius.jpg" class="zoom-img" alt="shadow_radius" style="width: 80%; margin: auto; display: block;">
+            <img src="images/shadow_radius.jpg" class="zoom-img" alt="shadow_radius" style="width: 85%; margin: auto; display: block;">
             <figcaption style="text-align: center; margin-top: 10px;">Shadow Radius Image Comparison</figcaption>
          </figure>
 		 -->
@@ -201,7 +205,7 @@
          </div>
          <p><s>Enabled by default for High Quality and Ultra Quality preset, you can enable it through Engine.ini if you want.</s> Added into in-game settings in version 3.1.<br><br>Full image comparison: <a href="https://imgsli.com/NDI5ODk3" target="_blank">DFAO Comparison 1</a> | <a href="https://imgsli.com/NDI5OTAw" target="_blank">DFAO Comparison 2</a></p>
          <figure>
-            <img src="images/dfao_compare.jpg" class="zoom-img" alt="dfao" style="width: 80%; margin: auto; display: block;">
+            <img src="images/dfao_compare.jpg" class="zoom-img" alt="dfao" style="width: 85%; margin: auto; display: block;">
             <figcaption style="text-align: center; margin-top: 10px;">DFAO Image Comparison</figcaption>
          </figure>
       </div>
@@ -221,12 +225,12 @@
 		 <!--
          <p>In-game “Volumetric Fog” setting doesn’t completely remove fog. To remove the remaining fog, put the commands in Engine.ini.</p>
          <figure>
-            <img src="images/fog.jpg" class="zoom-img" alt="fog" style="width: 80%; margin: auto; display: block;">
+            <img src="images/fog.jpg" class="zoom-img" alt="fog" style="width: 85%; margin: auto; display: block;">
             <figcaption style="text-align: center; margin-top: 10px;">Fog Image Comparison</figcaption>
          </figure>
 		 -->
          <figure>
-            <img src="images/volume_cloud.jpg" class="zoom-img" alt="volume_cloud" style="width: 80%; margin: auto; display: block;">
+            <img src="images/volume_cloud.jpg" class="zoom-img" alt="volume_cloud" style="width: 85%; margin: auto; display: block;">
             <figcaption style="text-align: center; margin-top: 10px;">Volume Cloud Image Comparison</figcaption>
          </figure>
       </div>
@@ -250,7 +254,7 @@
          </div>
          <p>Game's default hardware occlusion culling is pretty bad especially in Vault Underground / Minos Sewers. Using HZB Occlusion reduces white spots when turning camera but drops FPS (for example 10 FPS lower in Ragunna), only a few areas maintain similar FPS.</p>
          <figure>
-            <img src="images/hzb.jpg" class="zoom-img" alt="hzb" style="width: 80%; margin: auto; display: block;">
+            <img src="images/hzb.jpg" class="zoom-img" alt="hzb" style="width: 85%; margin: auto; display: block;">
             <figcaption style="text-align: center; margin-top: 10px;">HZB Occlusion Image Comparison</figcaption>
          </figure>
       </div>
@@ -265,7 +269,7 @@
          </div>
          <p>All Comparisons done with default game settings. From left to right: 0 to 3, labels are at the bottom.</p>
          <figure>
-            <img src="images/kuro_tonemap.jpg" class="zoom-img" alt="kuro_tonemap" style="width: 80%; margin: auto; display: block;">
+            <img src="images/kuro_tonemap.jpg" class="zoom-img" alt="kuro_tonemap" style="width: 85%; margin: auto; display: block;">
             <figcaption style="text-align: center; margin-top: 10px;">Kuro Tonemapping Image Comparison</figcaption>
          </figure>
       </div>
@@ -274,11 +278,11 @@
       <div id="auto-exposure">
          <p>Here's some image comparisons when changing in-game Auto Exposure setting to On / Off.</p>
          <figure>
-            <img src="images/auto_exposure.jpg" class="zoom-img" alt="auto_exposure" style="width: 80%; margin: auto; display: block;">
+            <img src="images/auto_exposure.jpg" class="zoom-img" alt="auto_exposure" style="width: 85%; margin: auto; display: block;">
             <figcaption style="text-align: center; margin-top: 10px;">Auto Exposure Image Comparison 1</figcaption>
          </figure>
          <figure>
-            <img src="images/auto_exposure2.jpg" class="zoom-img" alt="auto_exposure2" style="width: 80%; margin: auto; display: block;">
+            <img src="images/auto_exposure2.jpg" class="zoom-img" alt="auto_exposure2" style="width: 85%; margin: auto; display: block;">
             <figcaption style="text-align: center; margin-top: 10px;">Auto Exposure Image Comparison 2</figcaption>
          </figure>
       </div>
@@ -404,11 +408,11 @@
             Link to download NVIDIA Profile Inspector: <a href="https://github.com/Orbmu2k/nvidiaProfileInspector/releases" target="_blank">https://github.com/Orbmu2k/nvidiaProfileInspector/releases</a>
          </p>
          <figure>
-            <img src="images/nvpi.png" class="zoom-img" alt="nvpi" style="width: 80%; margin: auto; display: block;">
+            <img src="images/nvpi.png" class="zoom-img" alt="nvpi" style="width: 85%; margin: auto; display: block;">
             <figcaption style="text-align: center; margin-top: 10px;">How to apply using NVIDIA Profile Inspector</figcaption>
          </figure>
          <figure>
-            <img src="images/rebar.jpg" class="zoom-img" alt="rebar" style="width: 80%; margin: auto; display: block;">
+            <img src="images/rebar.jpg" class="zoom-img" alt="rebar" style="width: 85%; margin: auto; display: block;">
             <figcaption style="text-align: center; margin-top: 10px;">ReBar FPS Comparison</figcaption>
          </figure>
       </div>
