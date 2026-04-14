@@ -26,7 +26,7 @@
          <a href="color-settings">Old Color Settings</a>
          <a href="https://ko-fi.com/alteria/" target="_blank">Donate</a>
       </div>
-      <div class="right-info">Last update: 8 April 2026</div>
+      <div class="right-info">Last update: 15 April 2026</div>
    </div>
 
    <p class="something"><a href="https://framedsc.com/GeneralGuides/ue4_commands.htm" target="_blank">UE4 Default Commands (Some not available in WuWa)</a> | <a href="https://pastebin.com/KUNNVZeC" target="_blank">WuWa Commands</a></p>
@@ -61,7 +61,7 @@
                r.Streaming.PoolSize=1536<br><br>
 			   ; Enable or disable Kuro Streaming Priority<br>
 			   ; 0: Off, 1: Retention Only, 2: Load Only, 3: Both Retention and Load (Default)<br>
-			   ; Turning this off can cause Smartprint Cube Reboot textures to load slowly but fixes the issue where Aemeath Resonance Liberation Exostrider armor fails to load<br>
+			   ; Off can cause Smartprint Cube Reboot textures to load slowly but fixes Aemeath Resonance Liberation Exostrider armor not loading<br>
 			   r.Streaming.UsingKuroStreamingPriority=0<br><br>
 			   ; Limits how many mipmaps are kept in memory<br>
 			   ; Default value - 8 for mesh, 15 for texture<br>
@@ -70,6 +70,9 @@
                ; Adjust object details, lower value = better far object detail<br>
 			   ; Using values lower than 0.5 can cause ground texture to flicker<br>
                r.StaticMeshLODDistanceScale=0.7<br><br>
+               ; 0: Low (does not work, will cause textures to not load), 1: High, 2: Medium<br>
+               r.MaterialQualityLevel=1<br>
+               r.KuroMaterialQualityLevel=1<br><br>
                ; Higher value = more objects rendered and better textures at a distance<br>
 			   ; Limit seems to be 1.0, didn't notice any change using a higher value<br>
 			   wp.Runtime.PlannedLoadingRangeScale=1.0<br>
@@ -170,7 +173,9 @@
                ; Lower values increases the amount of shadow<br>
                r.Shadow.RadiusThreshold=0.01<br><br>
                ; Set shadow resolution, higher costs more FPS<br>
+			   ; Foliage / object shadow
 			   r.Shadow.MaxCSMResolution=2048<br>
+			   ; Character shadow
                r.Shadow.PerObjectResolutionMax=1024<br>
                r.Shadow.PerObjectResolutionMin=1024<br>
             </p>
@@ -180,12 +185,10 @@
             <img src="images/shadows.jpg" class="zoom-img" alt="shadows" style="width: 85%; margin: auto; display: block;">
             <figcaption style="text-align: center; margin-top: 10px;">Shadow Resolution Image Comparison</figcaption>
          </figure>
-		 <!--
          <figure>
             <img src="images/shadow_radius.jpg" class="zoom-img" alt="shadow_radius" style="width: 85%; margin: auto; display: block;">
             <figcaption style="text-align: center; margin-top: 10px;">Shadow Radius Image Comparison</figcaption>
          </figure>
-		 -->
       </div>
       <p></p>
       <button onclick="toggleVisibility('ambient-occlusion')" class="ambient-occlusion-btn text-change" data-text="Ambient Occlusion" data-state="expanded"><span>▼ Ambient Occlusion</span></button>
@@ -267,7 +270,7 @@
                r.KuroTonemapping=3<br>
             </p>
          </div>
-         <p>All Comparisons done with default game settings. From left to right: 0 to 3, labels are at the bottom.</p>
+         <p>All images in the comparison were taken with default game settings.</p>
          <figure>
             <img src="images/kuro_tonemap.jpg" class="zoom-img" alt="kuro_tonemap" style="width: 85%; margin: auto; display: block;">
             <figcaption style="text-align: center; margin-top: 10px;">Kuro Tonemapping Image Comparison</figcaption>
@@ -317,6 +320,9 @@
                ; Controls how often the animation updates<br>
 			   ; 0 = Use default speed, 1 = Animation updates every frame, fixes low FPS animation for certain NPCs<br>
                a.URO.ForceAnimRate=1<br><br>
+               ; Changes object details, lights and particle effects<br>
+               ; 0 = low, 1 = medium, 2 = high<br>
+               r.DetailMode=2<br><br>
 			   ; Affects UI quality even at native res<br>
 			   ; 3 is best quality, some GPUs have it set to a lower value by default<br>
 			   ; Using value above 3 causes parts of UI to glitch<br>
@@ -348,7 +354,7 @@
       <div id="raytracing">
          <div class="codebox">
             <p>
-               ; Place the commands in Engine.ini under [/Script/Engine.RendererSettings] or [/Script/Engine.RendererRTXSettings]<br><br>
+               ; Place the commands in Engine.ini under [SystemSettings]<br><br>
                ; Lower values reduce ghosting from characters when near a wall/foliage for RT GI but increase flickering artifacts<br>
                ; Default - 0.05 (Low & Medium) | 0.03 (High)<br>
                r.Lumen.ScreenProbeGather.Temporal.DistanceThreshold=0.03<br><br>
