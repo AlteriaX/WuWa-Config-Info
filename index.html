@@ -26,7 +26,7 @@
          <a href="color-settings">Old Color Settings</a>
          <a href="https://ko-fi.com/alteria/" target="_blank">Donate</a>
       </div>
-      <div class="right-info">Last update: 15 April 2026</div>
+      <div class="right-info">Last update: 30 April 2026</div>
    </div>
 
    <p class="something"><a href="https://framedsc.com/GeneralGuides/ue4_commands.htm" target="_blank">UE4 Default Commands (Some not available in WuWa)</a> | <a href="https://pastebin.com/KUNNVZeC" target="_blank">WuWa Commands</a></p>
@@ -34,15 +34,7 @@
    <div class="content">
       <button onclick="toggleVisibility('texture-details')" class="texture-details-btn text-change" data-text="Improving Texture Details / LoD" data-state="expanded"><span>▼ Improving Texture Details / LoD</span></button>
       <div id="texture-details">
-         <div class="codebox">
-            <p>
-               ; Forcing Anisotropic Filtering x16 for AMD GPUs doesn't work<br>
-               ; Forcing AFx16 through NVIDIA Control Panel works on NVIDIA GPUs (Does not work for RTX 50 series, will cause textures to have red / pink tint)<br><br>
-               ; For RTX 50 Series / AMD GPUs with FSR3 place this command in Engine.ini instead<br>
-               r.MipMapLODBias=-2<br>
-            </p>
-         </div>
-         <p>The command <code>r.MaxAnisotropy</code> doesn't work even when set to 16. Changing anisotropic filtering / mip bias improves texture details.</p>
+         <p><s>The command <code>r.MaxAnisotropy</code> doesn't work even when set to 16.</s> Fixed and added into in-game settings in version 3.3.</p>
          <figure>
             <img src="images/af_compare.jpg" class="zoom-img" alt="af_compare" style="width: 85%; margin: auto; display: block;">
             <figcaption style="text-align: center; margin-top: 10px;">Anisotropic Filtering Image Comparison 1</figcaption>
@@ -248,9 +240,6 @@
                ; Enable / disable Parallel Frustum Cull<br>
                ; 0 = Off (Default), 1 = On<br>
 			   r.ParallelFrustumCull=1<br><br>
-               ; Enable / disable Parallel Occlusion Cull<br>
-               ; 0 = Off (Default), 1 = On<br>
-			   r.ParallelOcclusionCull=1<br><br>
 			   ; Higher value = more objects culled<br>
 			   r.ScreenSizeCullRatioFactor=3<br>
             </p>
@@ -333,7 +322,8 @@
 			   r.VRS.EnableMesh=false<br><br>
                ; Adjust light shaft resolution<br>
                ; Value from 1 to 8 (default 2), higher value = lower resolution<br>
-               r.LightShaftDownSampleFactor=1<br><br>
+               r.LightShaftDownSampleFactor=1<br>
+			   r.Kuro.KuroTyndallScatteringsDownSampleFactor=1<br><br>
 			   ; Adjust volumetric light quality<br>
 			   ; Higher value = lower quality, default value is 4 for both<br>
 			   r.KuroVolumetricLight.ColorMaskDownSampleFactor=1<br>
@@ -345,7 +335,10 @@
 			   ; 0 = Off (Default), 1 = On<br>
 			   foliage.DensityScaleLOD.DrawCallOptimize=1<br><br>
                ; Set height before light turns off / object despawn in flight mode<br>
-               wp.Runtime.SoraGridBlackListHeight=20000<br>
+               wp.Runtime.SoraGridBlackListHeight=20000<br><br>
+			   ; Enable / disable C# environment<br>
+			   ; Default false<br>
+			   Kuro.Script.EnableCSharpEnv=true<br>
             </p>
          </div>
       </div>
