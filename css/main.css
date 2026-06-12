@@ -334,7 +334,7 @@ li:nth-child(n+2) {
    .output-box,
    .apply-settings {
       width: 90%;
-      max-width: calc(100vw - 40px);
+      max-width: calc(100vw - 20px);
       margin-left: auto;
       margin-right: auto;
    }
@@ -357,13 +357,19 @@ li:nth-child(n+2) {
       display: none;
    }
    
+   figure {
+	   width: 100%;
+	   margin: auto;
+   }
+   
    .zoom-img {
       width: 100%;
+	  transition: none;
       cursor: auto;
-      pointer-events: none;
    }
 
    .zoom-img.zoomed {
       transform: none;
+	  cursor: auto;
    }
 }
