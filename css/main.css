@@ -328,6 +328,10 @@ li:nth-child(n+2) {
    .content span {
       font-size: 18px;
    }
+   
+   .codebox p {
+	  font-size: 13px;
+   }
 
    .slider,
    .slider-label,
@@ -340,7 +344,7 @@ li:nth-child(n+2) {
    }
 
    .slider-label {
-      font-size: 16px;
+      font-size: 15px;
    }
 
    #generate,
@@ -358,12 +362,12 @@ li:nth-child(n+2) {
    }
    
    figure {
-	   width: 100%;
-	   margin: auto;
+	  width: 100%;
+	  margin: auto;
    }
    
    .zoom-img {
-      width: 100%;
+	  width: 100%;
 	  transition: none;
       cursor: auto;
    }
