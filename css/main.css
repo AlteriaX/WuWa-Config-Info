@@ -276,7 +276,7 @@ li:nth-child(n+2) {
    color: black;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 768px) {
    * {
       box-sizing: border-box;
    }
@@ -362,18 +362,18 @@ li:nth-child(n+2) {
    }
    
    figure {
-	  width: 100%;
-	  margin: auto;
+      width: 100%;
+      margin: 15px auto;
    }
    
    .zoom-img {
-	  width: 100%;
-	  transition: none;
+      width: 100%;
+      transition: none;
       cursor: auto;
    }
 
    .zoom-img.zoomed {
       transform: none;
-	  cursor: auto;
+      cursor: auto;
    }
 }
