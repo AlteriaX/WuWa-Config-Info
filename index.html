@@ -3,6 +3,7 @@
 
 <head>
 	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta property="og:title" content="WuWa Config Command Info" />
 	<meta property="og:description" content="Explanation for commands used in WuWa-Configs" />
 	<meta property="og:image" content="https://i.imgur.com/FTGBtNI.png" />
@@ -26,7 +27,7 @@
          <a href="color-settings">Old Color Settings</a>
          <a href="https://ko-fi.com/alteria/" target="_blank">Donate</a>
       </div>
-      <div class="right-info">Last update: 9 June 2026</div>
+      <div class="right-info">Last update: 12 June 2026</div>
    </div>
 
    <p class="something"><a href="https://framedsc.com/GeneralGuides/ue4_commands.htm" target="_blank">UE4 Default Commands (Some not available in WuWa)</a> | <a href="https://pastebin.com/KUNNVZeC" target="_blank">WuWa Commands</a></p>
@@ -36,15 +37,23 @@
       <div id="texture-details">
          <p><s>The command <code>r.MaxAnisotropy</code> doesn't work even when set to 16.</s> Fixed and added into in-game settings in version 3.3.</p>
          <figure>
-            <img src="images/af_compare.jpg" class="zoom-img" alt="af_compare" style="width: 85%; margin: auto; display: block;">
+            <img src="images/af_compare.jpg" class="zoom-img" alt="af_compare">
             <figcaption style="text-align: center; margin-top: 10px;">Anisotropic Filtering Image Comparison 1</figcaption>
          </figure>
          <figure>
-            <img src="images/af_compare2.jpg" class="zoom-img" alt="af_compare" style="width: 85%; margin: auto; display: block;">
+            <img src="images/af_compare2.jpg" class="zoom-img" alt="af_compare">
             <figcaption style="text-align: center; margin-top: 10px;">Anisotropic Filtering Image Comparison 2</figcaption>
          </figure>
          <div class="codebox">
             <p>
+               ; Default - 1.0, higher value = prioritize loading higher resolution textures<br>
+               ; Lower value = less priority loading high resolution textures<br>
+               r.Streaming.MinBoost=1.5<br><br>
+               ; Sets texture pool size, size in MB<br>
+			   ; When set to 0, the pool size will be unlimited (uses a lot of VRAM)<br>
+               r.Streaming.PoolSize=1536<br><br>
+			   ; When set to -1, share pool with textures otherwise dedicated to meshes<br>
+			   r.Streaming.PoolSizeForMeshes=1024<br><br>
 			   ; Enable or disable Kuro Streaming Priority<br>
 			   ; 0: Off, 1: Retention Only, 2: Load Only, 3: Both Retention and Load (Default)<br>
 			   ; Off can cause Smartprint Cube Reboot textures to load slowly but fixes Aemeath Res Lib Exostrider armor not loading<br>
@@ -52,18 +61,19 @@
                ; Adjust object details, lower value = better far object detail<br>
 			   ; Using values lower than 0.5 can cause ground texture to flicker<br>
                r.StaticMeshLODDistanceScale=0.7<br><br>
+               ; 0: Low (does not work, will cause textures to not load), 1: High, 2: Medium, 3: Epic<br>
+               r.MaterialQualityLevel=1<br>
+               r.KuroMaterialQualityLevel=1<br><br>
                ; Higher value = more objects rendered and better textures at a distance<br>
 			   ; Limit seems to be 1.0, didn't notice any change using a higher value<br>
 			   wp.Runtime.PlannedLoadingRangeScale=1.0<br>
             </p>
          </div>
-		 <!--
          <p>If textures are still blurry you can increase streaming boost and pool size but if it's too high you'll get FPS drops due to hitting the VRAM limit (Lahai Roi uses more VRAM compared to older areas)</p>
          <figure>
-            <img src="images/streaming_boost.jpg" class="zoom-img" alt="streaming_boost" style="width: 85%; margin: auto; display: block;">
+            <img src="images/streaming_boost.jpg" class="zoom-img" alt="streaming_boost">
             <figcaption style="text-align: center; margin-top: 10px;">Streaming Boost Image Comparison</figcaption>
          </figure>
-		 -->
       </div>
       <p></p>
       <button onclick="toggleVisibility('view-distance')" class="view-distance-btn text-change" data-text="View Distance" data-state="expanded"><span>▼ View Distance</span></button>
@@ -71,6 +81,7 @@
          <div class="codebox">
             <p>
                ; Default value is 1 for both commands<br>
+			   r.ViewDistanceScale=2.0<br>
                foliage.LODDistanceScale=2.0<br><br>
                ; Set distance before grass is culled<br>
                r.Kuro.Foliage.GrassCullDistanceMax=17500<br>
@@ -78,14 +89,12 @@
             </p>
          </div>
          <p>Didn't notice much difference when using values above 5 for foliage LOD distance scale.</p>
-		 <!--
          <figure>
-            <img src="images/view_distance.jpg" class="zoom-img" alt="view_distance" style="width: 85%; margin: auto; display: block;">
+            <img src="images/view_distance.jpg" class="zoom-img" alt="view_distance">
             <figcaption style="text-align: center; margin-top: 10px;">View Distance Image Comparison</figcaption>
          </figure>
-		 -->
          <figure>
-            <img src="images/foliage_distance.jpg" class="zoom-img" alt="foliage_distance" style="width: 85%; margin: auto; display: block;">
+            <img src="images/foliage_distance.jpg" class="zoom-img" alt="foliage_distance">
             <figcaption style="text-align: center; margin-top: 10px;">Foliage LOD Distance Image Comparison</figcaption>
          </figure>
       </div>
@@ -109,7 +118,7 @@
          </div>
          <p>By using lower values you can see that there are less trees in the distance. From left to right: 80, 100, 150, 200 (Labels at the bottom of image)</p>
          <figure>
-            <img src="images/wp_runtime.jpg" class="zoom-img" alt="wp_runtime" style="width: 85%; margin: auto; display: block;">
+            <img src="images/wp_runtime.jpg" class="zoom-img" alt="wp_runtime">
             <figcaption style="text-align: center; margin-top: 10px;">Far Object Rendering Image Comparison</figcaption>
          </figure>
       </div>
@@ -130,7 +139,7 @@
             </p>
          </div>
          <figure>
-            <img src="images/reflections.jpg" class="zoom-img" alt="reflections" style="width: 85%; margin: auto; display: block;">
+            <img src="images/reflections.jpg" class="zoom-img" alt="reflections">
             <figcaption style="text-align: center; margin-top: 10px;">Reflections Max Roughness Image Comparison</figcaption>
          </figure>
 		 <!--
@@ -142,7 +151,7 @@
          </div>
 		 <p>Using <b>high precision normals</b> improves SSR reflection quality, <b>high precision</b> is better than default but slightly worse than <b>high precision normals</b>. Another example comparison can be seen on <a href="https://dev.epicgames.com/documentation/en-us/unreal-engine/reflection-environment?application_version=4.27#highprecisiongbuffernormalencoding" target="_blank">UE4.27 Reflection Environment Documentation</a>
          <figure>
-            <img src="images/gbuffer.jpg" class="zoom-img" alt="gbuffer" style="width: 85%; margin: auto; display: block;">
+            <img src="images/gbuffer.jpg" class="zoom-img" alt="gbuffer">
             <figcaption style="text-align: center; margin-top: 10px;">GBuffer Format Image Comparison</figcaption>
          </figure>
 		 -->
@@ -154,18 +163,21 @@
             <p>
                ; Lower values increases the amount of shadow<br>
                r.Shadow.RadiusThreshold=0.01<br><br>
-               ; Set character shadow resolution<br>
+               ; Set shadow resolution, higher costs more FPS<br>
+			   ; Foliage / object shadow<br>
+			   r.Shadow.MaxCSMResolution=2048<br>
+			   ; Character shadow<br>
                r.Shadow.PerObjectResolutionMax=1024<br>
                r.Shadow.PerObjectResolutionMin=1024<br>
             </p>
          </div>
          <p>Default values used for per object shadow resolution is low which is the reason why it doesn't look great, setting per object resolution to 512 or 1024 is enough to make character shadows look better than default.</p>
          <figure>
-            <img src="images/shadows.jpg" class="zoom-img" alt="shadows" style="width: 85%; margin: auto; display: block;">
+            <img src="images/shadows.jpg" class="zoom-img" alt="shadows">
             <figcaption style="text-align: center; margin-top: 10px;">Shadow Resolution Image Comparison</figcaption>
          </figure>
          <figure>
-            <img src="images/shadow_radius.jpg" class="zoom-img" alt="shadow_radius" style="width: 85%; margin: auto; display: block;">
+            <img src="images/shadow_radius.jpg" class="zoom-img" alt="shadow_radius">
             <figcaption style="text-align: center; margin-top: 10px;">Shadow Radius Image Comparison</figcaption>
          </figure>
       </div>
@@ -187,7 +199,7 @@
          </div>
          <p><s>Enabled by default for High Quality and Ultra Quality preset, you can enable it through Engine.ini if you want.</s> Added into in-game settings in version 3.1.<br><br>Full image comparison: <a href="https://imgsli.com/NDI5ODk3" target="_blank">DFAO Comparison 1</a> | <a href="https://imgsli.com/NDI5OTAw" target="_blank">DFAO Comparison 2</a></p>
          <figure>
-            <img src="images/dfao_compare.jpg" class="zoom-img" alt="dfao" style="width: 85%; margin: auto; display: block;">
+            <img src="images/dfao_compare.jpg" class="zoom-img" alt="dfao">
             <figcaption style="text-align: center; margin-top: 10px;">DFAO Image Comparison</figcaption>
          </figure>
       </div>
@@ -207,12 +219,12 @@
 		 <!--
          <p>In-game “Volumetric Fog” setting doesn’t completely remove fog. To remove the remaining fog, put the commands in Engine.ini.</p>
          <figure>
-            <img src="images/fog.jpg" class="zoom-img" alt="fog" style="width: 85%; margin: auto; display: block;">
+            <img src="images/fog.jpg" class="zoom-img" alt="fog">
             <figcaption style="text-align: center; margin-top: 10px;">Fog Image Comparison</figcaption>
          </figure>
 		 -->
          <figure>
-            <img src="images/volume_cloud.jpg" class="zoom-img" alt="volume_cloud" style="width: 85%; margin: auto; display: block;">
+            <img src="images/volume_cloud.jpg" class="zoom-img" alt="volume_cloud">
             <figcaption style="text-align: center; margin-top: 10px;">Volume Cloud Image Comparison</figcaption>
          </figure>
       </div>
@@ -233,7 +245,7 @@
          </div>
          <p>Game's default hardware occlusion culling is pretty bad especially in Vault Underground / Minos Sewers. Using HZB Occlusion reduces white spots when turning camera but drops FPS (for example 10 FPS lower in Ragunna), only a few areas maintain similar FPS.</p>
          <figure>
-            <img src="images/hzb.jpg" class="zoom-img" alt="hzb" style="width: 85%; margin: auto; display: block;">
+            <img src="images/hzb.jpg" class="zoom-img" alt="hzb">
             <figcaption style="text-align: center; margin-top: 10px;">HZB Occlusion Image Comparison</figcaption>
          </figure>
       </div>
@@ -248,7 +260,7 @@
          </div>
          <p>All images in the comparison were taken with default game settings.</p>
          <figure>
-            <img src="images/kuro_tonemap.jpg" class="zoom-img" alt="kuro_tonemap" style="width: 85%; margin: auto; display: block;">
+            <img src="images/kuro_tonemap.jpg" class="zoom-img" alt="kuro_tonemap">
             <figcaption style="text-align: center; margin-top: 10px;">Kuro Tonemapping Image Comparison</figcaption>
          </figure>
       </div>
@@ -257,11 +269,11 @@
       <div id="auto-exposure">
          <p>Here's some image comparisons when changing in-game Auto Exposure setting to On / Off.</p>
          <figure>
-            <img src="images/auto_exposure.jpg" class="zoom-img" alt="auto_exposure" style="width: 85%; margin: auto; display: block;">
+            <img src="images/auto_exposure.jpg" class="zoom-img" alt="auto_exposure">
             <figcaption style="text-align: center; margin-top: 10px;">Auto Exposure Image Comparison 1</figcaption>
          </figure>
          <figure>
-            <img src="images/auto_exposure2.jpg" class="zoom-img" alt="auto_exposure2" style="width: 85%; margin: auto; display: block;">
+            <img src="images/auto_exposure2.jpg" class="zoom-img" alt="auto_exposure2">
             <figcaption style="text-align: center; margin-top: 10px;">Auto Exposure Image Comparison 2</figcaption>
          </figure>
       </div>
@@ -274,6 +286,8 @@
 			   ; New bloom used in Lahai-Roi<br>
 			   r.Kuro.KuroEnableFFTBloom=0<br>
 			   r.Kuro.KuroEnableToonFFTBloom=0<br><br>
+               ; 0 = Off (slightly lower bloom brightness without streak), 1 = On (Default)<br>
+               r.Kuro.KuroBloomStreak=0<br><br>
                ; 0 = Disable Lens Flare, 1 = Enable Lens Flare (Default)<br>
                r.EnableLensflareSceneSample=0<br><br>
                ; 0 = Disable Depth of Field, 1 = Low, 2 = High (Default), 3 = Very High, 4 = Extremely High<br>
@@ -294,6 +308,9 @@
                ; Controls how often the animation updates<br>
 			   ; 0 = Use default speed, 1 = Animation updates every frame, fixes low FPS animation for certain NPCs<br>
                a.URO.ForceAnimRate=1<br><br>
+               ; Changes object details, lights and particle effects<br>
+               ; 0 = low, 1 = medium, 2 = high<br>
+               r.DetailMode=2<br><br>
 			   ; Affects UI quality even at native res<br>
 			   ; 3 is best quality, some GPUs have it set to a lower value by default<br>
 			   ; Using value above 3 causes parts of UI to glitch<br>
@@ -329,7 +346,7 @@
       <div id="raytracing">
          <div class="codebox">
             <p>
-               ; Place the commands in Engine.ini under [SystemSettings]<br><br>
+               ; Place the commands in UserEngine.ini under [SystemSettings]<br><br>
                ; Lower values reduce ghosting from characters when near a wall/foliage for RT GI but increase flickering artifacts<br>
                ; Default - 0.05 (Low & Medium) | 0.03 (High)<br>
                r.Lumen.ScreenProbeGather.Temporal.DistanceThreshold=0.03<br><br>
@@ -355,7 +372,7 @@
       <div id="extra">
          <div class="codebox">
             <p>
-               All commands listed are placed in Engine.ini under [SystemSettings]<br><br>
+               All commands listed are placed in UserEngine.ini under [SystemSettings]<br><br>
                ; Set distance before NPC disappears (Default 6000)<br>
 			   ; Doesn't work for all NPCs, some have a set distance<br>
                r.Kuro.NpcDisappearDistance=20000<br><br>
@@ -386,11 +403,11 @@
             Link to download NVIDIA Profile Inspector: <a href="https://github.com/Orbmu2k/nvidiaProfileInspector/releases" target="_blank">https://github.com/Orbmu2k/nvidiaProfileInspector/releases</a>
          </p>
          <figure>
-            <img src="images/nvpi.png" class="zoom-img" alt="nvpi" style="width: 85%; margin: auto; display: block;">
+            <img src="images/nvpi.png" class="zoom-img" alt="nvpi">
             <figcaption style="text-align: center; margin-top: 10px;">How to apply using NVIDIA Profile Inspector</figcaption>
          </figure>
          <figure>
-            <img src="images/rebar.jpg" class="zoom-img" alt="rebar" style="width: 85%; margin: auto; display: block;">
+            <img src="images/rebar.jpg" class="zoom-img" alt="rebar">
             <figcaption style="text-align: center; margin-top: 10px;">ReBar FPS Comparison</figcaption>
          </figure>
       </div>

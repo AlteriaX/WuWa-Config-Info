@@ -8,6 +8,7 @@ body {
    background-attachment: fixed;
    font-size: 16px;
    overflow-y: scroll;
+   overflow-x: hidden;
    color: #fff;
 }
 
@@ -112,6 +113,9 @@ a {
 .zoom-img {
    cursor: zoom-in;
    transition: transform 0s ease;
+   width: 85%;
+   margin: auto;
+   display: block;
 }
 
 .zoom-img.zoomed {
@@ -270,4 +274,96 @@ li:nth-child(n+2) {
 .back-to-top:hover {
    background-color: #ccc;
    color: black;
+}
+
+@media (max-width: 600px) {
+   * {
+      box-sizing: border-box;
+   }
+
+   body {
+      font-size: 14px;
+      padding: 0;
+      margin: 0;
+   }
+
+   h1 {
+      font-size: 20px;
+      margin: 15px 5px;
+      text-align: center;
+   }
+
+   .top-bar {
+      width: 90%;
+      max-width: calc(100vw - 20px);
+      font-size: 14px;
+      margin: 15px auto;
+   }
+
+   .top-bar a {
+      padding: 8px 10px;
+      font-size: 12px;
+   }
+
+   .right-info {
+      display: none;
+   }
+
+   .something {
+      width: 90%;
+      max-width: calc(100vw - 20px);
+      font-size: 16px;
+      margin: 10px auto;
+      padding: 0 5px;
+   }
+
+   .content,
+   .color-settings-content {
+      width: 90%;
+      max-width: calc(100vw - 20px);
+      padding: 0 5px;
+      margin: 10px auto;
+   }
+
+   .content span {
+      font-size: 18px;
+   }
+
+   .slider,
+   .slider-label,
+   .output-box,
+   .apply-settings {
+      width: 90%;
+      max-width: calc(100vw - 40px);
+      margin-left: auto;
+      margin-right: auto;
+   }
+
+   .slider-label {
+      font-size: 16px;
+   }
+
+   #generate,
+   #reset {
+      font-size: 14px;
+      padding-top: 8px;
+      padding-bottom: 8px;
+      width: 120px;
+   }
+
+   .collapse-btn,
+   .expand-btn,
+   .back-to-top {
+      display: none;
+   }
+   
+   .zoom-img {
+      width: 100%;
+      cursor: auto;
+      pointer-events: none;
+   }
+
+   .zoom-img.zoomed {
+      transform: none;
+   }
 }
