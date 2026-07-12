@@ -164,7 +164,8 @@
 			   ; Character shadow<br>
                r.Shadow.PerObjectResolutionMax=1024<br>
                r.Shadow.PerObjectResolutionMin=1024<br><br>
-			   ; 0: Disable, 1: Enable<br>
+			   ; Enable/disable distance field shadowing<br>
+			   ; 0 = Off, 1 = On<br>
 			   r.DistanceFieldShadowing=1<br><br>
 			   ; 1: Low, 2: Medium, 3: High<br>
 			   r.DFShadowQuality=2<br>
@@ -212,7 +213,10 @@
                r.KuroVolumeCloudEnable=0<br><br>
                ; Enable / disable Screen Space Fog Scattering<br>
                ; 0 = Off, 1 = On (Default)<br>
-               r.SSFS=1<br>
+               r.SSFS=1<br><br>
+			   ; Set Screen Space Fog Scattering resolution<br>
+			   ; 1: Full res, 2: Half res, 4: Quarter res<br>
+			   r.SSFS.DownSampleFator=1<br>
             </p>
          </div>
 		 <!--
@@ -336,10 +340,7 @@
                wp.Runtime.SoraGridBlackListHeight=20000<br><br>
 			   ; Default - 2000, controls size of PSO least recently used cache<br>
 			   ; Using a low value (less than 1000) will cause objects / UI to not render properly and flicker<br>
-			   r.PSO.LRUCapacity=2560<br><br>
-			   ; Set Screen Space Fog Scattering resolution<br>
-			   ; 1: Full res, 2: Half res, 4: Quarter res<br>
-			   r.SSFS.DownSampleFator=1<br>
+			   r.PSO.LRUCapacity=2560<br>
             </p>
          </div>
       </div>
