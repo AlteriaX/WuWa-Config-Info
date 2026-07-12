@@ -27,7 +27,7 @@
          <a href="color-settings">Old Color Settings</a>
          <a href="https://ko-fi.com/alteria/" target="_blank">Donate</a>
       </div>
-      <div class="right-info">Last update: 12 June 2026</div>
+      <div class="right-info">Last update: 13 July 2026</div>
    </div>
 
    <p class="something"><a href="https://framedsc.com/GeneralGuides/ue4_commands.htm" target="_blank">UE4 Default Commands (Some not available in WuWa)</a> | <a href="https://pastebin.com/KUNNVZeC" target="_blank">WuWa Commands</a></p>
@@ -46,14 +46,8 @@
          </figure>
          <div class="codebox">
             <p>
-               ; Default - 1.0, higher value = prioritize loading higher resolution textures<br>
-               ; Lower value = less priority loading high resolution textures<br>
-               r.Streaming.MinBoost=1.5<br><br>
-               ; Sets texture pool size, size in MB<br>
-			   ; When set to 0, the pool size will be unlimited (uses a lot of VRAM)<br>
-               r.Streaming.PoolSize=1536<br><br>
-			   ; When set to -1, share pool with textures otherwise dedicated to meshes<br>
-			   r.Streaming.PoolSizeForMeshes=1024<br><br>
+			   ; Kuro extra streaming pool size in MB, added on top of r.Streaming.PoolSize<br>
+               r.Streaming.KuroExtraPoolSize=256<br><br>
 			   ; Enable or disable Kuro Streaming Priority<br>
 			   ; 0: Off, 1: Retention Only, 2: Load Only, 3: Both Retention and Load (Default)<br>
 			   ; Off can cause Smartprint Cube Reboot textures to load slowly but fixes Aemeath Res Lib Exostrider armor not loading<br>
@@ -61,38 +55,41 @@
                ; Adjust object details, lower value = better far object detail<br>
 			   ; Using values lower than 0.5 can cause ground texture to flicker<br>
                r.StaticMeshLODDistanceScale=0.7<br><br>
-               ; 0: Low (does not work, will cause textures to not load), 1: High, 2: Medium, 3: Epic<br>
-               r.MaterialQualityLevel=1<br>
-               r.KuroMaterialQualityLevel=1<br><br>
                ; Higher value = more objects rendered and better textures at a distance<br>
 			   ; Limit seems to be 1.0, didn't notice any change using a higher value<br>
 			   wp.Runtime.PlannedLoadingRangeScale=1.0<br>
             </p>
          </div>
-         <p>If textures are still blurry you can increase streaming boost and pool size but if it's too high you'll get FPS drops due to hitting the VRAM limit (Lahai Roi uses more VRAM compared to older areas)</p>
+         <p>If textures are still blurry you can increase <code>r.Streaming.KuroExtraPoolSize</code> but if it's too high you'll get FPS drops due to hitting the VRAM limit (Lahai Roi uses more VRAM compared to older areas)</p>
+		 <!---
          <figure>
             <img src="images/streaming_boost.jpg" class="zoom-img" alt="streaming_boost">
             <figcaption style="text-align: center; margin-top: 10px;">Streaming Boost Image Comparison</figcaption>
          </figure>
+		 --->
       </div>
       <p></p>
       <button onclick="toggleVisibility('view-distance')" class="view-distance-btn text-change" data-text="View Distance" data-state="expanded"><span>▼ View Distance</span></button>
       <div id="view-distance">
          <div class="codebox">
             <p>
-               ; Default value is 1 for both commands<br>
-			   r.ViewDistanceScale=2.0<br>
+               ; Default value is 1.0<br>
                foliage.LODDistanceScale=2.0<br><br>
                ; Set distance before grass is culled<br>
-               r.Kuro.Foliage.GrassCullDistanceMax=17500<br>
-			   r.Kuro.Foliage.Grass3_0CullDistanceMax=20000<br>
+			   r.Kuro.Foliage.NearCullDistanceMax=9750<br>
+			   r.Kuro.Foliage.MiddleCullDistanceMax=15750<br>
+			   r.Kuro.Foliage.FarCullDistanceMax=22500<br>
+			   r.Kuro.Foliage.GrassCullDistanceMax=22500<br>
+			   r.Kuro.Foliage.Grass3_0CullDistanceMax=30000<br>
             </p>
          </div>
          <p>Didn't notice much difference when using values above 5 for foliage LOD distance scale.</p>
+		 <!---
          <figure>
             <img src="images/view_distance.jpg" class="zoom-img" alt="view_distance">
             <figcaption style="text-align: center; margin-top: 10px;">View Distance Image Comparison</figcaption>
          </figure>
+		 --->
          <figure>
             <img src="images/foliage_distance.jpg" class="zoom-img" alt="foliage_distance">
             <figcaption style="text-align: center; margin-top: 10px;">Foliage LOD Distance Image Comparison</figcaption>
@@ -164,11 +161,13 @@
                ; Lower values increases the amount of shadow<br>
                r.Shadow.RadiusThreshold=0.01<br><br>
                ; Set shadow resolution, higher costs more FPS<br>
-			   ; Foliage / object shadow<br>
-			   r.Shadow.MaxCSMResolution=2048<br>
 			   ; Character shadow<br>
                r.Shadow.PerObjectResolutionMax=1024<br>
-               r.Shadow.PerObjectResolutionMin=1024<br>
+               r.Shadow.PerObjectResolutionMin=1024<br><br>
+			   ; 0: Disable, 1: Enable<br>
+			   r.DistanceFieldShadowing=1<br><br>
+			   ; 1: Low, 2: Medium, 3: High<br>
+			   r.DFShadowQuality=2<br>
             </p>
          </div>
          <p>Default values used for per object shadow resolution is low which is the reason why it doesn't look great, setting per object resolution to 512 or 1024 is enough to make character shadows look better than default.</p>
@@ -305,7 +304,7 @@
       <div id="others">
          <div class="codebox">
             <p>
-               ; Controls how often the animation updates<br>
+               ; Controls how often the animation updates, does not work in Lahai Roi and other newer areas<br>
 			   ; 0 = Use default speed, 1 = Animation updates every frame, fixes low FPS animation for certain NPCs<br>
                a.URO.ForceAnimRate=1<br><br>
                ; Changes object details, lights and particle effects<br>
@@ -337,7 +336,10 @@
                wp.Runtime.SoraGridBlackListHeight=20000<br><br>
 			   ; Default - 2000, controls size of PSO least recently used cache<br>
 			   ; Using a low value (less than 1000) will cause objects / UI to not render properly and flicker<br>
-			   r.PSO.LRUCapacity=2560<br>
+			   r.PSO.LRUCapacity=2560<br><br>
+			   ; Set Screen Space Fog Scattering resolution<br>
+			   ; 1: Full res, 2: Half res, 4: Quarter res<br>
+			   r.SSFS.DownSampleFator=1<br>
             </p>
          </div>
       </div>
@@ -346,7 +348,7 @@
       <div id="raytracing">
          <div class="codebox">
             <p>
-               ; Place the commands in UserEngine.ini under [SystemSettings]<br><br>
+               ; Place the commands in Engine.ini under [SystemSettings]<br><br>
                ; Lower values reduce ghosting from characters when near a wall/foliage for RT GI but increase flickering artifacts<br>
                ; Default - 0.05 (Low & Medium) | 0.03 (High)<br>
                r.Lumen.ScreenProbeGather.Temporal.DistanceThreshold=0.03<br><br>
@@ -372,7 +374,7 @@
       <div id="extra">
          <div class="codebox">
             <p>
-               All commands listed are placed in UserEngine.ini under [SystemSettings]<br><br>
+               All commands listed are placed in Engine.ini under [SystemSettings]<br><br>
                ; Set distance before NPC disappears (Default 6000)<br>
 			   ; Doesn't work for all NPCs, some have a set distance<br>
                r.Kuro.NpcDisappearDistance=20000<br><br>
@@ -380,7 +382,7 @@
 			   ; Turning this off fixes low FPS animation for certain things in Lahai-Roi but disables interactive objects in Honami (e.g., umbrella) and Lahai-Roi (e.g., ball)<br>
 			   Kuro.Blueprint.EnableGameBudget=false<br><br>
                ; Reflex Mode - 1 = low latency, 2 = low latency with boost<br>
-               ; Does not work for RTX 40/50 series due to Frame Generation but if you need Reflex only you can delete nvngx_dlssg.dll to disable FG when turned on (Don't open the game with launcher, it will probably verify files and redownload)<br>
+               ; Does not work for RTX 40/50 series due to Frame Generation but if you need Reflex only you can delete nvngx_dlssg.dll to disable FG when turned on (Don't open game with launcher, it will verify files and redownload)<br>
                t.Streamline.Reflex.HandleMaxTickRate=true<br>
                t.Streamline.Reflex.Enable=1<br>
                t.Streamline.Reflex.Mode=1<br>
