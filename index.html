@@ -27,7 +27,7 @@
          <a href="color-settings">Old Color Settings</a>
          <a href="https://ko-fi.com/alteria/" target="_blank">Donate</a>
       </div>
-      <div class="right-info">Last update: 16 July 2026</div>
+      <div class="right-info">Last update: 2 August 2026</div>
    </div>
 
    <p class="something"><a href="https://framedsc.com/GeneralGuides/ue4_commands.htm" target="_blank">UE4 Default Commands (Some not available in WuWa)</a> | <a href="https://pastebin.com/KUNNVZeC" target="_blank">WuWa Commands</a></p>
@@ -46,7 +46,7 @@
          </figure>
          <div class="codebox">
             <p>
-			   ; Kuro extra streaming pool size in MB, added on top of r.Streaming.PoolSize<br>
+			   ; Kuro extra streaming pool size in MB, added on top of r.Streaming.PoolSize (0 = disabled)<br>
                r.Streaming.KuroExtraPoolSize=256<br><br>
 			   ; Enable or disable Kuro Streaming Priority<br>
 			   ; 0: Off, 1: Retention Only, 2: Load Only, 3: Both Retention and Load (Default)<br>
@@ -56,11 +56,11 @@
 			   ; Using values lower than 0.5 can cause ground texture to flicker<br>
                r.StaticMeshLODDistanceScale=0.7<br><br>
                ; Higher value = more objects rendered and better textures at a distance<br>
-			   ; Limit seems to be 1.0, didn't notice any change using a higher value<br>
+			   ; Limit seems to be 1.0, didn't notice any changes using a higher value<br>
 			   wp.Runtime.PlannedLoadingRangeScale=1.0<br>
             </p>
          </div>
-         <p>If textures are still blurry you can increase <code>r.Streaming.KuroExtraPoolSize</code> but if it's too high you'll get FPS drops due to hitting the VRAM limit (Lahai Roi uses more VRAM compared to older areas)</p>
+         <p>If textures are still blurry you can increase <code>r.Streaming.KuroExtraPoolSize</code> but if it's too high you'll get FPS drops due to hitting the VRAM limit (Lahai Roi / Menghzou uses more VRAM compared to older areas)</p>
 		 <!---
          <figure>
             <img src="images/streaming_boost.jpg" class="zoom-img" alt="streaming_boost">
@@ -74,7 +74,8 @@
          <div class="codebox">
             <p>
                ; Default value is 1.0<br>
-               foliage.LODDistanceScale=2.0<br><br>
+               foliage.LODDistanceScale=2.0<br>
+			   r.LightMaxDrawDistanceScale=2.0<br><br>
                ; Set distance before grass is culled<br>
 			   r.Kuro.Foliage.NearCullDistanceMax=9750<br>
 			   r.Kuro.Foliage.MiddleCullDistanceMax=15750<br>
@@ -93,6 +94,10 @@
          <figure>
             <img src="images/foliage_distance.jpg" class="zoom-img" alt="foliage_distance">
             <figcaption style="text-align: center; margin-top: 10px;">Foliage LOD Distance Image Comparison</figcaption>
+         </figure>
+         <figure>
+            <img src="images/light_distance.jpg" class="zoom-img" alt="light_distance">
+            <figcaption style="text-align: center; margin-top: 10px;">Light Draw Distance Image Comparison</figcaption>
          </figure>
       </div>
       <p></p>
@@ -308,9 +313,11 @@
       <div id="others">
          <div class="codebox">
             <p>
-               ; Controls how often the animation updates, does not work in Lahai Roi and other newer areas<br>
-			   ; 0 = Use default speed, 1 = Animation updates every frame, fixes low FPS animation for certain NPCs<br>
-               a.URO.ForceAnimRate=1<br><br>
+			   ; Animation rate optimization - 0 = Off, 1 = On (Default)<br>
+			   ; Disabling fixes low FPS animation for certain things in Jinzhou and Rinascita?, does not work in newer areas<br>
+               a.URO.Enable=0<br><br>
+			   ; Screen ratio based URO optimization (added in version 3.5) - 0 = Off, 1 = On (Default)<br>
+			   a.URO.EnableScreenRatio=0<br><br>
                ; Changes object details, lights and particle effects<br>
                ; 0 = low, 1 = medium, 2 = high<br>
                r.DetailMode=2<br><br>
@@ -340,7 +347,9 @@
                wp.Runtime.SoraGridBlackListHeight=20000<br><br>
 			   ; Default - 2000, controls size of PSO least recently used cache<br>
 			   ; Using a low value (less than 1000) will cause objects / UI to not render properly and flicker<br>
-			   r.PSO.LRUCapacity=2560<br>
+			   r.PSO.LRUCapacity=2304<br><br>
+			   ; HLOD cell mapping optimization - 0 = Off (Default), 1 = On<br>
+			   wp.Runtime.EnableHLODCellMappingOptimization=1<br>
             </p>
          </div>
       </div>
@@ -386,7 +395,15 @@
                ; Does not work for RTX 40/50 series due to Frame Generation but if you need Reflex only you can delete nvngx_dlssg.dll to disable FG when turned on (Don't open game with launcher, it will verify files and redownload)<br>
                t.Streamline.Reflex.HandleMaxTickRate=true<br>
                t.Streamline.Reflex.Enable=1<br>
-               t.Streamline.Reflex.Mode=1<br>
+               t.Streamline.Reflex.Mode=1<br><br>
+			   r.Streamline.DLSSG.RetainResourcesWhenOff (used to fix FG menu stutter) already enabled by default in version 3.5<br>
+            </p>
+         </div>
+		 <p>To reduce log file size add the text below to Engine.ini but this prevents gacha history URL from being logged which is used for sites like WuWa Tracker.<br>You can remove it temporarily to import your pulls then add it back.</p>
+         <div class="codebox">
+            <p>
+			   [Core.Log]<br>
+			   global=none<br>
             </p>
          </div>
       </div>
