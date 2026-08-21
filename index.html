@@ -27,7 +27,7 @@
          <a href="color-settings">Old Color Settings</a>
          <a href="https://ko-fi.com/alteria/" target="_blank">Donate</a>
       </div>
-      <div class="right-info">Last update: 2 August 2026</div>
+      <div class="right-info">Last update: 22 August 2026</div>
    </div>
 
    <p class="something"><a href="https://framedsc.com/GeneralGuides/ue4_commands.htm" target="_blank">UE4 Default Commands (Some not available in WuWa)</a> | <a href="https://pastebin.com/KUNNVZeC" target="_blank">WuWa Commands</a></p>
@@ -46,8 +46,6 @@
          </figure>
          <div class="codebox">
             <p>
-			   ; Kuro extra streaming pool size in MB, added on top of r.Streaming.PoolSize (0 = disabled)<br>
-               r.Streaming.KuroExtraPoolSize=256<br><br>
 			   ; Enable or disable Kuro Streaming Priority<br>
 			   ; 0: Off, 1: Retention Only, 2: Load Only, 3: Both Retention and Load (Default)<br>
 			   ; Off can cause Smartprint Cube Reboot textures to load slowly but fixes Aemeath Res Lib Exostrider armor not loading<br>
@@ -60,7 +58,7 @@
 			   wp.Runtime.PlannedLoadingRangeScale=1.0<br>
             </p>
          </div>
-         <p>If textures are still blurry you can increase <code>r.Streaming.KuroExtraPoolSize</code> but if it's too high you'll get FPS drops due to hitting the VRAM limit (Lahai Roi / Menghzou uses more VRAM compared to older areas)</p>
+         <p><s>If textures are still blurry try using High/Ultra High LOD Bias (Lahai Roi / Menghzou uses more VRAM compared to older areas - can cause FPS drops due to hitting the VRAM limit)</s> VRAM usage reduced in version 3.6.</p>
 		 <!---
          <figure>
             <img src="images/streaming_boost.jpg" class="zoom-img" alt="streaming_boost">
@@ -74,8 +72,7 @@
          <div class="codebox">
             <p>
                ; Default value is 1.0<br>
-               foliage.LODDistanceScale=2.0<br>
-			   r.LightMaxDrawDistanceScale=2.0<br><br>
+               foliage.LODDistanceScale=2.0<br><br>
                ; Set distance before grass is culled<br>
 			   r.Kuro.Foliage.NearCullDistanceMax=9750<br>
 			   r.Kuro.Foliage.MiddleCullDistanceMax=15750<br>
@@ -95,10 +92,12 @@
             <img src="images/foliage_distance.jpg" class="zoom-img" alt="foliage_distance">
             <figcaption style="text-align: center; margin-top: 10px;">Foliage LOD Distance Image Comparison</figcaption>
          </figure>
+		 <!---
          <figure>
             <img src="images/light_distance.jpg" class="zoom-img" alt="light_distance">
             <figcaption style="text-align: center; margin-top: 10px;">Light Draw Distance Image Comparison</figcaption>
          </figure>
+		 --->
       </div>
       <p></p>
       <!--
@@ -169,14 +168,15 @@
 			   ; Character shadow<br>
                r.Shadow.PerObjectResolutionMax=1024<br>
                r.Shadow.PerObjectResolutionMin=1024<br><br>
-			   ; Enable/disable shadow cache<br>
+			   ; Enable/disable shadow cache (not included in config)<br>
 			   ; Disabling this fixes the low FPS shadows in Lahai Roi and newer areas, but expect 10-20 FPS drop or more<br>
 			   r.Shadow.CacheDirectLightShadow=0<br><br>
 			   ; Enable/disable distance field shadowing<br>
+			   ; Default enabled for High Quality/Ultra Quality preset<br>
 			   ; 0 = Off, 1 = On<br>
 			   r.DistanceFieldShadowing=1<br><br>
 			   ; 1: Low, 2: Medium, 3: High<br>
-			   r.DFShadowQuality=2<br>
+			   r.DFShadowQuality=3<br>
             </p>
          </div>
          <p>Default values used for per object shadow resolution is low which is the reason why it doesn't look great, setting per object resolution to 512 or 1024 is enough to make character shadows look better than default.</p>
@@ -243,15 +243,10 @@
             <p>
                ; Not included in config<br>
                ; 0 = Hardware occlusion (Default), 1 = HZB Occlusion<br>
-               r.HZBOcclusion=1<br><br>
-               ; Enable / disable Parallel Frustum Cull<br>
-               ; 0 = Off (Default), 1 = On<br>
-			   r.ParallelFrustumCull=1<br><br>
-			   ; Higher value = more objects culled<br>
-			   r.ScreenSizeCullRatioFactor=3<br>
+               r.HZBOcclusion=1<br>
             </p>
          </div>
-         <p>Game's default hardware occlusion culling is pretty bad especially in Vault Underground / Minos Sewers. Using HZB Occlusion reduces white spots when turning camera but drops FPS (for example 10 FPS lower in Ragunna), only a few areas maintain similar FPS.</p>
+         <p>Game's default hardware occlusion culling is bad especially in Vault Underground / Minos Sewers and certain newer areas. Using HZB Occlusion reduces white spots when turning camera but lowers FPS in some areas.</p>
          <figure>
             <img src="images/hzb.jpg" class="zoom-img" alt="hzb">
             <figcaption style="text-align: center; margin-top: 10px;">HZB Occlusion Image Comparison</figcaption>
@@ -325,10 +320,6 @@
 			   ; 3 is best quality, some GPUs have it set to a lower value by default<br>
 			   ; Using value above 3 causes parts of UI to glitch<br>
 			   r.Upscale.Quality=3<br><br>
-			   ; Enable / disable material or mesh Variable Rate Shading<br>
-			   ; Default true<br>
-			   r.VRS.EnableMaterial=false<br>
-			   r.VRS.EnableMesh=false<br><br>
                ; Adjust light shaft resolution<br>
                ; Value from 1 to 8 (default 2), higher value = lower resolution<br>
                r.LightShaftDownSampleFactor=1<br>
@@ -347,9 +338,7 @@
                wp.Runtime.SoraGridBlackListHeight=20000<br><br>
 			   ; Default - 2000, controls size of PSO least recently used cache<br>
 			   ; Using a low value (less than 1000) will cause objects / UI to not render properly and flicker<br>
-			   r.PSO.LRUCapacity=2304<br><br>
-			   ; HLOD cell mapping optimization - 0 = Off (Default), 1 = On<br>
-			   wp.Runtime.EnableHLODCellMappingOptimization=1<br>
+			   r.PSO.LRUCapacity=2304<br>
             </p>
          </div>
       </div>
@@ -389,14 +378,15 @@
 			   ; Doesn't work for all NPCs, some have a set distance<br>
                r.Kuro.NpcDisappearDistance=20000<br><br>
 			   ; When enabled, blueprint tick is managed by time budget (Default true)<br>
-			   ; Turning this off fixes low FPS animation for certain things in Lahai-Roi but disables interactive objects in Honami (e.g., umbrella) and Lahai-Roi (e.g., ball)<br>
+			   ; Turning this off fixes low FPS animation for certain things in Septimont/Lahai-Roi<br>
+			   ; Downside is that this disables interactive objects in certain quests, Honami (e.g., umbrella) and Lahai-Roi (e.g., ball)<br>
 			   Kuro.Blueprint.EnableGameBudget=false<br><br>
                ; Reflex Mode - 1 = low latency, 2 = low latency with boost<br>
                ; Does not work for RTX 40/50 series due to Frame Generation but if you need Reflex only you can delete nvngx_dlssg.dll to disable FG when turned on (Don't open game with launcher, it will verify files and redownload)<br>
                t.Streamline.Reflex.HandleMaxTickRate=true<br>
                t.Streamline.Reflex.Enable=1<br>
                t.Streamline.Reflex.Mode=1<br><br>
-			   r.Streamline.DLSSG.RetainResourcesWhenOff (used to fix FG menu stutter) already enabled by default in version 3.5<br>
+			   r.Streamline.DLSSG.RetainResourcesWhenOff (used to fix FG menu stutter) already enabled by default since version 3.5<br>
             </p>
          </div>
 		 <p>To reduce log file size add the text below to Engine.ini but this prevents gacha history URL from being logged which is used for sites like WuWa Tracker.<br>You can remove it temporarily to import your pulls then add it back.</p>

@@ -45,12 +45,17 @@ function updateSlider(slider) {
 }
 
 function calcValue(type, i) {
-   if (type === "b") {
-      const result = -1 + 2 * (i / 100);
-      return parseFloat(result.toFixed(14));
-   };
-   if (type === "s") return i <= 50 ? 50 * Math.pow(i / 50, 0.29595113329349826) : 50 + 50 * Math.pow((i - 50) / 50, 1.7040488667065017);
-   if (type === "c") return i <= 50 ? 50 * Math.pow(i / 50, 0.3705536649270038) : 50 + 50 * Math.pow((i - 50) / 50, 1.6294463350729962);
+   if (type === "b") return Math.round(-1 + 2 * (i / 100));
+
+   if (type === "s") {
+      const result = i <= 50 ? 50 * Math.pow(i / 50, 0.29595113329349826) : 50 + 50 * Math.pow((i - 50) / 50, 1.7040488667065017);
+      return Math.round(result);
+   }
+   
+   if (type === "c") {
+      const result = i <= 50 ? 50 * Math.pow(i / 50, 0.3705536649270038) : 50 + 50 * Math.pow((i - 50) / 50, 1.6294463350729962);
+      return Math.round(result);
+   }
 }
 
 $(document).ready(function() {
@@ -59,10 +64,14 @@ $(document).ready(function() {
       ['brightness', 'saturation', 'contrast'].forEach(id => {
          const sliderID = document.getElementById(id);
          const sliderValue = document.getElementById(id + 'Value');
-         sliderID.addEventListener('input', () => sliderValue.textContent = sliderID.value);
-         sliderID.oninput = function() {
+         sliderID.addEventListener('input', () => {
+            if (id === 'brightness') {
+				const val = parseInt(sliderID.value);
+				sliderID.value = val < 25 ? 0 : val < 75 ? 50 : 100;
+            }
+            sliderValue.textContent = sliderID.value;
             updateSlider(sliderID);
-         };
+		});
       });
 
       // Generate button
