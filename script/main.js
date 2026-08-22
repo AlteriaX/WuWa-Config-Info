@@ -58,7 +58,66 @@ function calcValue(type, i) {
    }
 }
 
+function decrypt(data) {
+   const out = new Uint8Array(data.length);
+   for (let i = 0; i < data.length; i++)
+      out[i] = (data[i] & 0x0f) % 2 === 1 ? data[i] ^ 0xa5 : data[i] ^ 0xef;
+   return out;
+}
+
 $(document).ready(function() {
+   // Decrypt page (decrypt/index.html)
+   if (document.getElementById("out") && document.getElementById("file")) {
+      let buf = null;
+
+      const statusElement = document.getElementById("status");
+      const documentOut = document.getElementById("out");
+      const fileIcon = document.getElementById("file-icon");
+      const dlBtn = document.getElementById("dl");
+      const resetBtn = document.getElementById("reset");
+      const file = document.getElementById("file");
+
+      function handleFile(f) {
+         if (!f) return;
+         f.arrayBuffer().then((ab) => {
+            buf = decrypt(new Uint8Array(ab));
+            documentOut.value = new TextDecoder().decode(buf);
+            documentOut.style.cursor = "text";
+            fileIcon.style.display = "none";
+            dlBtn.disabled = false;
+            resetBtn.disabled = false;
+            statusElement.textContent = "";
+         });
+      }
+
+      function resetDecrypt() {
+         buf = null;
+         documentOut.value = "";
+         documentOut.style.cursor = "pointer";
+         fileIcon.style.display = "flex";
+         dlBtn.disabled = true;
+         resetBtn.disabled = true;
+         file.value = "";
+         statusElement.textContent = "";
+      }
+
+      function download() {
+         const a = document.createElement("a");
+         a.href = URL.createObjectURL(new Blob([buf], { type: "application/octet-stream" }));
+         a.download = "Client_unencrypted.log";
+         a.click();
+         URL.revokeObjectURL(a.href);
+      }
+
+      $(file).on("change", (e) => handleFile(e.target.files[0]));
+      $(documentOut).on("dragover", (e) => { e.preventDefault(); documentOut.classList.add("drop-over"); });
+      $(documentOut).on("dragleave", () => documentOut.classList.remove("drop-over"));
+      $(documentOut).on("drop", (e) => { e.preventDefault(); documentOut.classList.remove("drop-over"); handleFile(e.originalEvent.dataTransfer.files[0]); });
+      $(documentOut).on("click", () => { if (!documentOut.value) file.click(); });
+      $(dlBtn).on("click", download);
+      $(resetBtn).on("click", resetDecrypt);
+   }
+
    if (colorPage) {
       // Slider value and color update
       ['brightness', 'saturation', 'contrast'].forEach(id => {

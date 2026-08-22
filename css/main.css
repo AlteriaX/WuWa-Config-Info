@@ -191,30 +191,52 @@ li:nth-child(n+2) {
    text-align: right;
 }
 
-#generate,
-#reset {
-   font-family: Segoe UI, sans-serif;
-   color: #000;
-   padding-top: 10px;
-   padding-bottom: 10px;
-   margin: 10px;
-   background-color: #E0E0E0;
+.action-btn,
+.content .action-btn {
+   color: #fff;
+   display: inline-flex;
+   vertical-align: middle;
+   align-items: center;
+   justify-content: center;
+   gap: 6px;
+   padding: 10px 15px;
+   background-color: #333;
+   border: thin solid #fff;
+   border-radius: 5px;
    cursor: pointer;
-   font-size: 18px;
-   font-weight: bold;
-   width: 140px;
+   font: bold 16px Segoe UI, sans-serif;
    user-select: none;
+   white-space: nowrap;
 }
 
-#generate:hover,
-#reset:hover {
-   box-shadow: 0 0 16px 0 rgba(200, 200, 200, 0.5)
+.color-settings-content .action-btn {
+   width: 140px;
+   min-height: 43px;
+   margin: 10px;
+   font-size: 18px;
+}
+
+.action-btn svg {
+   display: block;
+   flex: 0 0 20px;
+   width: 20px;
+   height: 20px;
+}
+
+.action-btn:not(:disabled):hover {
+   background-color: #ccc;
+   color: black;
+}
+
+.action-btn:disabled {
+   cursor: not-allowed;
+   opacity: 0.45;
 }
 
 .output-box {
    width: 75%;
    word-wrap: break-word;
-   background-color: #2B2A33;
+   background-color: #333;
    border-radius: 8px;
    border-color: white;
    border-width: 1px;
@@ -347,12 +369,8 @@ li:nth-child(n+2) {
       font-size: 15px;
    }
 
-   #generate,
-   #reset {
-      font-size: 14px;
-      padding-top: 8px;
-      padding-bottom: 8px;
-      width: 120px;
+   .action-btn {
+      padding: 8px 12px;
    }
 
    .collapse-btn,

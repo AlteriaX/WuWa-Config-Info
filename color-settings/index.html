@@ -29,15 +29,16 @@
          <a href="https://github.com/AlteriaX/WuWa-Configs" target="_blank">GitHub</a>
          <a href="https://discord.gg/gczjQvgzWE" target="_blank">Discord Server</a>
          <a href="../">Config Info</a>
+         <a href="../decrypt">Decrypt Log</a>
          <a href="https://ko-fi.com/alteria/" target="_blank">Donate</a>
       </div>
    </div>
 
    <div class="color-settings-content">
       <center>
-         <h3>Since version 3.6, game overrides decimal values back to default.<br>
+         <h3>Since version 3.6, game overrides decimal numbers back to default.<br>
             No more fine adjustment for brightness (only 0, 50, 100 possible).<br>
-            Saturation and contrast are still fine, as the rounded values are still close.
+            Saturation and contrast less accurate now but still usable when rounding the decimal numbers.<br>
          </h3><br>
          <div class="slider-label">
             <p>Brightness</p>
@@ -57,8 +58,8 @@
          </div>
          <input type="range" class="slider" id="contrast" min="0" max="100" value="50">
          <br><br><br>
-         <button id="reset">Reset</button>
-         <button id="generate">Generate</button>
+         <button id="reset" class="action-btn"><svg aria-hidden="true" viewBox="0 -960 960 960" fill="currentColor"><path d="M480-160q-134 0-227-93t-93-227q0-134 93-227t227-93q69 0 132 28.5T720-688v-112h80v248H552v-80h112q-35-39-82.5-63.5T480-720q-100 0-170 70t-70 170q0 100 70 170t170 70q100 0 170-70t70-170h80q0 134-93 227t-227 93Z"/></svg>Reset</button>
+         <button id="generate" class="action-btn">Generate</button>
          <h2>Values:</h2>
          <div class="output-box">
             <p id="value-output">Brightness: 0 &nbsp;&nbsp;| &nbsp;&nbsp;Saturation: 50 &nbsp;&nbsp;| &nbsp;&nbsp;Contrast: 50</p>

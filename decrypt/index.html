@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta property="og:title" content="WuWa Decrypt Log" />
+	<meta property="og:description" content="Decrypt WuWa log file locally" />
+	<meta property="og:image" content="https://i.imgur.com/FTGBtNI.png" />
+	<meta property="og:url" content="https://alteriax.github.io/WuWa-Config-Info/decrypt/" />
+	<title>WuWa Decrypt Log</title>
+	<link rel="icon" type="image/x-icon" href="../images/danjin_happy.ico">
+	<link rel="stylesheet" href="../css/main.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+	<script src="../script/main.js"></script>
+</head>
+
+<body>
+	<center><h1>WuWa Decrypt Log</h1></center>
+	<div class="top-bar">
+		<div class="left-links">
+			<a href="https://github.com/AlteriaX/WuWa-Configs" target="_blank">GitHub</a>
+			<a href="https://discord.gg/gczjQvgzWE" target="_blank">Discord Server</a>
+			<a href="../">Config Info</a>
+			<a href="../color-settings">Old Color Settings</a>
+			<a href="https://ko-fi.com/alteria/" target="_blank">Donate</a>
+		</div>
+	</div>
+	<div class="content">
+		<h3 style="text-align:center">Your file is decrypted locally, nothing is uploaded or stored.</h3>
+		<style>#out.drop-over{border:2px dashed #ffd700!important}</style>
+		<div style="display:flex;flex-direction:column">
+			<div style="position:relative">
+				<textarea id="out" readonly spellcheck="false" class="codebox"
+					style="width:100%;height:60vh;padding:14px;color:#fff;white-space:pre-wrap;word-wrap:break-word;overflow:auto;border:none;outline:none;cursor:pointer;box-sizing:border-box;resize:none"></textarea>
+				<div id="file-icon" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px">
+					<svg xmlns="http://www.w3.org/2000/svg" width="72" height="72" viewBox="0 0 24 24" fill="#fff">
+						<path d="M14,2H6C4.9,2 4,2.9 4,4V20C4,21.1 4.9,22 6,22H18C19.1,22 20,21.1 20,20V8L14,2M18,20H6V4H13V9H18V20Z"/>
+					</svg>
+					<span style="color:#fff;font-weight:bold;font-size:18px">Drop Client.log here OR click to browse for file</span>
+				</div>
+			</div>
+			<div style="display:flex;justify-content:center;gap:10px;margin-top:10px">
+				<button id="dl" class="action-btn" disabled><svg aria-hidden="true" viewBox="0 -960 960 960" fill="currentColor"><path d="M480-320 280-520l56-58 104 104v-326h80v326l104-104 56 58-200 200ZM240-160q-33 0-56.5-23.5T160-240v-120h80v120h480v-120h80v120q0 33-23.5 56.5T720-160H240Z"/></svg>Download Decrypted File</button>
+				<button id="reset" class="action-btn" disabled><svg aria-hidden="true" viewBox="0 -960 960 960" fill="currentColor"><path d="M480-160q-134 0-227-93t-93-227q0-134 93-227t227-93q69 0 132 28.5T720-688v-112h80v248H552v-80h112q-35-39-82.5-63.5T480-720q-100 0-170 70t-70 170q0 100 70 170t170 70q100 0 170-70t70-170h80q0 134-93 227t-227 93Z"/></svg>Reset</button>
+			</div>
+		</div>
+		<p id="status"></p>
+		<input type="file" id="file" accept=".log,.txt,*" style="display:none">
+	</div>
+</body>
+
+</html>
