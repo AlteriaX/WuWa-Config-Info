@@ -3,6 +3,7 @@
 
 <head>
 	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta property="og:title" content="WuWa Decrypt Log" />
 	<meta property="og:description" content="Decrypt WuWa log file locally" />
 	<meta property="og:image" content="https://i.imgur.com/FTGBtNI.png" />
@@ -10,6 +11,7 @@
 	<title>WuWa Decrypt Log</title>
 	<link rel="icon" type="image/x-icon" href="../images/danjin_happy.ico">
 	<link rel="stylesheet" href="../css/main.css">
+	<link rel="stylesheet" href="../css/mobile.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 	<script src="../script/main.js"></script>
 </head>
@@ -39,7 +41,7 @@
 					<span style="color:#fff;font-weight:bold;font-size:18px">Drop Client.log here OR click to browse for file</span>
 				</div>
 			</div>
-			<div style="display:flex;justify-content:center;gap:10px;margin-top:10px">
+			<div style="display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-top:10px">
 				<button id="dl" class="action-btn" disabled><svg aria-hidden="true" viewBox="0 -960 960 960" fill="currentColor"><path d="M480-320 280-520l56-58 104 104v-326h80v326l104-104 56 58-200 200ZM240-160q-33 0-56.5-23.5T160-240v-120h80v120h480v-120h80v120q0 33-23.5 56.5T720-160H240Z"/></svg>Download Decrypted File</button>
 				<button id="reset" class="action-btn" disabled><svg aria-hidden="true" viewBox="0 -960 960 960" fill="currentColor"><path d="M480-160q-134 0-227-93t-93-227q0-134 93-227t227-93q69 0 132 28.5T720-688v-112h80v248H552v-80h112q-35-39-82.5-63.5T480-720q-100 0-170 70t-70 170q0 100 70 170t170 70q100 0 170-70t70-170h80q0 134-93 227t-227 93Z"/></svg>Reset</button>
 			</div>

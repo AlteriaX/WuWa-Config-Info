@@ -66,6 +66,25 @@ function decrypt(data) {
 }
 
 $(document).ready(function() {
+   const menuButton = document.createElement('button');
+   menuButton.className = 'mobile-menu-btn';
+   menuButton.type = 'button';
+   menuButton.setAttribute('aria-label', 'Toggle navigation');
+   menuButton.setAttribute('aria-expanded', 'false');
+   menuButton.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg>';
+   const closeMenu = () => {
+      document.body.classList.remove('menu-open');
+      menuButton.setAttribute('aria-expanded', 'false');
+   };
+   menuButton.addEventListener('click', () => {
+      const open = document.body.classList.toggle('menu-open');
+      menuButton.setAttribute('aria-expanded', open);
+   });
+   document.addEventListener('click', (event) => {
+      if (innerWidth <= 768 && !event.target.closest('.top-bar, .mobile-menu-btn')) closeMenu();
+   });
+   document.body.append(menuButton);
+
    // Decrypt page (decrypt/index.html)
    if (document.getElementById("out") && document.getElementById("file")) {
       let buf = null;
