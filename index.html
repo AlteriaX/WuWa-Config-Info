@@ -29,7 +29,7 @@
          <a href="decrypt">Decrypt Log</a>
          <a href="https://ko-fi.com/alteria/" target="_blank">Donate</a>
       </div>
-      <div class="right-info">Last update: 22 August 2026</div>
+      <div class="right-info">Last update: 24 August 2026</div>
    </div>
 
    <p class="something"><a href="https://framedsc.com/GeneralGuides/ue4_commands.htm" target="_blank">UE4 Default Commands (Some not available in WuWa)</a> | <a href="https://pastebin.com/KUNNVZeC" target="_blank">WuWa Commands</a></p>
@@ -55,6 +55,9 @@
                ; Adjust object details, lower value = better far object detail<br>
 			   ; Using values lower than 0.5 can cause ground texture to flicker<br>
                r.StaticMeshLODDistanceScale=0.7<br><br>
+			   ; Set mesh blend quality<br>
+			   ; 1 = Low, 2 = Medium, 3 = High, 4 = Epic<br>
+			   r.MeshBlend.Quality=3<br><br>
                ; Higher value = more objects rendered and better textures at a distance<br>
 			   ; Limit seems to be 1.0, didn't notice any changes using a higher value<br>
 			   wp.Runtime.PlannedLoadingRangeScale=1.0<br>
@@ -171,7 +174,7 @@
                r.Shadow.PerObjectResolutionMax=1024<br>
                r.Shadow.PerObjectResolutionMin=1024<br><br>
 			   ; Enable/disable shadow cache (not included in config)<br>
-			   ; Disabling this fixes the low FPS shadows in Lahai Roi and newer areas, but expect 10-20 FPS drop or more<br>
+			   ; Disabling this fixes the low FPS shadows in Lahai Roi and newer areas, but expect 10-20 FPS drop or more and also make certain shadows update too fast<br>
 			   r.Shadow.CacheDirectLightShadow=0<br><br>
 			   ; Enable/disable distance field shadowing<br>
 			   ; Default enabled for High Quality/Ultra Quality preset<br>
@@ -338,6 +341,15 @@
 			   foliage.DensityScaleLOD.DrawCallOptimize=1<br><br>
                ; Set height before light turns off / object despawn in flight mode<br>
                wp.Runtime.SoraGridBlackListHeight=20000<br><br>
+			   ; Enable/disable Variable Rate Shading<br>
+			   ; 0 = Off, 1 = On (Default)<br>
+			   r.VRS.Enable=0<br><br>
+			   ; Controls how stack traces are collected in Mono<br>
+			   ; 0 = JIT mode, 1 = AOT mode<br>
+			   Kuro.Mono.StackTraceAOTMode=1<br><br>
+			   ; Default is LRU up till version 3.5<br>
+			   ; 0 = Default, 1 = LRU<br>
+			   r.PSO.CacheEvictScheme=1<br><br>
 			   ; Default - 2000, controls size of PSO least recently used cache<br>
 			   ; Using a low value (less than 1000) will cause objects / UI to not render properly and flicker<br>
 			   r.PSO.LRUCapacity=2304<br>
