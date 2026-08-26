@@ -149,8 +149,16 @@
       padding: 8px 12px;
    }
 
-   .color-settings-content .action-btn {
-      margin: 5px;
+   .choose-mode {
+      width: 45%;
+      flex-wrap: wrap;
+   }
+
+   .choose-mode .action-btn {
+      padding: 8px 12px;
+      margin: 0;
+      white-space: nowrap;
+      font-size: 14px;
    }
 
    #file-icon {

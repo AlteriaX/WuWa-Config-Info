@@ -38,10 +38,13 @@
 
    <div class="color-settings-content">
       <center>
-         <h3>Since version 3.6, game overrides decimal numbers back to default.<br>
-            No more fine adjustment for brightness (only 0, 50, 100 possible).<br>
-            Saturation and contrast less accurate now but still usable when rounding the decimal numbers.<br>
+         <h3>When using C#, game overrides decimal numbers back to default so no more fine adjustment for brightness (only 0, 50, 100 possible), saturation and contrast adjustment less accurate too.<br>
          </h3><br>
+         <div class="choose-mode">
+            <button id="no-csharp" class="action-btn">I'm not using C#</button>
+            <button id="using-csharp" class="action-btn">I'm using C#</button>
+         </div>
+         <div id="settings-controls" class="hide">
          <div class="slider-label">
             <p>Brightness</p>
             <p id="brightnessValue">50</p>
@@ -71,6 +74,7 @@
             <p id="sql-output">INSERT OR REPLACE INTO LocalStorage (key, value) VALUES ('Brightness', '0'), ('SaturationNew', '50'), ('ContrastNew', '50');</p>
          </div>
          <br><br>
+         </div>
          <hr class="solid"><br>
          <h2>How to apply color settings:</h2>
          <div class="apply-settings">

@@ -110,6 +110,33 @@ a {
    display: none;
 }
 
+#settings-controls.hide {
+   display: none;
+}
+
+.choose-mode {
+   display: flex;
+   justify-content: center;
+   gap: 10px;
+   margin-bottom: 20px;
+   width: 37.5%;
+   margin-left: auto;
+   margin-right: auto;
+}
+
+.choose-mode .action-btn {
+   flex: 1 1 0;
+   padding: 12px 24px;
+   margin: 0;
+   white-space: nowrap;
+   line-height: 1.2;
+}
+
+.choose-mode .action-btn.active {
+   background-color: #CDC57C;
+   color: #000;
+}
+
 .zoom-img {
    cursor: zoom-in;
    transition: transform 0s ease;

@@ -44,17 +44,20 @@ function updateSlider(slider) {
    slider.style.background = `linear-gradient(to right, #CDC57C 0%, #CDC57C ${value}%, #2B2A33 ${value}%, #2B2A33 100%)`;
 }
 
-function calcValue(type, i) {
-   if (type === "b") return Math.round(-1 + 2 * (i / 100));
+function calcValue(type, i, round = true) {
+   if (type === "b") {
+      const result = -1 + 2 * (i / 100);
+      return round ? Math.round(result) : parseFloat(result.toFixed(14));
+   }
 
    if (type === "s") {
       const result = i <= 50 ? 50 * Math.pow(i / 50, 0.29595113329349826) : 50 + 50 * Math.pow((i - 50) / 50, 1.7040488667065017);
-      return Math.round(result);
+      return round ? Math.round(result) : result;
    }
    
    if (type === "c") {
       const result = i <= 50 ? 50 * Math.pow(i / 50, 0.3705536649270038) : 50 + 50 * Math.pow((i - 50) / 50, 1.6294463350729962);
-      return Math.round(result);
+      return round ? Math.round(result) : result;
    }
 }
 
@@ -138,37 +141,60 @@ $(document).ready(function() {
    }
 
    if (colorPage) {
+      let csharpLimits = false;
+
+      const revealSettings = () => $('#settings-controls').removeClass('hide');
+
+      const resetSliders = () => {
+         ['brightness', 'saturation', 'contrast'].forEach(id => {
+            document.getElementById(id).value = 50;
+            document.getElementById(id + 'Value').textContent = 50;
+            updateSlider(document.getElementById(id));
+         });
+      };
+
+      $('#using-csharp').on('click', function() {
+         csharpLimits = true;
+         revealSettings();
+         this.classList.add('active');
+         $('#no-csharp').removeClass('active');
+         resetSliders();
+      });
+
+      $('#no-csharp').on('click', function() {
+         csharpLimits = false;
+         revealSettings();
+         this.classList.add('active');
+         $('#using-csharp').removeClass('active');
+         resetSliders();
+      });
+
       // Slider value and color update
       ['brightness', 'saturation', 'contrast'].forEach(id => {
          const sliderID = document.getElementById(id);
          const sliderValue = document.getElementById(id + 'Value');
          sliderID.addEventListener('input', () => {
-            if (id === 'brightness') {
-				const val = parseInt(sliderID.value);
-				sliderID.value = val < 25 ? 0 : val < 75 ? 50 : 100;
+            if (id === 'brightness' && csharpLimits) {
+   	const val = parseInt(sliderID.value);
+   	sliderID.value = val < 25 ? 0 : val < 75 ? 50 : 100;
             }
             sliderValue.textContent = sliderID.value;
             updateSlider(sliderID);
-		});
+  });
       });
 
       // Generate button
       $('#generate').on('click', function() {
-         const bright = calcValue("b", document.getElementById("brightness").value);
-         const sat = calcValue("s", document.getElementById("saturation").value);
-         const con = calcValue("c", document.getElementById("contrast").value);
+         const bright = calcValue("b", document.getElementById("brightness").value, csharpLimits);
+         const sat = calcValue("s", document.getElementById("saturation").value, csharpLimits);
+         const con = calcValue("c", document.getElementById("contrast").value, csharpLimits);
          $('#value-output').html(`Brightness: ${bright}&nbsp;&nbsp; | &nbsp;&nbsp;Saturation: ${sat}&nbsp;&nbsp; | &nbsp;&nbsp;Contrast: ${con}`);
          $('#sql-output').html(`INSERT OR REPLACE INTO LocalStorage (key, value) VALUES ('Brightness', '${bright}'), ('SaturationNew', '${sat}'), ('ContrastNew', '${con}');`);
       });
 
       // Reset button
       $('#reset').on('click', function() {
-         ['brightness', 'saturation', 'contrast'].forEach(id => {
-            const valueDisplayId = id + 'Value';
-            document.getElementById(id).value = 50;
-            document.getElementById(valueDisplayId).textContent = 50;
-            updateSlider(document.getElementById(id));
-         });
+         resetSliders();
 
          $('#value-output').html(`Brightness: 0&nbsp;&nbsp; | &nbsp;&nbsp;Saturation: 50&nbsp;&nbsp; | &nbsp;&nbsp;Contrast: 50`);
          $('#sql-output').html(`INSERT OR REPLACE INTO LocalStorage (key, value) VALUES ('Brightness', '0'), ('SaturationNew', '50'), ('ContrastNew', '50');`);
