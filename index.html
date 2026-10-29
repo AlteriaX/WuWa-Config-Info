@@ -29,7 +29,7 @@
          <a href="decrypt">Decrypt Log</a>
          <a href="https://ko-fi.com/alteria/" target="_blank">Donate</a>
       </div>
-      <div class="right-info">Last update: 24 August 2026</div>
+      <div class="right-info">Last update: 30 October 2026</div>
    </div>
 
    <p class="something"><a href="https://framedsc.com/GeneralGuides/ue4_commands.htm" target="_blank">UE4 Default Commands (Some not available in WuWa)</a> | <a href="https://pastebin.com/KUNNVZeC" target="_blank">WuWa Commands</a></p>
@@ -246,6 +246,8 @@
       <div id="culling">
          <div class="codebox">
             <p>
+               ; Toggles parallel frustum cull - 0 = Off (Default), 1 = On<br>
+			   r.ParallelFrustumCull=1<br><br>
                ; Not included in config<br>
                ; 0 = Hardware occlusion (Default), 1 = HZB Occlusion<br>
                r.HZBOcclusion=1<br>
@@ -304,7 +306,9 @@
                r.SceneColorFringeQuality=0<br><br>
                ; 0 = Disable, 1 = FilmContrast, 2 = Vignette, 4 = Vignette + Film Grain<br>
                ; Setting it to 1 disables Film Grain and Vignette (can make certain scenes brighter)<br>
-               r.Tonemapper.Quality=1<br>
+               r.Tonemapper.Quality=1<br><br>
+			   ; 0 = Disable, 1 = Enable post-processing dispersive + radial blur pass (Default)<br>
+			   r.Kuro.NiagaraBlur.Enable=0<br>
             </p>
          </div>
       </div>
@@ -329,10 +333,20 @@
                ; Value from 1 to 8 (default 2), higher value = lower resolution<br>
                r.LightShaftDownSampleFactor=1<br>
 			   r.Kuro.KuroTyndallScatteringsDownSampleFactor=1<br><br>
+			   ; 0 = Mobile quality, 1 = PC quality<br>
+			   ; Adjust light shaft tyndall quality<br>
+			   r.TyndallScatteringQuality=1<br><br>
 			   ; Adjust volumetric light quality<br>
 			   ; Higher value = lower quality, default value is 4 for both<br>
 			   r.KuroVolumetricLight.ColorMaskDownSampleFactor=1<br>
 			   r.KuroVolumetricLight.DownSampleFactor=1<br><br>
+			   ; 0 = Disable dynamic FFT quality, 1 = Enable (Default)<br>
+			   r.Kuro.KuroFFTDynamicQuality=0<br><br>
+			   ; 1 = Full res, 2 = Half res, 4 = quarter res<br>
+			   ; Determine FFT resolution<br>
+			   r.Kuro.KuroFFTHighQuality=1<br><br>
+			   ; When true, use full res translucency (Default false)<br>
+			   r.KuroDownsampleTranslucencyFullRes=true<br><br>
                ; Enable water ripples when flying close/casting skill<br>
                ; 0 = Off, 1 = On (Default)<br>
                r.Kuro.InteractionEffect.UseCppWaterEffect=1<br><br>
@@ -343,13 +357,7 @@
                wp.Runtime.SoraGridBlackListHeight=20000<br><br>
 			   ; Enable/disable Variable Rate Shading<br>
 			   ; 0 = Off, 1 = On (Default)<br>
-			   r.VRS.Enable=0<br><br>
-			   ; Default is LRU up till version 3.5<br>
-			   ; 0 = Default, 1 = LRU<br>
-			   r.PSO.CacheEvictScheme=1<br><br>
-			   ; Default - 2000, controls size of PSO least recently used cache<br>
-			   ; Using a low value (less than 1000) will cause objects / UI to not render properly and flicker<br>
-			   r.PSO.LRUCapacity=2304<br>
+			   r.VRS.Enable=0<br>
             </p>
          </div>
       </div>
@@ -392,6 +400,9 @@
 			   ; Turning this off fixes low FPS animation for certain things in Septimont/Lahai-Roi<br>
 			   ; Downside is that this disables interactive objects in certain quests, Honami (e.g., umbrella) and Lahai-Roi (e.g., ball)<br>
 			   Kuro.Blueprint.EnableGameBudget=false<br><br>
+			   ; 0: Use hardware decoding, 1: Use software decoding (Default)<br>
+			   ; Hardware decoding can help reduce lag for Hsin's resonance liberation<br>
+			   Electra.PC.UseSoftwareDecoding=0<br><br>
                ; Reflex Mode - 1 = low latency, 2 = low latency with boost<br>
                ; Does not work for RTX 40/50 series due to Frame Generation but if you need Reflex only you can delete nvngx_dlssg.dll to disable FG when turned on (Don't open game with launcher, it will verify files and redownload)<br>
                t.Streamline.Reflex.HandleMaxTickRate=true<br>
